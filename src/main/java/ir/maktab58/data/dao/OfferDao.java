@@ -1,5 +1,6 @@
 package ir.maktab58.data.dao;
 
+import ir.maktab58.data.models.Offer;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RequiredArgsConstructor
 //@Component
-public class OfferDao {
+public class OfferDao extends BaseDaoImpl<Offer> {
     @Autowired
     private SessionFactory sessionFactory;
 

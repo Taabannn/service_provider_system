@@ -45,6 +45,12 @@ public class DataBaseConfig {
     String user;
     @Value("${db.password}")
     String pass;
+    @Value("${hibernate.dialect}")
+    String dialect;
+    @Value("${hibernate.show_sql}")
+    String sql;
+    @Value("${hibernate.hbm2ddl.auto}")
+    String hbm2ddl;
 
     @Bean("sessionFactory")
     public  SessionFactory getSessionFactory() {
@@ -52,21 +58,7 @@ public class DataBaseConfig {
             try {
                 Configuration configuration = new Configuration();
 
-                // Hibernate settings equivalent to hibernate.cfg.xml's properties
-                Properties settings = new Properties();
-                settings.put(Environment.DRIVER, "db.driver");
-                settings.put(Environment.URL, url);
-                settings.put(Environment.USER, user);
-                settings.put(Environment.PASS, pass);
-                settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
-
-                settings.put(Environment.SHOW_SQL, "true");
-
-                //settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-
-                settings.put(Environment.HBM2DDL_AUTO, "update");
-
-                configuration.setProperties(settings);
+                configuration.setProperties(getProperties());
 
                 configuration.addAnnotatedClass(User.class);
                 configuration.addAnnotatedClass(Manager.class);
@@ -90,43 +82,15 @@ public class DataBaseConfig {
         return sessionFactory;
     }
 
-
-   /* @Bean
-    public LocalSessionFactoryBean sessionFactory() {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("ir.maktab58.data.models");
-        sessionFactory.setHibernateProperties(hibernateProperties());
-
-        return sessionFactory;
+    private Properties getProperties() {
+        Properties settings = new Properties();
+        settings.put(Environment.DRIVER, driver);
+        settings.put(Environment.URL, url);
+        settings.put(Environment.USER, user);
+        settings.put(Environment.PASS, pass);
+        settings.put(Environment.DIALECT, dialect);
+        settings.put(Environment.SHOW_SQL, sql);
+        settings.put(Environment.HBM2DDL_AUTO, hbm2ddl);
+        return settings;
     }
-
-    @Bean
-    public DataSource dataSource() {
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("db.driver");
-        dataSource.setUrl("db.url");
-        dataSource.setUsername("db.user");
-        dataSource.setPassword("db.password");
-
-        return dataSource;
-    }
-
-    @Bean
-    public PlatformTransactionManager hibernateTransactionManager() {
-        HibernateTransactionManager transactionManager
-                = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory().getObject());
-        return transactionManager;
-    }
-
-    private final Properties hibernateProperties() {
-        Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty(
-                "hibernate.hbm2ddl.auto", "update");
-        hibernateProperties.setProperty(
-                "hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
-
-        return hibernateProperties;
-    }*/
 }

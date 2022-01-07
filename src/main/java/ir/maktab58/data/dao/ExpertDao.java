@@ -1,10 +1,8 @@
 package ir.maktab58.data.dao;
 
-import ir.maktab58.config.DataBaseConfig;
 import ir.maktab58.data.dto.ExpertDTO;
 import ir.maktab58.data.models.services.SubService;
 import ir.maktab58.data.models.users.Expert;
-import ir.maktab58.data.utils.SessionUtil;
 import ir.maktab58.exceptions.ServiceSysException;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Criteria;
@@ -15,7 +13,6 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.query.Query;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
@@ -26,7 +23,6 @@ import java.util.List;
  */
 @Repository
 @RequiredArgsConstructor
-//@Component
 public class ExpertDao extends BaseDaoImpl<Expert> {
     @Autowired
     private SessionFactory sessionFactory;
