@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(setterPrefix = "with")
 @EqualsAndHashCode(of = "field")
 @ToString
 public class MainService {

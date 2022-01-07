@@ -1,6 +1,6 @@
 package ir.maktab58.data.dao;
 
-import ir.maktab58.data.models.users.Manager;
+import ir.maktab58.data.models.users.Customer;
 import ir.maktab58.exceptions.ServiceSysException;
 import org.junit.Rule;
 import org.junit.jupiter.api.AfterAll;
@@ -14,48 +14,45 @@ import org.junit.rules.ExpectedException;
 import java.util.Date;
 import java.util.stream.Stream;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
 /**
  * @author Taban Soleymani
  */
-public class ManagerDaoTest {
-    ManagerDao managerDao = new ManagerDao();//mock(ManagerDao.class);
+public class CustomerDaoTest {
+    CustomerDao customerDao = new CustomerDao();//mock(CustomerDao.class);
     @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
+    public org.junit.rules.ExpectedException exceptionRule = ExpectedException.none();
 
     @BeforeAll
     public static void init() {
-        System.out.println("In ManagerDaoTest init...");
+        System.out.println("In CustomerDaoTest init...");
     }
 
     @AfterAll
     public static void after() {
-        System.out.println("In ManagerDaoTest after...");
+        System.out.println("In CustomerDaoTest after...");
     }
 
-    static Stream<Arguments> generateManager() {
+    static Stream<Arguments> generateCustomer() {
         return Stream.of(
-                /*Arguments.of("Taabannn", "61378Tns", "tabansoleymani@yahoo.com"),*/
-                Arguments.of("Maryam", "Maryam123", "maryam@example.com")/*,
+                Arguments.of("Taabannn", "61378Tns", "tabansoleymani@yahoo.com")/*,
+                Arguments.of("Maryam", "Maryam123", "maryam@example.com"),
                 Arguments.of("Aminn", "12Amin", "aminAmini@example.com")*/
         );
     }
 
     @ParameterizedTest
-    @MethodSource("generateManager")
-    public void findManagerByUserAndPassTest_whenFindManagerByUserAndPassCalls_withExistedManager(String username, String password, String email) {
-        Manager manager = Manager.builder()
+    @MethodSource("generateCustomer")
+    public void findCustomerByUserAndPassTest_whenFindCustomerByUserAndPassCalls_withExistedCustomer(String username, String password, String email) {
+        Customer customer = Customer.builder()
                 .withUsername(username)
                 .withPassword(password)
                 .withEmail(email).withFirstAccess(new Date()).build();
-        managerDao.save(manager);
-        managerDao.findManagerByUserAndPass(username, password);
+        customerDao.save(customer);
+        customerDao.findCustomerByUserAndPass(username, password);
         //verify(managerDao).findManagerByUserAndPass(username, password);
     }
 
-    static Stream<Arguments> generateInvalidManager() {
+    static Stream<Arguments> generateInvalidCustomer() {
         return Stream.of(
                 Arguments.of("Taaba", "61378Tns", "tabansoleymani@yahoo.com"),
                 Arguments.of("Maryam", "Maryam3", "maryam@example.com")
@@ -63,12 +60,12 @@ public class ManagerDaoTest {
     }
 
     @ParameterizedTest
-    @MethodSource("generateInvalidManager")
-    public void findManagerByUserAndPassTest_whenFindManagerByUserAndPassCalls_withNotExistedManager(String username, String password) {
+    @MethodSource("generateInvalidCustomer")
+    public void findCustomerByUserAndPassTest_whenFindCustomerByUserAndPassCalls_withNotExistedCustomer(String username, String password) {
         //exceptionRule.expect(ServiceSysException.class);
         //exceptionRule.expectMessage("No manager with entered username and password was found.");
         //managerDao.findManagerByUserAndPass(username, password);
-        Assertions.assertThrows(ServiceSysException.class, () -> managerDao.findManagerByUserAndPass(username, password), "No manager with entered username and password was found.");
+        Assertions.assertThrows(ServiceSysException.class, () -> customerDao.findCustomerByUserAndPass(username, password), "No customer with entered username and password was found.");
         //verify(managerDao).findManagerByUserAndPass(username, password);
     }
 }
