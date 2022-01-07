@@ -1,7 +1,6 @@
 package ir.maktab58.service;
 
 import ir.maktab58.config.SpringConfig;
-import ir.maktab58.data.models.users.Expert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,8 +9,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.stream.Stream;
 
 /**

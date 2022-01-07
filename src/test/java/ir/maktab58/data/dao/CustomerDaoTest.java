@@ -1,7 +1,6 @@
 package ir.maktab58.data.dao;
 
 import ir.maktab58.data.models.users.Customer;
-import ir.maktab58.data.models.users.Manager;
 import ir.maktab58.exceptions.ServiceSysException;
 import org.junit.Rule;
 import org.junit.jupiter.api.AfterAll;

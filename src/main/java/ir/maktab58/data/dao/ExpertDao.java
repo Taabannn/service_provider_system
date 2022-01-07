@@ -1,9 +1,7 @@
 package ir.maktab58.data.dao;
 
-import ir.maktab58.data.dto.CustomerDTO;
 import ir.maktab58.data.dto.ExpertDTO;
 import ir.maktab58.data.models.services.SubService;
-import ir.maktab58.data.models.users.Customer;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.data.utils.SessionUtil;
 import ir.maktab58.exceptions.ServiceSysException;

@@ -12,7 +12,6 @@ import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.validator.EmailValidator;
 import ir.maktab58.service.validator.UserAndPassValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

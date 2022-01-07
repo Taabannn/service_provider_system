@@ -1,7 +1,6 @@
 package ir.maktab58.service;
 
 import ir.maktab58.config.SpringConfig;
-import ir.maktab58.data.dto.CustomerDTO;
 import ir.maktab58.data.models.users.Customer;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.data.models.users.Manager;
@@ -19,10 +18,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Date;
-import java.util.List;
 import java.util.stream.Stream;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 /**
