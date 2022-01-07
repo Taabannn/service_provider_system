@@ -52,7 +52,7 @@ public class ExpertDaoTest {
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
             fileInputStream.read(bFile);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
         }
         Expert expert = Expert.builder()
                 .withUsername(username)

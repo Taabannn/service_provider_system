@@ -3,6 +3,7 @@ package ir.maktab58.service;
 import ir.maktab58.data.dao.CustomerDao;
 import ir.maktab58.data.dao.ExpertDao;
 import ir.maktab58.data.dao.ManagerDao;
+import ir.maktab58.data.models.users.Customer;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.data.models.users.Manager;
 import ir.maktab58.exceptions.ServiceSysException;
@@ -71,6 +72,16 @@ public class UserService {
     }
 
     public void checkIfUserIsCustomerOrNot(String username, String password) {
+        customerDao.findCustomerByUserAndPass(username, password);
+    }
 
+    public void saveCustomer(Customer customer) {
+        try {
+            customerDao.save(customer);
+        } catch (RuntimeException e) {
+            throw ServiceSysException.builder()
+                    .withMessage("This user might have been existed")
+                    .withErrorCode(400).build();
+        }
     }
 }
