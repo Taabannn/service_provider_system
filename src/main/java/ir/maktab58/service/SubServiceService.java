@@ -19,9 +19,9 @@ public class SubServiceService {
     private ExpertDao expertDao;
 
     public void addASubServiceToExpert(String username, String password, String subServiceDescription, String field, long basePrice) {
-
+        MainService mainService = MainService.builder().withField(field).build();
         SubService subService = SubService.builder()
-                .withMainService(MainService.builder().withField(field).build())
+                .withMainService(mainService)
                 .withSubServiceDescription(subServiceDescription)
                 .withBasePrice(basePrice).build();
         subServiceDao.save(subService);

@@ -28,6 +28,6 @@ public class Offer {
     private int numOfEstimatedHours;
     @Temporal(TemporalType.TIME)
     private Date timeOfBeginning;
-    /*@ManyToOne
-    private Order order;*/
+    @ManyToOne
+    private Order order;
 }

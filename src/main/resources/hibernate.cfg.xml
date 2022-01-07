@@ -26,7 +26,7 @@
         <mapping class="ir.maktab58.data.models.Offer"/>
         <mapping class="ir.maktab58.data.models.Comment"/>
         <mapping class="ir.maktab58.data.models.Address"/>
-        <!--<mapping class="ir.maktab58.data.models.Order"/>-->
+        <mapping class="ir.maktab58.data.models.Order"/>
 
     </session-factory>
 </hibernate-configuration>

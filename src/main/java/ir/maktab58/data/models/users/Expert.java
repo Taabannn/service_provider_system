@@ -25,6 +25,7 @@ public class Expert extends User {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<SubService> subServices = new ArrayList<>();
     @Lob
+    @Column(columnDefinition = "BLOB")//, length =
     private byte[] image;
 
     @Builder(setterPrefix = "with")
