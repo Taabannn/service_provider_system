@@ -1,5 +1,7 @@
 package ir.maktab58.service;
 
+import ir.maktab58.config.SpringConfig;
+import ir.maktab58.data.dto.CustomerDTO;
 import ir.maktab58.data.models.users.Customer;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.data.models.users.Manager;
@@ -12,10 +14,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.rules.ExpectedException;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.mockito.Mockito.mock;
@@ -129,5 +133,18 @@ public class UserServiceTest {
         Assertions.assertThrows(ServiceSysException.class, () -> userService.saveManager(manager), "This user might have been existed");
     }
 
+    static Stream<Arguments> generateManager() {
+        return Stream.of(
+                Arguments.of("Maryam", "Maryam123")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateManager")
+    public void getListOfCustomersToManagerTest_whenGetListOfCustomersToManagerCalls_withExistedManager(String username, String password) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        userService = context.getBean(UserService.class);
+        userService.getListOfCustomersToManager(username, password);
+    }
 }
 

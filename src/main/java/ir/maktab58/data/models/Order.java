@@ -14,14 +14,14 @@ import java.util.Optional;
 /**
  * @author Taban Soleymani
  */
-@Entity
+//@Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @Builder(setterPrefix = "with")
 @ToString
 public class Order {
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @OneToOne
@@ -40,5 +40,5 @@ public class Order {
     private List<Offer> offers = new ArrayList<>();
     @OneToOne
     private Comment comment;
-    private int estimatedTime;
+    private int estimatedTime;*/
 }
