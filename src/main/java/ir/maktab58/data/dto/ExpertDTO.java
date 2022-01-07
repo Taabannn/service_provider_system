@@ -12,10 +12,8 @@ import java.util.List;
  */
 public class ExpertDTO {
     String username;
-    String Email;
-    long Credit;
+    String email;
     double score;
     UserStatus userStatus;
     Date firstAccess;
-    List<SubService> subServices = new ArrayList<>();
 }

@@ -4,6 +4,7 @@ import ir.maktab58.data.dao.CustomerDao;
 import ir.maktab58.data.dao.ExpertDao;
 import ir.maktab58.data.dao.ManagerDao;
 import ir.maktab58.data.dto.CustomerDTO;
+import ir.maktab58.data.dto.ExpertDTO;
 import ir.maktab58.data.models.users.Customer;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.data.models.users.Manager;
@@ -91,5 +92,10 @@ public class UserService {
     public List<CustomerDTO> getListOfCustomersToManager(String username, String password) {
         checkIfUserIsManagerOrNot(username, password);
         return customerDao.getListOfCustomers();
+    }
+
+    public List<ExpertDTO> getListOfExpertsToManager(String username, String password) {
+        checkIfUserIsManagerOrNot(username, password);
+        return expertDao.getListOfExperts();
     }
 }

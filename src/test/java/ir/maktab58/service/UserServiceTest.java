@@ -146,5 +146,13 @@ public class UserServiceTest {
         userService = context.getBean(UserService.class);
         userService.getListOfCustomersToManager(username, password);
     }
+
+    @ParameterizedTest
+    @MethodSource("generateManager")
+    public void getListOfExpertsToManagerTest_whenGetListOfExpertsToManagerCalls_withExistedManager(String username, String password) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        userService = context.getBean(UserService.class);
+        userService.getListOfExpertsToManager(username, password);
+    }
 }
 
