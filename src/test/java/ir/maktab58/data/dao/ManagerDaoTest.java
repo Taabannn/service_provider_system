@@ -4,6 +4,7 @@ import ir.maktab58.data.models.users.Manager;
 import ir.maktab58.exceptions.ServiceSysException;
 import org.junit.Rule;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,7 +21,7 @@ import static org.mockito.Mockito.verify;
  * @author Taban Soleymani
  */
 public class ManagerDaoTest {
-    ManagerDao managerDaoMock = mock(ManagerDao.class);
+    ManagerDao managerDao = new ManagerDao();//mock(ManagerDao.class);
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
 
@@ -49,17 +50,25 @@ public class ManagerDaoTest {
                 .withUsername(username)
                 .withPassword(password)
                 .withEmail(email).withFirstAccess(new Date()).build();
-        managerDaoMock.save(manager);
-        managerDaoMock.findManagerByUserAndPass(username, password);
-        verify(managerDaoMock).findManagerByUserAndPass(username, password);
+        managerDao.save(manager);
+        managerDao.findManagerByUserAndPass(username, password);
+        //verify(managerDao).findManagerByUserAndPass(username, password);
+    }
+
+    static Stream<Arguments> generateInvalidManager() {
+        return Stream.of(
+                Arguments.of("Taaba", "61378Tns", "tabansoleymani@yahoo.com"),
+                Arguments.of("Maryam", "Maryam3", "maryam@example.com")
+        );
     }
 
     @ParameterizedTest
-    @MethodSource("generateManager")
+    @MethodSource("generateInvalidManager")
     public void findManagerByUserAndPassTest_whenFindManagerByUserAndPassCalls_withNotExistedManager(String username, String password) {
-        exceptionRule.expect(ServiceSysException.class);
-        exceptionRule.expectMessage("No manager with entered username and password was found.");
-        managerDaoMock.findManagerByUserAndPass(username, password);
-        verify(managerDaoMock).findManagerByUserAndPass(username, password);
+        //exceptionRule.expect(ServiceSysException.class);
+        //exceptionRule.expectMessage("No manager with entered username and password was found.");
+        //managerDao.findManagerByUserAndPass(username, password);
+        Assertions.assertThrows(ServiceSysException.class, () -> managerDao.findManagerByUserAndPass(username, password), "No manager with entered username and password was found.");
+        //verify(managerDao).findManagerByUserAndPass(username, password);
     }
 }

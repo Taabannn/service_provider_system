@@ -22,7 +22,7 @@ import static org.mockito.Mockito.verify;
  * @author Taban Soleymani
  */
 public class ExpertDaoTest {
-    ExpertDao expertDaoMock = new ExpertDao();//mock(ExpertDao.class);
+    ExpertDao expertDao = mock(ExpertDao.class);//new ExpertDao();
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
 
@@ -47,11 +47,10 @@ public class ExpertDaoTest {
     @ParameterizedTest
     @MethodSource("generateExpert")
     public void findExpertByUserAndPassTest_whenFindExpertByUserAndPassCalls_withExistedExpert(String username, String password, String email) {
-        File file = mock(File.class);
+        File file = new File("expert.png");
         byte[] bFile = new byte[(int) file.length()];
-        try (FileInputStream fileInputStream = mock(FileInputStream.class)) {
+        try (FileInputStream fileInputStream = new FileInputStream(file)) {
             fileInputStream.read(bFile);
-            verify(fileInputStream).read(bFile);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,17 +60,17 @@ public class ExpertDaoTest {
                 .withEmail(email)
                 .withFirstAccess(new Date())
                 .withImage(bFile).build();
-        expertDaoMock.save(expert);
-        expertDaoMock.findExpertByUserAndPass(username, password);
-        verify(expertDaoMock).findExpertByUserAndPass(username, password);
+        expertDao.save(expert);
+        expertDao.findExpertByUserAndPass(username, password);
+        verify(expertDao).findExpertByUserAndPass(username, password);
     }
 
     @ParameterizedTest
-    @MethodSource("generateManager")
+    @MethodSource("generateExpert")
     public void findExpertByUserAndPassTest_whenFindExpertByUserAndPassCalls_withNotExistedExpert(String username, String password) {
         exceptionRule.expect(ServiceSysException.class);
         exceptionRule.expectMessage("No expert with entered username and password was found.");
-        expertDaoMock.findExpertByUserAndPass(username, password);
-        verify(expertDaoMock).findExpertByUserAndPass(username, password);
+        expertDao.findExpertByUserAndPass(username, password);
+        verify(expertDao).findExpertByUserAndPass(username, password);
     }
 }
