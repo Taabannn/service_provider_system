@@ -37,9 +37,9 @@ public class ManagerDaoTest {
 
     static Stream<Arguments> generateManager() {
         return Stream.of(
-                Arguments.of("Taabannn", "61378Tns", "tabansoleymani@yahoo.com"),
-                Arguments.of("Maryam", "Maryam123", "maryam@example.com"),
-                Arguments.of("Aminn", "12Amin", "aminAmini@example.com")
+                /*Arguments.of("Taabannn", "61378Tns", "tabansoleymani@yahoo.com"),*/
+                Arguments.of("Maryam", "Maryam123", "maryam@example.com")/*,
+                Arguments.of("Aminn", "12Amin", "aminAmini@example.com")*/
         );
     }
 
