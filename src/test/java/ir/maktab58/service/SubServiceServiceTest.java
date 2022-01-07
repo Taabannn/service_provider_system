@@ -35,7 +35,7 @@ public class SubServiceServiceTest {
 
     static Stream<Arguments> generateExpert() {
         return Stream.of(
-                Arguments.of("Aminn", "12Amin", "aminAmini@example.com", "decoration", "repairment", 250000)
+                Arguments.of("Aminn", "12Amin", "aminAmini@example.com", "electronics", "repairment", 250000)
         );
     }
 

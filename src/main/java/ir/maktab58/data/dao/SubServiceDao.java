@@ -1,22 +1,32 @@
 package ir.maktab58.data.dao;
 
+import ir.maktab58.config.DataBaseConfig;
 import ir.maktab58.data.models.services.SubService;
 import ir.maktab58.data.utils.SessionUtil;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * @author Taban Soleymani
  */
-@Component
+//@Component
+@Repository
+@RequiredArgsConstructor
 public class SubServiceDao extends BaseDaoImpl<SubService> {
+    @Autowired
+    private SessionFactory sessionFactory;
+
     public List<SubService> findSubService(String subServiceDescription, String field) {
         List<SubService> subServiceList;
-        Session session = SessionUtil.getSession();
+        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Query<SubService> query = session.createQuery("from SubService s where s.subServiceDescription=:des and s.mainService.field=:field", SubService.class)
                 .setParameter("des", subServiceDescription)

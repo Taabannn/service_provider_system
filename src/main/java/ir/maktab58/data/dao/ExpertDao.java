@@ -1,17 +1,22 @@
 package ir.maktab58.data.dao;
 
+import ir.maktab58.config.DataBaseConfig;
 import ir.maktab58.data.dto.ExpertDTO;
 import ir.maktab58.data.models.services.SubService;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.data.utils.SessionUtil;
 import ir.maktab58.exceptions.ServiceSysException;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.query.Query;
 import org.hibernate.transform.Transformers;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
 import java.util.List;
@@ -19,12 +24,17 @@ import java.util.List;
 /**
  * @author Taban Soleymani
  */
-@Component
+@Repository
+@RequiredArgsConstructor
+//@Component
 public class ExpertDao extends BaseDaoImpl<Expert> {
+    @Autowired
+    private SessionFactory sessionFactory;
+
     public Expert findExpertByUserAndPass(String username, String password) {
         Expert expert;
         try {
-            Session session = SessionUtil.getSession();
+            Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             Query<Expert> query = session.createQuery("from Expert e where e.username=:username and e.password=:password", Expert.class)
                     .setParameter("username", username)
@@ -41,7 +51,7 @@ public class ExpertDao extends BaseDaoImpl<Expert> {
     }
 
     public List<ExpertDTO> getListOfExperts() {
-        Session session = SessionUtil.getSession();
+        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
         Criteria criteria = session.createCriteria(Expert.class, "e");
@@ -65,7 +75,7 @@ public class ExpertDao extends BaseDaoImpl<Expert> {
     public void addSubServiceToExpert(String username, String password, SubService subService) {
         Expert expert;
         try {
-            Session session = SessionUtil.getSession();
+            Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             Query<Expert> query = session.createQuery("from Expert e where e.username=:username and e.password=:password", Expert.class)
                     .setParameter("username", username)
