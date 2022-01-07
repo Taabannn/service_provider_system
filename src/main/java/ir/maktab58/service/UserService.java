@@ -46,11 +46,31 @@ public class UserService {
         managerDao.findManagerByUserAndPass(username, password);
     }
 
-    public void saveManager(Manager manager) {managerDao.save(manager);}
+    public void saveManager(Manager manager) {
+        try {
+            managerDao.save(manager);
+        } catch (RuntimeException e) {
+            throw ServiceSysException.builder()
+                    .withMessage("This user might have been existed")
+                    .withErrorCode(400).build();
+        }
+    }
 
     public void CheckIfUserIsExpertOrNot(String username, String password) {
         expertDao.findExpertByUserAndPass(username, password);
     }
 
-    public void saveExpert(Expert expert) {expertDao.save(expert);}
+    public void saveExpert(Expert expert) {
+        try {
+            expertDao.save(expert);
+        } catch (RuntimeException e) {
+            throw ServiceSysException.builder()
+                    .withMessage("This user might have been existed")
+                    .withErrorCode(400).build();
+        }
+    }
+
+    public void checkIfUserIsCustomerOrNot(String username, String password) {
+
+    }
 }
