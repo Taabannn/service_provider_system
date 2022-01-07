@@ -2,6 +2,7 @@ package ir.maktab58.data.dao;
 
 import ir.maktab58.data.dto.CustomerDTO;
 import ir.maktab58.data.dto.ExpertDTO;
+import ir.maktab58.data.models.services.SubService;
 import ir.maktab58.data.models.users.Customer;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.data.utils.SessionUtil;
@@ -61,5 +62,24 @@ public class ExpertDao extends BaseDaoImpl<Expert> {
         transaction.commit();
         session.close();
         return list;
+    }
+
+    public void addSubServiceToExpert(String username, String password, SubService subService) {
+        Expert expert;
+        try {
+            Session session = SessionUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            Query<Expert> query = session.createQuery("from Expert e where e.username=:username and e.password=:password", Expert.class)
+                    .setParameter("username", username)
+                    .setParameter("password", password);
+            expert = query.getSingleResult();
+            expert.getSubServices().add(subService);
+            transaction.commit();
+            session.close();
+        } catch (NoResultException e) {
+            throw ServiceSysException.builder()
+                    .withMessage("No expert with entered username and password was found.")
+                    .withErrorCode(400).build();
+        }
     }
 }
