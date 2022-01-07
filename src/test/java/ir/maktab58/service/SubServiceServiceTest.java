@@ -15,7 +15,7 @@ import java.util.stream.Stream;
  * @author Taban Soleymani
  */
 public class SubServiceServiceTest {
-    private SubServiceService subServiceService;
+    private SubServiceServiceImpl subServiceService;
 
     @BeforeAll
     public static void init() {
@@ -25,7 +25,7 @@ public class SubServiceServiceTest {
     @BeforeEach
     public void beforeEach() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        subServiceService = context.getBean(SubServiceService.class);
+        subServiceService = context.getBean(SubServiceServiceImpl.class);
     }
 
     @AfterAll

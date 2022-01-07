@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
  * @author Taban Soleymani
  */
 @Service
-public interface OfferService {
+public interface CustomerService {
 }

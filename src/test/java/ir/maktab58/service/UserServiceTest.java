@@ -27,7 +27,7 @@ import static org.mockito.Mockito.verify;
  */
 public class UserServiceTest {
 
-    UserService userService = new UserService();//mock(UserService.class);
+    UserService userService = new UserServiceImpl();//mock(UserService.class);
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
 
@@ -140,7 +140,7 @@ public class UserServiceTest {
     @MethodSource("generateManager")
     public void getListOfCustomersToManagerTest_whenGetListOfCustomersToManagerCalls_withExistedManager(String username, String password) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        userService = context.getBean(UserService.class);
+        userService = context.getBean(UserServiceImpl.class);
         userService.getListOfCustomersToManager(username, password);
     }
 
@@ -148,7 +148,7 @@ public class UserServiceTest {
     @MethodSource("generateManager")
     public void getListOfExpertsToManagerTest_whenGetListOfExpertsToManagerCalls_withExistedManager(String username, String password) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        userService = context.getBean(UserService.class);
+        userService = context.getBean(UserServiceImpl.class);
         userService.getListOfExpertsToManager(username, password);
     }
 }
