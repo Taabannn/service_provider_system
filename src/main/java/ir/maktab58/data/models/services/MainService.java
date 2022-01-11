@@ -18,6 +18,6 @@ public class MainService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String field;
 }

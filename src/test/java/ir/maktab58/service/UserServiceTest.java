@@ -1,35 +1,15 @@
 package ir.maktab58.service;
 
-import ir.maktab58.config.SpringConfig;
-import ir.maktab58.data.models.users.Customer;
-import ir.maktab58.data.models.users.Expert;
-import ir.maktab58.data.models.users.Manager;
-import ir.maktab58.exceptions.ServiceSysException;
-import org.junit.Rule;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.rules.ExpectedException;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.Date;
-import java.util.stream.Stream;
-
-import static org.mockito.Mockito.verify;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Taban Soleymani
  */
 public class UserServiceTest {
-
-    UserService userService = new UserServiceImpl();//mock(UserService.class);
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
+    @Autowired
+    private UserService userService;
 
     @BeforeAll
     public static void init() {
@@ -41,6 +21,7 @@ public class UserServiceTest {
         System.out.println("In UserServiceTest after...");
     }
 
+    /*
     static Stream<Arguments> generateValidEmailAndUserAndPass() {
         return Stream.of(
                 Arguments.of("Taabannn", "61378Tns", "tabansoleymani@yahoo.com"),
@@ -150,6 +131,6 @@ public class UserServiceTest {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
         userService = context.getBean(UserServiceImpl.class);
         userService.getListOfExpertsToManager(username, password);
-    }
+    }*/
 }
 

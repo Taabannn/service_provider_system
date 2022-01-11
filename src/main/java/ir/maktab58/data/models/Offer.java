@@ -20,14 +20,20 @@ public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(nullable = false)
     private Expert expert;
     @CreationTimestamp
+    @Column(nullable = false)
     private Date createdDate;
+    @Column(nullable = false)
     private long offeredPrice;
+    @Column(nullable = false)
     private int numOfEstimatedHours;
     @Temporal(TemporalType.TIME)
+    @Column(nullable = false)
     private Date timeOfBeginning;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Order order;
 }

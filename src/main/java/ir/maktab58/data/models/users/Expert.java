@@ -21,11 +21,11 @@ import java.util.List;
 public class Expert extends User {
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
-    private double score = 0.0;
+    private Double score;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<SubService> subServices = new ArrayList<>();
     @Lob
-    @Column(columnDefinition = "BLOB")//, length =
+    @Column(columnDefinition = "BLOB", length = 307200)
     private byte[] image;
 
     @Builder(setterPrefix = "with")

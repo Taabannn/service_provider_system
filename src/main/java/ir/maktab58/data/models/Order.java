@@ -25,21 +25,22 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(nullable = false)
     private Customer customer;
-    @OneToOne
-    private Address address;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(nullable = false)
     private Expert expert;
-    private long offeredPrice;
+    @Column(nullable = false)
     private String details;
     @CreationTimestamp
+    @Column(nullable = false)
     private Date createdDate;
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Date completedDate;
     @OneToMany(mappedBy = "order")
     private List<Offer> offers = new ArrayList<>();
-    @OneToOne
-    private Comment comment;
-    private int estimatedTime;
+    @OneToMany
+    private List<Comment> comments;
 }

@@ -15,7 +15,7 @@ import java.util.stream.Stream;
  * @author Taban Soleymani
  */
 public class SubServiceServiceTest {
-    private SubServiceServiceImpl subServiceService;
+    /*private SubServiceServiceImpl subServiceService;
 
     @BeforeAll
     public static void init() {
@@ -43,5 +43,5 @@ public class SubServiceServiceTest {
     @MethodSource("generateExpert")
     public void addASubServiceToExpertTest_whenAddASubServiceToExpertCalls_withExistedExpert(String username, String password, String email, String description, String field, long basePrice) {
         subServiceService.addASubServiceToExpert(username, password, description, field, basePrice);
-    }
+    }*/
 }

@@ -25,7 +25,7 @@ public class SubService {
     private String subServiceDescription;
     @Column(nullable = false)
     private long basePrice;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private MainService mainService;
     @ManyToMany(mappedBy = "subServices")
     private List<Expert> expertList = new ArrayList<>();
