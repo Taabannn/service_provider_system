@@ -1,29 +1,17 @@
 package ir.maktab58.data.dao;
 
-import ir.maktab58.data.dto.CustomerDTO;
 import ir.maktab58.data.models.users.Customer;
-import ir.maktab58.exceptions.ServiceSysException;
-import lombok.RequiredArgsConstructor;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Projections;
-import org.hibernate.query.Query;
-import org.hibernate.transform.Transformers;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.NoResultException;
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Taban Soleymani
  */
+@Transactional
 @Repository
-@RequiredArgsConstructor
-public class CustomerDao extends BaseDaoImpl<Customer> {
-    @Autowired
+public interface CustomerDao extends PagingAndSortingRepository<Customer, Integer> {
+    /*@Autowired
     private SessionFactory sessionFactory;
 
     public Customer findCustomerByUserAndPass(String username, String password) {
@@ -65,5 +53,5 @@ public class CustomerDao extends BaseDaoImpl<Customer> {
         transaction.commit();
         session.close();
         return list;
-    }
+    }*/
 }

@@ -22,7 +22,7 @@ import static org.mockito.Mockito.verify;
  * @author Taban Soleymani
  */
 public class ExpertDaoTest {
-    ExpertDao expertDao = mock(ExpertDao.class);//new ExpertDao();
+    /*ExpertDao expertDao = mock(ExpertDao.class);//new ExpertDao();
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
 
@@ -38,8 +38,8 @@ public class ExpertDaoTest {
 
     static Stream<Arguments> generateExpert() {
         return Stream.of(
-                /*Arguments.of("Taabannn", "61378Tns", "tabansoleymani@yahoo.com"),
-                Arguments.of("Maryam", "Maryam123", "maryam@example.com"),*/
+                *//*Arguments.of("Taabannn", "61378Tns", "tabansoleymani@yahoo.com"),
+                Arguments.of("Maryam", "Maryam123", "maryam@example.com"),*//*
                 Arguments.of("Aminn", "12Amin", "aminAmini@example.com")
         );
     }
@@ -72,5 +72,5 @@ public class ExpertDaoTest {
         exceptionRule.expectMessage("No expert with entered username and password was found.");
         expertDao.findExpertByUserAndPass(username, password);
         verify(expertDao).findExpertByUserAndPass(username, password);
-    }
+    }*/
 }

@@ -20,7 +20,7 @@ import java.util.List;
  * @author Taban Soleymani
  */
 public class UserServiceImpl implements UserService {
-    @Autowired
+    /*@Autowired
     private CustomerDao customerDao;
 
     @Autowired
@@ -94,5 +94,5 @@ public class UserServiceImpl implements UserService {
     public List<ExpertDTO> getListOfExpertsToManager(String username, String password) {
         checkIfUserIsManagerOrNot(username, password);
         return expertDao.getListOfExperts();
-    }
+    }*/
 }

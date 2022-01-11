@@ -18,7 +18,7 @@ import java.util.stream.Stream;
  * @author Taban Soleymani
  */
 public class CustomerDaoTest {
-    CustomerDao customerDao = new CustomerDao();//mock(CustomerDao.class);
+    /*CustomerDao customerDao = new CustomerDao();//mock(CustomerDao.class);
     @Rule
     public org.junit.rules.ExpectedException exceptionRule = ExpectedException.none();
 
@@ -34,9 +34,9 @@ public class CustomerDaoTest {
 
     static Stream<Arguments> generateCustomer() {
         return Stream.of(
-                Arguments.of("Taabannn", "61378Tns", "tabansoleymani@yahoo.com")/*,
+                Arguments.of("Taabannn", "61378Tns", "tabansoleymani@yahoo.com")*//*,
                 Arguments.of("Maryam", "Maryam123", "maryam@example.com"),
-                Arguments.of("Aminn", "12Amin", "aminAmini@example.com")*/
+                Arguments.of("Aminn", "12Amin", "aminAmini@example.com")*//*
         );
     }
 
@@ -67,5 +67,5 @@ public class CustomerDaoTest {
         //managerDao.findManagerByUserAndPass(username, password);
         Assertions.assertThrows(ServiceSysException.class, () -> customerDao.findCustomerByUserAndPass(username, password), "No customer with entered username and password was found.");
         //verify(managerDao).findManagerByUserAndPass(username, password);
-    }
+    }*/
 }

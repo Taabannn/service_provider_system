@@ -8,17 +8,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
 
 /**
  * @author Taban Soleymani
  */
+@Transactional
 @Repository
-@RequiredArgsConstructor
-public class ManagerDao extends BaseDaoImpl<Manager> {
-    @Autowired
+public interface ManagerDao extends PagingAndSortingRepository<Manager, Integer> {
+    /*@Autowired
     private SessionFactory sessionFactory;
 
     public Manager findManagerByUserAndPass(String username, String password) {
@@ -38,5 +40,5 @@ public class ManagerDao extends BaseDaoImpl<Manager> {
                     .withErrorCode(400).build();
         }
         return manager;
-    }
+    }*/
 }

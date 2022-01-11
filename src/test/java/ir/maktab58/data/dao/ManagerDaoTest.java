@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
  * @author Taban Soleymani
  */
 public class ManagerDaoTest {
-    ManagerDao managerDao = new ManagerDao();//mock(ManagerDao.class);
+    /*ManagerDao managerDao = new ManagerDao();//mock(ManagerDao.class);
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
 
@@ -37,9 +37,9 @@ public class ManagerDaoTest {
 
     static Stream<Arguments> generateManager() {
         return Stream.of(
-                /*Arguments.of("Taabannn", "61378Tns", "tabansoleymani@yahoo.com"),*/
-                Arguments.of("Maryam", "Maryam123", "maryam@example.com")/*,
-                Arguments.of("Aminn", "12Amin", "aminAmini@example.com")*/
+                *//*Arguments.of("Taabannn", "61378Tns", "tabansoleymani@yahoo.com"),*//*
+                Arguments.of("Maryam", "Maryam123", "maryam@example.com")*//*,
+                Arguments.of("Aminn", "12Amin", "aminAmini@example.com")*//*
         );
     }
 
@@ -70,5 +70,5 @@ public class ManagerDaoTest {
         //managerDao.findManagerByUserAndPass(username, password);
         Assertions.assertThrows(ServiceSysException.class, () -> managerDao.findManagerByUserAndPass(username, password), "No manager with entered username and password was found.");
         //verify(managerDao).findManagerByUserAndPass(username, password);
-    }
+    }*/
 }

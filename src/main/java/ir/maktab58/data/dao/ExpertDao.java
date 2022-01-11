@@ -13,7 +13,9 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.query.Query;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
 import java.util.List;
@@ -21,10 +23,10 @@ import java.util.List;
 /**
  * @author Taban Soleymani
  */
+@Transactional
 @Repository
-@RequiredArgsConstructor
-public class ExpertDao extends BaseDaoImpl<Expert> {
-    @Autowired
+public interface ExpertDao extends PagingAndSortingRepository<Expert, Integer> {
+    /*@Autowired
     private SessionFactory sessionFactory;
 
     public Expert findExpertByUserAndPass(String username, String password) {
@@ -85,5 +87,5 @@ public class ExpertDao extends BaseDaoImpl<Expert> {
                     .withMessage("No expert with entered username and password was found.")
                     .withErrorCode(400).build();
         }
-    }
+    }*/
 }

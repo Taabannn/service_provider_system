@@ -7,17 +7,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * @author Taban Soleymani
  */
+@Transactional
 @Repository
-@RequiredArgsConstructor
-public class SubServiceDao extends BaseDaoImpl<SubService> {
-    @Autowired
+public interface SubServiceDao extends PagingAndSortingRepository<SubService, Integer> {
+    /*@Autowired
     private SessionFactory sessionFactory;
 
     public List<SubService> findSubService(String subServiceDescription, String field) {
@@ -31,5 +33,5 @@ public class SubServiceDao extends BaseDaoImpl<SubService> {
         transaction.commit();
         session.close();
         return subServiceList;
-    }
+    }*/
 }

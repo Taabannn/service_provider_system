@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Service
 public interface UserService {
-    void validateEmailAndUserAndPass(String username, String password, String email);
+    /*void validateEmailAndUserAndPass(String username, String password, String email);
 
     void checkIfUserIsManagerOrNot(String username, String password);
 
@@ -30,5 +30,5 @@ public interface UserService {
 
     List<CustomerDTO> getListOfCustomersToManager(String username, String password);
 
-    List<ExpertDTO> getListOfExpertsToManager(String username, String password);
+    List<ExpertDTO> getListOfExpertsToManager(String username, String password);*/
 }

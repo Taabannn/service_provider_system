@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SubServiceServiceImpl implements SubServiceService {
-    @Autowired
+    /*@Autowired
     private SubServiceDao subServiceDao;
 
     @Autowired
@@ -28,5 +28,5 @@ public class SubServiceServiceImpl implements SubServiceService {
 
         //subServices = subServiceDao.findSubService(subServiceDescription, field);
         expertDao.addSubServiceToExpert(username, password, subService);
-    }
+    }*/
 }
