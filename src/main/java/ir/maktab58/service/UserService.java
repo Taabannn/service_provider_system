@@ -5,6 +5,7 @@ import ir.maktab58.data.dto.ExpertDTO;
 import ir.maktab58.data.models.users.Customer;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.data.models.users.Manager;
+import ir.maktab58.data.models.users.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,8 @@ import java.util.List;
  */
 @Service
 public interface UserService {
+
+    User login(String username, String password);
     /*void validateEmailAndUserAndPass(String username, String password, String email);
 
     void checkIfUserIsManagerOrNot(String username, String password);

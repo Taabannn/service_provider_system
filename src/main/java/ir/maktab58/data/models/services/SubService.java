@@ -27,6 +27,6 @@ public class SubService {
     private long basePrice;
     @ManyToOne
     private MainService mainService;
-    @ManyToMany(mappedBy = "subServices")
+    @ManyToMany
     private List<Expert> expertList = new ArrayList<>();
 }

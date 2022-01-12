@@ -3,11 +3,13 @@ package ir.maktab58.service;
 import ir.maktab58.data.dao.CustomerDao;
 import ir.maktab58.data.dao.ExpertDao;
 import ir.maktab58.data.dao.ManagerDao;
+import ir.maktab58.data.dao.UserDao;
 import ir.maktab58.data.dto.CustomerDTO;
 import ir.maktab58.data.dto.ExpertDTO;
 import ir.maktab58.data.models.users.Customer;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.data.models.users.Manager;
+import ir.maktab58.data.models.users.User;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.validator.EmailValidator;
 import ir.maktab58.service.validator.UserAndPassValidator;
@@ -15,11 +17,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Taban Soleymani
  */
 public class UserServiceImpl implements UserService {
+    @Autowired
+    UserDao userDao;
+
+    @Override
+    public User login(String username, String password) {
+        Optional<User> foundedUser = userDao.findUserByUsernameAndPassword(username, password);
+        if (foundedUser.isEmpty())
+            throw  ServiceSysException.builder()
+                    .withMessage("Invalid username or pass.\n" +
+                            "Please try again!").withErrorCode(400).build();
+        User user = foundedUser.get();
+        if (user instanceof Manager) {
+            Manager manager = (Manager) user;
+            return manager;
+        }
+        else if (user instanceof Expert) {
+            Expert expert = (Expert) user;
+            return expert;
+        }
+        else if (user instanceof Customer) {
+            Customer customer = (Customer) user;
+            return customer;
+        }
+        else
+            return null;
+    }
+
     /*@Autowired
     private CustomerDao customerDao;
 

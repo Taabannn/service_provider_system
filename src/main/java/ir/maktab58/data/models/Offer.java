@@ -33,7 +33,7 @@ public class Offer {
     @Temporal(TemporalType.TIME)
     @Column(nullable = false)
     private Date timeOfBeginning;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false)
     private Order order;
 }
