@@ -4,29 +4,59 @@ import ir.maktab58.data.dao.ExpertDao;
 import ir.maktab58.data.dao.SubServiceDao;
 import ir.maktab58.data.models.services.MainService;
 import ir.maktab58.data.models.services.SubService;
+import ir.maktab58.exceptions.ServiceSysException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * @author Taban Soleymani
  */
 @Service
 public class SubServiceServiceImpl implements SubServiceService {
-    /*@Autowired
+    @Autowired
     private SubServiceDao subServiceDao;
 
     @Autowired
-    private ExpertDao expertDao;
+    private MainServiceServiceImpl mainServiceService;
 
-    public void addASubServiceToExpert(String username, String password, String subServiceDescription, String field, long basePrice) {
-        MainService mainService = MainService.builder().withField(field).build();
+    @Override
+    public SubService saveASubService(String field, String subServiceDescription, long basePrice) {
+        Optional<MainService> foundedMainService = mainServiceService.findMainServiceByField(field);
+        if (foundedMainService.isPresent()) {
+            MainService mainService = foundedMainService.get();
+            Optional<SubService> foundedSubService = subServiceDao.findBySubServiceDescriptionAndBasePriceAndMainService(subServiceDescription, basePrice, mainService);
+            checkSubServiceIsExisted(foundedSubService, subServiceDescription);
+            return saveNewSubService(mainService, subServiceDescription, basePrice);
+        } else {
+            return saveANewMainAndSubService(field, subServiceDescription, basePrice);
+        }
+    }
+
+    public SubService saveANewMainAndSubService(String field, String subServiceDescription, long basePrice) {
+        MainService mainService = mainServiceService.saveNewMainService(field);
         SubService subService = SubService.builder()
                 .withMainService(mainService)
                 .withSubServiceDescription(subServiceDescription)
                 .withBasePrice(basePrice).build();
-        subServiceDao.save(subService);
+        return subServiceDao.save(subService);
+    }
 
-        //subServices = subServiceDao.findSubService(subServiceDescription, field);
-        expertDao.addSubServiceToExpert(username, password, subService);
-    }*/
+    public SubService saveNewSubService(MainService mainService, String subServiceDescription, long basePrice) {
+        SubService subService = SubService.builder()
+                .withSubServiceDescription(subServiceDescription)
+                .withMainService(mainService)
+                .withBasePrice(basePrice).build();
+        return subServiceDao.save(subService);
+    }
+
+    public void checkSubServiceIsExisted(Optional<SubService> foundedSubService, String subServiceDescription) {
+        if (foundedSubService.isPresent()) {
+            throw ServiceSysException.builder()
+                    .withMessage("SubService " + subServiceDescription + " is already Existed.")
+                    .withErrorCode(400).build();
+        }
+    }
 }

@@ -8,5 +8,4 @@ import org.springframework.stereotype.Service;
  */
 public interface MainServiceService {
     MainService saveNewMainService(String field);
-
 }

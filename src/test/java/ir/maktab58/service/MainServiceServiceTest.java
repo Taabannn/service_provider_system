@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -22,7 +23,7 @@ public class MainServiceServiceTest {
 
     @BeforeAll
     public static void init() {
-        System.out.println("In MainServiceServiceTest init...");
+        System.out.println("In subServiceServiceTest init...");
     }
 
     @BeforeEach
@@ -33,7 +34,7 @@ public class MainServiceServiceTest {
 
     @AfterAll
     public static void after() {
-        System.out.println("In MainServiceServiceTest after...");
+        System.out.println("In subServiceServiceTest after...");
     }
 
     static Stream<Arguments> generateMainService() {

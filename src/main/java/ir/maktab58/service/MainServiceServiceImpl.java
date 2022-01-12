@@ -28,4 +28,8 @@ public class MainServiceServiceImpl implements MainServiceService {
                 .withField(field).build();
         return mainServiceDao.save(mainService);
     }
+
+    Optional<MainService> findMainServiceByField(String field) {
+        return mainServiceDao.findMainServiceByField(field);
+    }
 }
