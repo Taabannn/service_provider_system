@@ -1,7 +1,10 @@
 package ir.maktab58.service;
 
+import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.users.Expert;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author Taban Soleymani
@@ -16,4 +19,8 @@ public interface ExpertService {
     void addNewSubServiceToExpertsSubServiceList(Expert expert, String subServiceDescription);
 
     void removeASubServiceFromExpertsServiceList(Expert expert, String subServiceDescription);
+
+    List<Expert> getAllExpertByExpertStatus(UserStatus userStatus);
+
+    List<Expert> getListOfExpertsBySubService(String subServiceDescription);
 }

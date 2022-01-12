@@ -1,5 +1,6 @@
 package ir.maktab58.data.dao;
 
+import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.users.Customer;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -7,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -21,6 +23,7 @@ public interface CustomerDao extends PagingAndSortingRepository<Customer, Intege
     @Query("update Customer c set c.password=:newPassword where c.username=:username and c.password=:passowrd")
     void updateCustomerPassword(@Param("username") String username, @Param("password") String password, @Param("newPassword") String newPassword);
 
+    List<Customer> getAllByUserStatus(UserStatus userStatus);
     /*@Autowired
     private SessionFactory sessionFactory;
 

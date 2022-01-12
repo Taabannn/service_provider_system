@@ -1,6 +1,7 @@
 package ir.maktab58.data.dao;
 
 import ir.maktab58.data.dto.ExpertDTO;
+import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.services.SubService;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.exceptions.ServiceSysException;
@@ -33,6 +34,10 @@ public interface ExpertDao extends PagingAndSortingRepository<Expert, Integer> {
     @Query("update Expert e set e.password=:newPassword where e.username=:username and e.password=:passowrd")
     void updateExpertPassword(@Param("username") String username, @Param("password") String password, @Param("newPassword") String newPassword);
 
+    List<Expert> getAllByUserStatus(UserStatus userStatus);
+
+    @Query("select e from Expert e join e.subServices s where s.subServiceDescription=:subServiceDescription")
+    List<Expert> getExpertsBySubService(@Param("subServiceDescription") String subServiceDescription);
 
     /*@Autowired
     private SessionFactory sessionFactory;

@@ -5,6 +5,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -13,9 +14,10 @@ import java.util.Optional;
 @Transactional
 @Repository
 public interface UserDao extends PagingAndSortingRepository<User, Integer> {
-    public Optional<User> findUserByEmail(String email);
+    Optional<User> findUserByEmail(String email);
 
-    public Optional<User> findUserByUsername(String username);
+    Optional<User> findUserByUsername(String username);
 
-    public Optional<User> findUserByUsernameAndPassword(String username, String password);
+    Optional<User> findUserByUsernameAndPassword(String username, String password);
+
 }

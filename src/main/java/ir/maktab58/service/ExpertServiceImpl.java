@@ -2,6 +2,7 @@ package ir.maktab58.service;
 
 import ir.maktab58.data.dao.ExpertDao;
 import ir.maktab58.data.dao.SubServiceDao;
+import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.services.SubService;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.data.models.users.User;
@@ -85,5 +86,15 @@ public class ExpertServiceImpl implements ExpertService {
         expertsSubServiceList.remove(subService);
         expert.setSubServices(expertsSubServiceList);
         expertDao.save(expert);
+    }
+
+    @Override
+    public List<Expert> getAllExpertByExpertStatus(UserStatus userStatus) {
+        return expertDao.getAllByUserStatus(userStatus);
+    }
+
+    @Override
+    public List<Expert> getListOfExpertsBySubService(String subServiceDescription) {
+        return expertDao.getExpertsBySubService(subServiceDescription);
     }
 }
