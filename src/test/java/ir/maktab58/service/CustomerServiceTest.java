@@ -1,4 +1,7 @@
-package ir.maktab58.service;/**
+package ir.maktab58.service;
+
+/**
  * @author Taban Soleymani
- */public class CustomerServiceTest {
+ */
+public class CustomerServiceTest {
 }

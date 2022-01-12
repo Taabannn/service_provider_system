@@ -2,6 +2,7 @@ package ir.maktab58.data.dao;
 
 import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.users.Customer;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -20,7 +21,8 @@ public interface CustomerDao extends PagingAndSortingRepository<Customer, Intege
 
     Optional<Customer> findCustomerByUsernameAndPassword(String username, String password);
 
-    @Query("update Customer c set c.password=:newPassword where c.username=:username and c.password=:passowrd")
+    @Modifying
+    @Query("update Customer c set c.password=:newPassword where c.username=:username and c.password=:password")
     void updateCustomerPassword(@Param("username") String username, @Param("password") String password, @Param("newPassword") String newPassword);
 
     List<Customer> getAllByUserStatus(UserStatus userStatus);

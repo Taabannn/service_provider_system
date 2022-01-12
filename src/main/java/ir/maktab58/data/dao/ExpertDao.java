@@ -13,6 +13,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -31,7 +32,8 @@ import java.util.Optional;
 public interface ExpertDao extends PagingAndSortingRepository<Expert, Integer> {
     Optional<Expert> findExpertByUsernameAndPassword(String username, String password);
 
-    @Query("update Expert e set e.password=:newPassword where e.username=:username and e.password=:passowrd")
+    @Modifying
+    @Query("update Expert e set e.password=:newPassword where e.username=:username and e.password=:password")
     void updateExpertPassword(@Param("username") String username, @Param("password") String password, @Param("newPassword") String newPassword);
 
     List<Expert> getAllByUserStatus(UserStatus userStatus);
