@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 /**
  * @author Taban Soleymani
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SubServiceServiceTest {
     ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     private final SubServiceServiceImpl subServiceService = context.getBean(SubServiceServiceImpl.class);
