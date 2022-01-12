@@ -18,18 +18,12 @@ import java.util.stream.Stream;
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MainServiceServiceTest {
-
-    private MainServiceServiceImpl mainServiceServiceImpl;
+    ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+    private final MainServiceServiceImpl mainServiceServiceImpl = context.getBean(MainServiceServiceImpl.class);
 
     @BeforeAll
     public static void init() {
         System.out.println("In subServiceServiceTest init...");
-    }
-
-    @BeforeEach
-    public void beforeEach() {
-        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        mainServiceServiceImpl = context.getBean(MainServiceServiceImpl.class);
     }
 
     @AfterAll
