@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * @author Taban Soleymani
  */
-@Service
 public interface UserService {
 
     User login(String username, String password);

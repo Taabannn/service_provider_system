@@ -1,11 +1,7 @@
 package ir.maktab58.service;
 
-import ir.maktab58.data.dao.CustomerDao;
-import ir.maktab58.data.dao.ExpertDao;
-import ir.maktab58.data.dao.ManagerDao;
 import ir.maktab58.data.dao.UserDao;
-import ir.maktab58.data.dto.CustomerDTO;
-import ir.maktab58.data.dto.ExpertDTO;
+import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.users.Customer;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.data.models.users.Manager;
@@ -16,15 +12,25 @@ import ir.maktab58.service.validator.UserAndPassValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Date;
 import java.util.Optional;
 
 /**
  * @author Taban Soleymani
  */
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
+
+    @Autowired
+    private ExpertServiceImpl expertService;
+
+    @Autowired
+    private ManagerServiceImpl managerService;
+
+    @Autowired
+    private CustomerServiceImpl customerService;
 
     @Override
     public User login(String username, String password) {
@@ -33,31 +39,8 @@ public class UserServiceImpl implements UserService {
             throw  ServiceSysException.builder()
                     .withMessage("Invalid username or pass.\n" +
                             "Please try again!").withErrorCode(400).build();
-        User user = foundedUser.get();
-        if (user instanceof Manager) {
-            Manager manager = (Manager) user;
-            return manager;
-        }
-        else if (user instanceof Expert) {
-            Expert expert = (Expert) user;
-            return expert;
-        }
-        else if (user instanceof Customer) {
-            Customer customer = (Customer) user;
-            return customer;
-        }
-        else
-            return null;
+        return foundedUser.get();
     }
-
-    /*@Autowired
-    private CustomerDao customerDao;
-
-    @Autowired
-    private ManagerDao managerDao;
-
-    @Autowired
-    private ExpertDao expertDao;
 
     public void validateEmailAndUserAndPass(String username, String password, String email) {
         boolean emailValid = EmailValidator.getInstance().isEmailValid(email);
@@ -73,6 +56,67 @@ public class UserServiceImpl implements UserService {
                     .withMessage("Entered username or password is not valid.")
                     .withErrorCode(400).build();
     }
+
+    public User saveNewUser(String role, String username, String password, String email, byte[] image) {
+        validateEmailAndUserAndPass(username, password, email);
+        isUsernameOrEmailAlreadyTaken(username, email);
+        switch (role.toLowerCase()) {
+            case "manager":
+                Manager manager = Manager.builder()
+                        .withUsername(username)
+                        .withPassword(password)
+                        .withEmail(email)
+                        .withFirstAccess(new Date()).build();
+                return managerService.saveNewManager(manager);
+            case "expert":
+                Expert expert = Expert.builder()
+                        .withUsername(username)
+                        .withPassword(password)
+                        .withEmail(email)
+                        .withImage(image)
+                        .withUserStatus(UserStatus.NEW)
+                        .withFirstAccess(new Date()).build();
+                return expertService.saveNewExpert(expert);
+            case "customer":
+                Customer customer = Customer
+                        .builder()
+                        .withUsername(username)
+                        .withPassword(password)
+                        .withEmail(email)
+                        .withCredit(0)
+                        .withUserStatus(UserStatus.NEW)
+                        .withFirstAccess(new Date()).build();
+                return customerService.saveNewCustomer(customer);
+            default: throw ServiceSysException.builder()
+                    .withErrorCode(500)
+                    .withMessage("Unable to save new " + role + " in user...\n" +
+                            "Please try again!").build();
+        }
+    }
+
+    public void isUsernameOrEmailAlreadyTaken(String username, String email) {
+        Optional<User> userByUsername = userDao.findUserByUsername(username);
+        Optional<User> userByEmail = userDao.findUserByEmail(email);
+        if (userByUsername.isPresent())
+            throw ServiceSysException.builder()
+                    .withMessage("Sorry! username " + username + " is already taken\n")
+                    .withErrorCode(400).build();
+        if (userByEmail.isPresent())
+            throw ServiceSysException.builder()
+                    .withMessage("Sorry! email " + email + " is already taken\n")
+                    .withErrorCode(400).build();
+    }
+
+
+
+    /*@Autowired
+    private CustomerDao customerDao;
+
+    @Autowired
+    private ManagerDao managerDao;
+
+    @Autowired
+    private ExpertDao expertDao;
 
     public void checkIfUserIsManagerOrNot(String username, String password) {
         managerDao.findManagerByUserAndPass(username, password);

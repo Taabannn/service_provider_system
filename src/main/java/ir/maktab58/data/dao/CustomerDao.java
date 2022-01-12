@@ -1,9 +1,13 @@
 package ir.maktab58.data.dao;
 
 import ir.maktab58.data.models.users.Customer;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * @author Taban Soleymani
@@ -11,6 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public interface CustomerDao extends PagingAndSortingRepository<Customer, Integer> {
+
+    Optional<Customer> findCustomerByUsernameAndPassword(String username, String password);
+
+    @Query("update Customer c set c.password=:newPassword where c.username=:username and c.password=:passowrd")
+    void updateCustomerPassword(@Param("username") String username, @Param("password") String password, @Param("newPassword") String newPassword);
+
     /*@Autowired
     private SessionFactory sessionFactory;
 

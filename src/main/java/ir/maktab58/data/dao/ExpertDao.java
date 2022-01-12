@@ -10,15 +10,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
-import org.hibernate.query.Query;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Taban Soleymani
@@ -26,6 +28,10 @@ import java.util.List;
 @Transactional
 @Repository
 public interface ExpertDao extends PagingAndSortingRepository<Expert, Integer> {
+    Optional<Expert> findExpertByUsernameAndPassword(String username, String password);
+
+    @Query("update Expert e set e.password=:newPassword where e.username=:username and e.password=:passowrd")
+    void updateExpertPassword(@Param("username") String username, @Param("password") String password, @Param("newPassword") String newPassword);
     /*@Autowired
     private SessionFactory sessionFactory;
 

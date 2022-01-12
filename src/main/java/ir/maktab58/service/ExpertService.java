@@ -1,10 +1,15 @@
 package ir.maktab58.service;
 
+import ir.maktab58.data.models.users.Expert;
 import org.springframework.stereotype.Service;
 
 /**
  * @author Taban Soleymani
  */
-@Service
 public interface ExpertService {
+    Expert expertLogin(String username, String password);
+
+    void changeExpertPassword(Expert expert, String newPassword);
+
+    Expert saveNewExpert(Expert expert);
 }
