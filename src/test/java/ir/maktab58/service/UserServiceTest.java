@@ -3,9 +3,7 @@ package ir.maktab58.service;
 import ir.maktab58.config.SpringConfig;
 import ir.maktab58.data.models.users.User;
 import ir.maktab58.exceptions.ServiceSysException;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -21,6 +19,7 @@ import java.util.stream.Stream;
 /**
  * @author Taban Soleymani
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserServiceTest {
     ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     private final UserServiceImpl userService = context.getBean(UserServiceImpl.class);
@@ -80,6 +79,7 @@ public class UserServiceTest {
 
     @ParameterizedTest
     @MethodSource("generateUsers")
+    @Order(1)
     public void saveNewUserTest(String role, String username, String password, String email, byte[] image) {
         User savedUser = userService.saveNewUser(role, username, password, email, image);
         Assertions.assertNotNull(savedUser);
@@ -102,30 +102,41 @@ public class UserServiceTest {
 
     @ParameterizedTest
     @MethodSource("generateExistedUsers")
-    public void saveNewUserTestWithExistedCustomer(String role, String username, String password, String email, String message, byte[] image) {
+    @Order(2)
+    public void saveNewUserTestWithExistedUser(String role, String username, String password, String email, String message, byte[] image) {
         Assertions.assertThrows(ServiceSysException.class, () -> userService.saveNewUser(role, username, password, email, image), message);
     }
-    /*
-    static Stream<Arguments> generateManager() {
+
+    static Stream<Arguments> generateExistedUsernameAndPasswords() {
         return Stream.of(
-                Arguments.of("Maryam", "Maryam123")
+                Arguments.of("Taabannn", "61378Tns"),
+                Arguments.of("Maryam", "Maryam123"),
+                Arguments.of("Aminn", "1259Amin")
         );
     }
 
     @ParameterizedTest
-    @MethodSource("generateManager")
-    public void getListOfCustomersToManagerTest_whenGetListOfCustomersToManagerCalls_withExistedManager(String username, String password) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        userService = context.getBean(UserServiceImpl.class);
-        userService.getListOfCustomersToManager(username, password);
+    @MethodSource("generateExistedUsernameAndPasswords")
+    @Order(3)
+    public void userLoginTestWithExistedUser(String username, String password) {
+        User user = userService.login(username, password);
+        Assertions.assertNotNull(user);
+    }
+
+    static Stream<Arguments> generateNotExistedUsernameAndPasswords() {
+        return Stream.of(
+                Arguments.of("TTTTTT", "122RTrtt"),
+                Arguments.of("Maryam", "Maryam1234"),
+                Arguments.of("Amin", "1259Amin")
+        );
     }
 
     @ParameterizedTest
-    @MethodSource("generateManager")
-    public void getListOfExpertsToManagerTest_whenGetListOfExpertsToManagerCalls_withExistedManager(String username, String password) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        userService = context.getBean(UserServiceImpl.class);
-        userService.getListOfExpertsToManager(username, password);
-    }*/
+    @MethodSource("generateNotExistedUsernameAndPasswords")
+    public void userLoginTestWithNotExistedUser(String username, String password) {
+        Assertions.assertThrows(ServiceSysException.class, () -> userService.login(username, password),
+                "Invalid username or pass.\n" +
+                "Please try again!");
+    }
 }
 
