@@ -107,57 +107,9 @@ public class UserServiceImpl implements UserService {
                     .withErrorCode(400).build();
     }
 
-
-
-    /*@Autowired
-    private CustomerDao customerDao;
-
-    @Autowired
-    private ManagerDao managerDao;
-
-    @Autowired
-    private ExpertDao expertDao;
-
+    /*
     public void checkIfUserIsManagerOrNot(String username, String password) {
         managerDao.findManagerByUserAndPass(username, password);
-    }
-
-    public void saveManager(Manager manager) {
-        try {
-            managerDao.save(manager);
-        } catch (RuntimeException e) {
-            throw ServiceSysException.builder()
-                    .withMessage("This user might have been existed")
-                    .withErrorCode(400).build();
-        }
-    }
-
-    public void checkIfUserIsExpertOrNot(String username, String password) {
-        expertDao.findExpertByUserAndPass(username, password);
-    }
-
-    public void saveExpert(Expert expert) {
-        try {
-            expertDao.save(expert);
-        } catch (RuntimeException e) {
-            throw ServiceSysException.builder()
-                    .withMessage("This user might have been existed")
-                    .withErrorCode(400).build();
-        }
-    }
-
-    public void checkIfUserIsCustomerOrNot(String username, String password) {
-        customerDao.findCustomerByUserAndPass(username, password);
-    }
-
-    public void saveCustomer(Customer customer) {
-        try {
-            customerDao.save(customer);
-        } catch (RuntimeException e) {
-            throw ServiceSysException.builder()
-                    .withMessage("This user might have been existed")
-                    .withErrorCode(400).build();
-        }
     }
 
     public List<CustomerDTO> getListOfCustomersToManager(String username, String password) {

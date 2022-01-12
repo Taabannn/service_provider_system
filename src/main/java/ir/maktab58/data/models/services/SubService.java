@@ -31,6 +31,6 @@ public class SubService {
     private long basePrice;
     @ManyToOne(cascade = CascadeType.MERGE)
     private MainService mainService;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Expert> expertList = new ArrayList<>();
 }

@@ -32,6 +32,8 @@ public interface ExpertDao extends PagingAndSortingRepository<Expert, Integer> {
 
     @Query("update Expert e set e.password=:newPassword where e.username=:username and e.password=:passowrd")
     void updateExpertPassword(@Param("username") String username, @Param("password") String password, @Param("newPassword") String newPassword);
+
+
     /*@Autowired
     private SessionFactory sessionFactory;
 

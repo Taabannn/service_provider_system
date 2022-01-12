@@ -22,7 +22,7 @@ public class Expert extends User {
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
     private Double score;
-    @ManyToMany
+    @ManyToMany(mappedBy = "expertList")
     private List<SubService> subServices = new ArrayList<>();
     @Lob
     @Column(columnDefinition = "BLOB", length = 307200)

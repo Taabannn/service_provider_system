@@ -12,4 +12,8 @@ public interface ExpertService {
     void changeExpertPassword(Expert expert, String newPassword);
 
     Expert saveNewExpert(Expert expert);
+
+    void addNewSubServiceToExpertsSubServiceList(Expert expert, String subServiceDescription);
+
+    void removeASubServiceFromExpertsServiceList(Expert expert, String subServiceDescription);
 }

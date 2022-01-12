@@ -24,6 +24,11 @@ import java.util.Optional;
 public interface SubServiceDao extends PagingAndSortingRepository<SubService, Integer> {
 
     Optional<SubService> findBySubServiceDescriptionAndBasePriceAndMainService(String subServiceDescription, long BasePrice, MainService mainService);
+
+    Optional<SubService> findBySubServiceDescription(String subServiceDescription);
+
+    @Query("select s from SubService s join s.expertList e where e.username=:username")
+    List<SubService> findExpertsSubServiceList(String username);
     /*@Autowired
     private SessionFactory sessionFactory;
 
