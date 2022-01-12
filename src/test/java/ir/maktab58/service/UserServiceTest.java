@@ -84,64 +84,28 @@ public class UserServiceTest {
         User savedUser = userService.saveNewUser(role, username, password, email, image);
         Assertions.assertNotNull(savedUser);
     }
-    /*
-    static Stream<Arguments> generateExistedCustomer() {
-        return Stream.of(
-                Arguments.of("Taabannn", "61378Tns", "tabansoleymani@yahoo.com")
-        );
-    }
 
-    @ParameterizedTest
-    @MethodSource("generateExistedCustomer")
-    public void saveCustomerTest_whenSaveCustomerCalls_withExisted(String username, String password, String email) {
-        Customer customer = Customer.builder()
-                .withUsername(username)
-                .withPassword(password)
-                .withEmail(email).withFirstAccess(new Date()).build();
-        Assertions.assertThrows(ServiceSysException.class, () -> userService.saveCustomer(customer), "This user might have been existed");
-    }
-
-    static Stream<Arguments> generateExistedExpert() {
-        return Stream.of(
-                Arguments.of("Aminn", "12Amin", "aminAmini@example.com")
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("generateExistedExpert")
-    public void saveExpertTest_whenSaveExpertCalls_withExisted(String username, String password, String email) {
-        File file = new File("expert.png");
-        byte[] bFile = new byte[(int) file.length()];
-        try (FileInputStream fileInputStream = new FileInputStream(file)) {
-            fileInputStream.read(bFile);
-        } catch (Exception e) {
-            e.getMessage();
+    static Stream<Arguments> generateExistedUsers() {
+        File file = new File("C:\\Users\\Taban\\Desktop\\maktab\\service_provider_system\\src\\main\\resources\\expert.png");
+        byte[] image = new byte[(int) file.length()];
+        try (InputStream inputStream = new FileInputStream(file)){
+            int bytesRead = inputStream.read(image);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        Expert expert = Expert.builder()
-                .withUsername(username)
-                .withPassword(password)
-                .withEmail(email)
-                .withFirstAccess(new Date())
-                .withImage(bFile).build();
-        Assertions.assertThrows(ServiceSysException.class, () -> userService.saveExpert(expert), "This user might have been existed");
-    }
-
-    static Stream<Arguments> generateExistedManager() {
         return Stream.of(
-                Arguments.of("Maryam", "Maryam123", "maryam@example.com")
+                Arguments.of("customer", "Taabannn", "61378Tns", "taban@yahoo.com", "Sorry! username Taabannn is already taken", null),
+                Arguments.of("customer", "Taban", "61378Tns", "tabansoleymani@yahoo.com", "Sorry! email tabansoleymani@yahoo.com is already taken", null),
+                Arguments.of("expert", "Aminn", "1259Amin", "amin@example.com", "Sorry! username Aminn is already taken", image)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("generateExistedCustomer")
-    public void saveManagerTest_whenSaveManagerCalls_withExisted(String username, String password, String email) {
-        Manager manager = Manager.builder()
-                .withUsername(username)
-                .withPassword(password)
-                .withEmail(email).withFirstAccess(new Date()).build();
-        Assertions.assertThrows(ServiceSysException.class, () -> userService.saveManager(manager), "This user might have been existed");
+    @MethodSource("generateExistedUsers")
+    public void saveNewUserTestWithExistedCustomer(String role, String username, String password, String email, String message, byte[] image) {
+        Assertions.assertThrows(ServiceSysException.class, () -> userService.saveNewUser(role, username, password, email, image), message);
     }
-
+    /*
     static Stream<Arguments> generateManager() {
         return Stream.of(
                 Arguments.of("Maryam", "Maryam123")

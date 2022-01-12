@@ -99,11 +99,11 @@ public class UserServiceImpl implements UserService {
         Optional<User> userByEmail = userDao.findUserByEmail(email);
         if (userByUsername.isPresent())
             throw ServiceSysException.builder()
-                    .withMessage("Sorry! username " + username + " is already taken\n")
+                    .withMessage("Sorry! username " + username + " is already taken")
                     .withErrorCode(400).build();
         if (userByEmail.isPresent())
             throw ServiceSysException.builder()
-                    .withMessage("Sorry! email " + email + " is already taken\n")
+                    .withMessage("Sorry! email " + email + " is already taken")
                     .withErrorCode(400).build();
     }
 
