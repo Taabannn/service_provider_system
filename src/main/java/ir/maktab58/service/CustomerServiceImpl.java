@@ -3,7 +3,6 @@ package ir.maktab58.service;
 import ir.maktab58.data.dao.CustomerDao;
 import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.users.Customer;
-import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.exceptions.ServiceSysException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

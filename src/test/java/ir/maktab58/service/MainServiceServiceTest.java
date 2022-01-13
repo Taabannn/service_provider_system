@@ -7,7 +7,6 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -51,11 +50,11 @@ public class MainServiceServiceTest {
 
     static Stream<Arguments> generateExistedMainService() {
         return Stream.of(
-                Arguments.of("Decoration", "MainService in field : " +  "Decoration" + " is already existed.\n" +
+                Arguments.of("Decoration", "MainService in field : " + "Decoration" + " is already existed.\n" +
                         "You can add whatever subService that you want."),
-                Arguments.of("Home Appliances", "MainService in field : " +  "Home Appliances" + " is already existed.\n" +
+                Arguments.of("Home Appliances", "MainService in field : " + "Home Appliances" + " is already existed.\n" +
                         "You can add whatever subService that you want."),
-                Arguments.of("Vehicles", "MainService in field : " +  "Vehicles" + " is already existed.\n" +
+                Arguments.of("Vehicles", "MainService in field : " + "Vehicles" + " is already existed.\n" +
                         "You can add whatever subService that you want.")
         );
     }

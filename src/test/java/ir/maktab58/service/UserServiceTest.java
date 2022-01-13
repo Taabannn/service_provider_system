@@ -65,7 +65,7 @@ public class UserServiceTest {
     static Stream<Arguments> generateUsers() {
         File file = new File("C:\\Users\\Taban\\Desktop\\maktab\\service_provider_system\\src\\main\\resources\\expert.png");
         byte[] image = new byte[(int) file.length()];
-        try (InputStream inputStream = new FileInputStream(file)){
+        try (InputStream inputStream = new FileInputStream(file)) {
             int bytesRead = inputStream.read(image);
         } catch (IOException e) {
             e.printStackTrace();
@@ -91,7 +91,7 @@ public class UserServiceTest {
     static Stream<Arguments> generateExistedUsers() {
         File file = new File("C:\\Users\\Taban\\Desktop\\maktab\\service_provider_system\\src\\main\\resources\\expert.png");
         byte[] image = new byte[(int) file.length()];
-        try (InputStream inputStream = new FileInputStream(file)){
+        try (InputStream inputStream = new FileInputStream(file)) {
             int bytesRead = inputStream.read(image);
         } catch (IOException e) {
             e.printStackTrace();
@@ -139,7 +139,7 @@ public class UserServiceTest {
     public void userLoginTestWithNotExistedUser(String username, String password) {
         Assertions.assertThrows(ServiceSysException.class, () -> userService.login(username, password),
                 "Invalid username or pass.\n" +
-                "Please try again!");
+                        "Please try again!");
     }
 }
 

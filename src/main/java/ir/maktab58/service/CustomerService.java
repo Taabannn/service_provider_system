@@ -2,8 +2,6 @@ package ir.maktab58.service;
 
 import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.users.Customer;
-import ir.maktab58.data.models.users.Expert;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

@@ -16,21 +16,10 @@ import java.util.List;
 public interface UserService {
 
     User login(String username, String password);
-    /*void validateEmailAndUserAndPass(String username, String password, String email);
 
-    void checkIfUserIsManagerOrNot(String username, String password);
+    void validateEmailAndUserAndPass(String username, String password, String email);
 
-    void saveManager(Manager manager);
+    User saveNewUser(String role, String username, String password, String email, byte[] image);
 
-    void checkIfUserIsExpertOrNot(String username, String password);
-
-    void saveExpert(Expert expert);
-
-    void checkIfUserIsCustomerOrNot(String username, String password);
-
-    void saveCustomer(Customer customer);
-
-    List<CustomerDTO> getListOfCustomersToManager(String username, String password);
-
-    List<ExpertDTO> getListOfExpertsToManager(String username, String password);*/
+    void isUsernameOrEmailAlreadyTaken(String username, String email);
 }

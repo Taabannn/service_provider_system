@@ -53,7 +53,7 @@ public class ManagerServiceTest {
                 Arguments.of("Maryam", "Maryam123", "Aminn", "1259Amin", UserStatus.VERIFIED),
                 Arguments.of("Maryam", "Maryam123", "AmirA", "AmirAimiri11", UserStatus.NOT_VERIFIED),
                 Arguments.of("Maryam", "Maryam123", "Mahnaz", "Mahnaz1366", UserStatus.VERIFIED)
-            );
+        );
     }
 
     @ParameterizedTest

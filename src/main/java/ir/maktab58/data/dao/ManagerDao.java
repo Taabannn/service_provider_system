@@ -22,25 +22,4 @@ import java.util.Optional;
 @Repository
 public interface ManagerDao extends PagingAndSortingRepository<Manager, Integer> {
     Optional<Manager> findManagerByUsernameAndPassword(String username, String password);
-    /*@Autowired
-    private SessionFactory sessionFactory;
-
-    public Manager findManagerByUserAndPass(String username, String password) {
-        Manager manager;
-        try {
-            Session session = sessionFactory.openSession();
-            Transaction transaction = session.beginTransaction();
-            Query<Manager> query = session.createQuery("from Manager m where m.username=:username and m.password=:password", Manager.class)
-                    .setParameter("username", username)
-                    .setParameter("password", password);
-            manager = query.getSingleResult();
-            transaction.commit();
-            session.close();
-        } catch (NoResultException e) {
-            throw ServiceSysException.builder()
-                    .withMessage("No manager with entered username and password was found.")
-                    .withErrorCode(400).build();
-        }
-        return manager;
-    }*/
 }

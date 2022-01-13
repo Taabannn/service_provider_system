@@ -7,16 +7,13 @@ import ir.maktab58.data.models.ExpertSubService;
 import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.services.SubService;
 import ir.maktab58.data.models.users.Expert;
-import ir.maktab58.data.models.users.User;
 import ir.maktab58.exceptions.ServiceSysException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.SecondaryTable;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**

@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService {
         return foundedUser.get();
     }
 
+    @Override
     public void validateEmailAndUserAndPass(String username, String password, String email) {
         boolean emailValid = EmailValidator.getInstance().isEmailValid(email);
         boolean userAndPassValid = UserAndPassValidator.getInstance().isUserAndPassValid(username, password);
@@ -57,6 +58,7 @@ public class UserServiceImpl implements UserService {
                     .withErrorCode(400).build();
     }
 
+    @Override
     public User saveNewUser(String role, String username, String password, String email, byte[] image) {
         validateEmailAndUserAndPass(username, password, email);
         isUsernameOrEmailAlreadyTaken(username, email);
@@ -94,6 +96,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
     public void isUsernameOrEmailAlreadyTaken(String username, String email) {
         Optional<User> userByUsername = userDao.findUserByUsername(username);
         Optional<User> userByEmail = userDao.findUserByEmail(email);

@@ -15,5 +15,4 @@ import java.util.Optional;
 public interface MainServiceDao extends PagingAndSortingRepository<MainService, Integer> {
 
     Optional<MainService> findMainServiceByField(String field);
-
 }

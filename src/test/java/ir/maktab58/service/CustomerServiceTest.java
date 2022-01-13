@@ -3,7 +3,6 @@ package ir.maktab58.service;
 import ir.maktab58.config.SpringConfig;
 import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.users.Customer;
-import ir.maktab58.data.models.users.Manager;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

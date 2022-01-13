@@ -23,8 +23,6 @@ public class Expert extends User {
     private Double score;
     @OneToMany(mappedBy = "expert")
     Set<ExpertSubService> expertSubServices;
-    /*@ManyToMany(mappedBy = "expertList")
-    private Set<SubService> subServices = new HashSet<>();*/
     @Lob
     @Column(columnDefinition = "BLOB", length = 307200)
     private byte[] image;
