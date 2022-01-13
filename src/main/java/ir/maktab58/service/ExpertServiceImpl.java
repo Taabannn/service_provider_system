@@ -105,8 +105,8 @@ public class ExpertServiceImpl implements ExpertService {
 
     @Override
     public List<Expert> getListOfExpertsBySubService(String subServiceDescription) {
-        //return expertDao.getExpertsBySubService(subServiceDescription);
-        return null;
+        List<ExpertSubService> expertSubByDescription = expertSubServiceDao.findExpertSubServiceBySubServiceDescription(subServiceDescription);
+        return expertSubByDescription.stream().map(ExpertSubService::getExpert).collect(Collectors.toList());
     }
 
     public void updateExpertStatus(Expert expert, UserStatus newUserStatus) {

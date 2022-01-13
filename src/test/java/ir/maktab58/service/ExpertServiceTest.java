@@ -1,6 +1,8 @@
 package ir.maktab58.service;
 
 import ir.maktab58.config.SpringConfig;
+import ir.maktab58.data.models.enums.UserStatus;
+import ir.maktab58.data.models.users.Customer;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.exceptions.ServiceSysException;
 import org.junit.jupiter.api.*;
@@ -99,5 +101,37 @@ public class ExpertServiceTest {
         for (String subServiceDescription : subServiceDes) {
             Assertions.assertThrows(ServiceSysException.class, () -> expertService.addNewSubServiceToExpertsSubServiceList(expert, subServiceDescription), "SubService " + subServiceDescription + " has already added to your services list.");
         }
+    }
+
+    static Stream<Arguments> generateExistedUserStatus() {
+        return Stream.of(
+                Arguments.of(UserStatus.VERIFIED),
+                Arguments.of(UserStatus.NOT_VERIFIED),
+                Arguments.of(UserStatus.NEW)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateExistedUserStatus")
+    @Order(5)
+    public void getAllExpertsByUserStatus(UserStatus userStatus) {
+        List<Expert> allExpertByExpertStatus = expertService.getAllExpertByExpertStatus(userStatus);
+        Assertions.assertNotNull(allExpertByExpertStatus);
+    }
+
+    static Stream<Arguments> generateOccupiedSubServices() {
+        return Stream.of(
+                Arguments.of("repairment"),
+                Arguments.of("changing oil"),
+                Arguments.of("demanding for a doctor")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateOccupiedSubServices")
+    @Order(6)
+    public void getExpertsBySubService(String subServiceDescription) {
+        List<Expert> listOfExpertsBySubService = expertService.getListOfExpertsBySubService(subServiceDescription);
+        Assertions.assertNotNull(listOfExpertsBySubService);
     }
 }
