@@ -3,7 +3,6 @@ package ir.maktab58.service;
 import ir.maktab58.config.SpringConfig;
 import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.users.Customer;
-import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.data.models.users.Manager;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,6 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -32,53 +32,50 @@ public class CustomerServiceTest {
         System.out.println("In CustomerServiceTest after...");
     }
 
-    static Stream<Arguments> generateCustomerManager() {
+    static Stream<Arguments> generateExistedCustomer() {
         return Stream.of(
-                Arguments.of("Maryam", "Maryam123")
+                Arguments.of("Taabannn", "61378Tns"),
+                Arguments.of("Farzad", "6Farzadi7")
         );
     }
 
     @ParameterizedTest
-    @MethodSource("generateCustomerManager")
+    @MethodSource("generateExistedCustomer")
     @Order(1)
-    public void MangerLoginTestWithExistedManager(String username, String password) {
-        Manager manager = managerService.managerLogin(username, password);
-        Assertions.assertNotNull(manager);
-    }
-
-    static Stream<Arguments> generateExistedExpertsWithNewUserStatus() {
-        return Stream.of(
-                Arguments.of("Maryam", "Maryam123", "Aminn", "1259Amin", UserStatus.VERIFIED),
-                Arguments.of("Maryam", "Maryam123", "AmirA", "AmirAimiri11", UserStatus.NOT_VERIFIED)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("generateExistedExpertsWithNewUserStatus")
-    @Order(2)
-    public void updateExpertStatusTest(String user, String pass, String username, String password, UserStatus userStatus) {
-        Manager manager = managerService.managerLogin(user, pass);
-        Expert expert = expertService.expertLogin(username, password);
-        managerService.updateUserStatus(manager, expert, userStatus);
-        expert = expertService.expertLogin(username, password);
-        Assertions.assertEquals(userStatus, expert.getUserStatus());
-    }
-
-    static Stream<Arguments> generateExistedCustomersWithNewUserStatus() {
-        return Stream.of(
-                Arguments.of("Maryam", "Maryam123", "Taabannn", "61378Tns", UserStatus.VERIFIED),
-                Arguments.of("Maryam", "Maryam123", "Farzad", "6Farzadi7", UserStatus.NOT_VERIFIED)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("generateExistedCustomersWithNewUserStatus")
-    @Order(3)
-    public void updateCustomerStatusTest(String user, String pass, String username, String password, UserStatus userStatus) {
-        Manager manager = managerService.managerLogin(user, pass);
+    public void customerLoginTestWithExistedCustomer(String username, String password) {
         Customer customer = customerService.customerLogin(username, password);
-        managerService.updateUserStatus(manager, customer, userStatus);
-        customer = customerService.customerLogin(username, password);
-        Assertions.assertEquals(userStatus, customer.getUserStatus());
+        Assertions.assertNotNull(customer);
+    }
+
+    static Stream<Arguments> generateExistedCustomersWithNewPassword() {
+        return Stream.of(
+                Arguments.of("Taabannn", "61378Tns", "Taban1122"),
+                Arguments.of("Farzad", "6Farzadi7", "LKJh12345")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateExistedCustomersWithNewPassword")
+    @Order(2)
+    public void updateCustomerPasswordTest(String username, String password, String newPassword) {
+        Customer customer = customerService.customerLogin(username, password);
+        customerService.changeCustomerPassword(customer, newPassword);
+        customer = customerService.customerLogin(username, newPassword);
+        Assertions.assertNotNull(customer);
+    }
+
+    static Stream<Arguments> generateExistedUserStatus() {
+        return Stream.of(
+                Arguments.of(UserStatus.VERIFIED),
+                Arguments.of(UserStatus.NOT_VERIFIED)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateExistedUserStatus")
+    @Order(3)
+    public void getAllCustomersByUserStatus(UserStatus userStatus) {
+        List<Customer> allCustomersByUserStatus = customerService.getAllCustomersByUserStatus(userStatus);
+        Assertions.assertNotNull(allCustomersByUserStatus);
     }
 }
