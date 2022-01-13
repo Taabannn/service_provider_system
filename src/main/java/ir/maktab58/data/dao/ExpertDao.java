@@ -38,6 +38,10 @@ public interface ExpertDao extends PagingAndSortingRepository<Expert, Integer> {
 
     List<Expert> getAllByUserStatus(UserStatus userStatus);
 
+    @Modifying
+    @Query("update Expert e set e.userStatus=:newUserStatus where e.username=:username and e.password=:password")
+    void updateExpertStatus(@Param("username") String username, @Param("password") String password, @Param("newUserStatus") UserStatus newUserStatus);
+
     /*@Query("select e from Expert e join e.subServices s where s.subServiceDescription=:subServiceDescription")
     List<Expert> getExpertsBySubService(@Param("subServiceDescription") String subServiceDescription);
 */

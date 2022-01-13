@@ -55,7 +55,6 @@ public class ExpertServiceImpl implements ExpertService {
 
     @Override
     public void addNewSubServiceToExpertsSubServiceList(Expert expert, String subServiceDescription) {
-        //Set<SubService> expertsSubServiceList = subServiceDao.findExpertsSubServiceList(expert.getUsername());
         Optional<SubService> foundedSubService = subServiceDao.findBySubServiceDescription(subServiceDescription);
         if (foundedSubService.isEmpty())
             throw ServiceSysException.builder()
@@ -108,5 +107,9 @@ public class ExpertServiceImpl implements ExpertService {
     public List<Expert> getListOfExpertsBySubService(String subServiceDescription) {
         //return expertDao.getExpertsBySubService(subServiceDescription);
         return null;
+    }
+
+    public void updateExpertStatus(Expert expert, UserStatus newUserStatus) {
+        expertDao.updateExpertStatus(expert.getUsername(), expert.getPassword(), newUserStatus);
     }
 }

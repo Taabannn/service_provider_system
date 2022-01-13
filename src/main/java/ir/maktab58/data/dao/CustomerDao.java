@@ -26,6 +26,13 @@ public interface CustomerDao extends PagingAndSortingRepository<Customer, Intege
     void updateCustomerPassword(@Param("username") String username, @Param("password") String password, @Param("newPassword") String newPassword);
 
     List<Customer> getAllByUserStatus(UserStatus userStatus);
+
+    @Modifying
+    @Query("update Customer c set c.userStatus=:newUserStatus where c.username=:username and c.password=:password")
+    void updateCustomerStatus(@Param("username") String username, @Param("password") String password, @Param("newUserStatus") UserStatus newUserStatus);
+
+
+
     /*@Autowired
     private SessionFactory sessionFactory;
 

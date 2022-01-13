@@ -23,4 +23,6 @@ public interface ExpertService {
     List<Expert> getAllExpertByExpertStatus(UserStatus userStatus);
 
     List<Expert> getListOfExpertsBySubService(String subServiceDescription);
+
+    void updateExpertStatus(Expert expert, UserStatus newUserStatus);
 }

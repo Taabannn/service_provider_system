@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
+import java.util.Optional;
 
 /**
  * @author Taban Soleymani
@@ -20,6 +21,7 @@ import javax.persistence.NoResultException;
 @Transactional
 @Repository
 public interface ManagerDao extends PagingAndSortingRepository<Manager, Integer> {
+    Optional<Manager> findManagerByUsernameAndPassword(String username, String password);
     /*@Autowired
     private SessionFactory sessionFactory;
 

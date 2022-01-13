@@ -18,4 +18,6 @@ public interface CustomerService {
     Customer saveNewCustomer(Customer customer);
 
     List<Customer> getAllCustomersByUserStatus(UserStatus userStatus);
+
+    void updateCustomerStatus(Customer customer, UserStatus newUserStatus);
 }

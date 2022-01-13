@@ -23,7 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer customerLogin(String username, String password) {
         Optional<Customer> foundedCustomer = customerDao.findCustomerByUsernameAndPassword(username, password);
         if (foundedCustomer.isEmpty())
-            throw  ServiceSysException.builder()
+            throw ServiceSysException.builder()
                     .withMessage("Invalid username or pass.\n" +
                             "Please try again!").withErrorCode(400).build();
         return foundedCustomer.get();
@@ -42,5 +42,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> getAllCustomersByUserStatus(UserStatus userStatus) {
         return customerDao.getAllByUserStatus(userStatus);
+    }
+
+    @Override
+    public void updateCustomerStatus(Customer customer, UserStatus newUserStatus) {
+        customerDao.updateCustomerStatus(customer.getUsername(), customer.getPassword(), newUserStatus);
     }
 }
