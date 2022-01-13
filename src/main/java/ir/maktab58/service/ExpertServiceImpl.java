@@ -79,7 +79,6 @@ public class ExpertServiceImpl implements ExpertService {
 
     @Override
     public void removeASubServiceFromExpertsServiceList(Expert expert, String subServiceDescription) {
-        /*Set<SubService> expertsSubServiceList = subServiceDao.findExpertsSubServiceList(expert.getUsername());
         Optional<SubService> foundedSubService = subServiceDao.findBySubServiceDescription(subServiceDescription);
         if (foundedSubService.isEmpty())
             throw ServiceSysException.builder()
@@ -88,14 +87,13 @@ public class ExpertServiceImpl implements ExpertService {
                     .withErrorCode(400).build();
 
         SubService subService = foundedSubService.get();
-        if (!expertsSubServiceList.contains(subService)) {
+        List<ExpertSubService> expertSubs = expertSubServiceDao.findExpertSubServiceBySubService(subService);
+        if (expertSubs.size() == 0) {
             throw ServiceSysException.builder()
                     .withMessage("SubService " + subServiceDescription + " has not existed in your services list.")
                     .withErrorCode(400).build();
         }
-        expertsSubServiceList.remove(subService);
-        //expert.setSubServices(expertsSubServiceList);
-        expertDao.save(expert);*/
+        expertSubServiceDao.deleteByExpertAndSubService(expert, subService);
     }
 
     @Override

@@ -21,4 +21,8 @@ public interface ExpertSubServiceDao extends CrudRepository<ExpertSubService, In
 
     @Query("from ExpertSubService exsub join exsub.subService sub where sub.subServiceDescription=:subServiceDescription")
     List<ExpertSubService> findExpertSubServiceBySubServiceDescription(@Param("subServiceDescription") String subServiceDescription);
+
+    List<ExpertSubService> findExpertSubServiceBySubService(SubService subService);
+
+    void deleteByExpertAndSubService(Expert expert, SubService subService);
 }
