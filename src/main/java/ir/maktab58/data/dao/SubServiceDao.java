@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author Taban Soleymani
@@ -27,8 +29,9 @@ public interface SubServiceDao extends PagingAndSortingRepository<SubService, In
 
     Optional<SubService> findBySubServiceDescription(String subServiceDescription);
 
-    @Query("select s from SubService s join s.expertList e where e.username=:username")
-    List<SubService> findExpertsSubServiceList(String username);
+    /*@Query("select s from SubService s join s.expertList e where e.username=:username")
+    Set<SubService> findExpertsSubServiceList(@Param("username") String username);
+*/
     /*@Autowired
     private SessionFactory sessionFactory;
 

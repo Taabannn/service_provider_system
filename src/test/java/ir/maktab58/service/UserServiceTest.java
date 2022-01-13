@@ -73,7 +73,10 @@ public class UserServiceTest {
         return Stream.of(
                 Arguments.of("customer", "Taabannn", "61378Tns", "tabansoleymani@yahoo.com", null),
                 Arguments.of("manager", "Maryam", "Maryam123", "maryam@example.com", null),
-                Arguments.of("expert", "Aminn", "1259Amin", "aminAmini@example.com", image)
+                Arguments.of("expert", "Aminn", "1259Amin", "aminAmini@example.com", image),
+                Arguments.of("expert", "AmirA", "AmirAimiri11", "aamiri@example.com", image),
+                Arguments.of("expert", "Mahnaz", "Ma12345678", "mahnaz@example.com", image),
+                Arguments.of("customer", "Farzad", "6Farzadi7", "farzad@yahoo.com", null)
         );
     }
 

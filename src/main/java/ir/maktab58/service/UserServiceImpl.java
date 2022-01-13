@@ -106,19 +106,4 @@ public class UserServiceImpl implements UserService {
                     .withMessage("Sorry! email " + email + " is already taken")
                     .withErrorCode(400).build();
     }
-
-    /*
-    public void checkIfUserIsManagerOrNot(String username, String password) {
-        managerDao.findManagerByUserAndPass(username, password);
-    }
-
-    public List<CustomerDTO> getListOfCustomersToManager(String username, String password) {
-        checkIfUserIsManagerOrNot(username, password);
-        return customerDao.getListOfCustomers();
-    }
-
-    public List<ExpertDTO> getListOfExpertsToManager(String username, String password) {
-        checkIfUserIsManagerOrNot(username, password);
-        return expertDao.getListOfExperts();
-    }*/
 }

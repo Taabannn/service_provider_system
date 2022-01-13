@@ -18,7 +18,7 @@ import java.util.Date;
 public class Manager extends User {
 
     @Builder(setterPrefix = "with")
-    public Manager(int id, String username, String password, String email, Date firstAccess) {
-        super(id, username, password, email, firstAccess);
+    public Manager(int id, String username, String password, String email, Date firstAccess, Date lastUpdate) {
+        super(id, username, password, email, firstAccess, lastUpdate);
     }
 }

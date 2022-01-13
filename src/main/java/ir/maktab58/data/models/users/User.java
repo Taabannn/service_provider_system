@@ -2,6 +2,7 @@ package ir.maktab58.data.models.users;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,8 +20,8 @@ import java.util.Date;
 @ToString
 public abstract class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int userId;
     @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false)
@@ -29,4 +30,6 @@ public abstract class User {
     private String email;
     @CreationTimestamp
     private Date firstAccess;
+    @UpdateTimestamp
+    private Date lastUpdate;
 }

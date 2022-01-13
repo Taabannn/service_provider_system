@@ -1,7 +1,9 @@
 package ir.maktab58.service;
 
 import ir.maktab58.data.dao.ExpertDao;
+import ir.maktab58.data.dao.ExpertSubServiceDao;
 import ir.maktab58.data.dao.SubServiceDao;
+import ir.maktab58.data.models.ExpertSubService;
 import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.services.SubService;
 import ir.maktab58.data.models.users.Expert;
@@ -11,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.SecondaryTable;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Taban Soleymani
@@ -24,6 +29,9 @@ public class ExpertServiceImpl implements ExpertService {
 
     @Autowired
     private SubServiceDao subServiceDao;
+
+    @Autowired
+    private ExpertSubServiceDao expertSubServiceDao;
 
     @Override
     public Expert expertLogin(String username, String password) {
@@ -47,7 +55,7 @@ public class ExpertServiceImpl implements ExpertService {
 
     @Override
     public void addNewSubServiceToExpertsSubServiceList(Expert expert, String subServiceDescription) {
-        List<SubService> expertsSubServiceList = subServiceDao.findExpertsSubServiceList(expert.getUsername());
+        //Set<SubService> expertsSubServiceList = subServiceDao.findExpertsSubServiceList(expert.getUsername());
         Optional<SubService> foundedSubService = subServiceDao.findBySubServiceDescription(subServiceDescription);
         if (foundedSubService.isEmpty())
             throw ServiceSysException.builder()
@@ -56,20 +64,23 @@ public class ExpertServiceImpl implements ExpertService {
                     .withErrorCode(400).build();
 
         SubService subService = foundedSubService.get();
-        if (expertsSubServiceList.contains(subService)) {
+        Optional<ExpertSubService> expertSubService = expertSubServiceDao.findExpertSubServiceByExpertAndSubService(expert, subService);
+        if (expertSubService.isPresent()) {
             throw ServiceSysException.builder()
                     .withMessage("SubService " + subServiceDescription + " has already added to your services list.")
                     .withErrorCode(400).build();
         }
 
-        expertsSubServiceList.add(subService);
-        expert.setSubServices(expertsSubServiceList);
-        expertDao.save(expert);
+        ExpertSubService newExpertSubService = ExpertSubService.builder()
+                .withSubService(subService)
+                .withExpert(expert)
+                .withCreationDate(new Date()).build();
+        expertSubServiceDao.save(newExpertSubService);
     }
 
     @Override
     public void removeASubServiceFromExpertsServiceList(Expert expert, String subServiceDescription) {
-        List<SubService> expertsSubServiceList = subServiceDao.findExpertsSubServiceList(expert.getUsername());
+        /*Set<SubService> expertsSubServiceList = subServiceDao.findExpertsSubServiceList(expert.getUsername());
         Optional<SubService> foundedSubService = subServiceDao.findBySubServiceDescription(subServiceDescription);
         if (foundedSubService.isEmpty())
             throw ServiceSysException.builder()
@@ -84,8 +95,8 @@ public class ExpertServiceImpl implements ExpertService {
                     .withErrorCode(400).build();
         }
         expertsSubServiceList.remove(subService);
-        expert.setSubServices(expertsSubServiceList);
-        expertDao.save(expert);
+        //expert.setSubServices(expertsSubServiceList);
+        expertDao.save(expert);*/
     }
 
     @Override
@@ -95,6 +106,7 @@ public class ExpertServiceImpl implements ExpertService {
 
     @Override
     public List<Expert> getListOfExpertsBySubService(String subServiceDescription) {
-        return expertDao.getExpertsBySubService(subServiceDescription);
+        //return expertDao.getExpertsBySubService(subServiceDescription);
+        return null;
     }
 }

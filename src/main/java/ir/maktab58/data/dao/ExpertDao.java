@@ -38,9 +38,9 @@ public interface ExpertDao extends PagingAndSortingRepository<Expert, Integer> {
 
     List<Expert> getAllByUserStatus(UserStatus userStatus);
 
-    @Query("select e from Expert e join e.subServices s where s.subServiceDescription=:subServiceDescription")
+    /*@Query("select e from Expert e join e.subServices s where s.subServiceDescription=:subServiceDescription")
     List<Expert> getExpertsBySubService(@Param("subServiceDescription") String subServiceDescription);
-
+*/
     /*@Autowired
     private SessionFactory sessionFactory;
 

@@ -26,8 +26,8 @@ public class Customer extends User {
     private List<Address> addressList = new ArrayList<>();
 
     @Builder(setterPrefix = "with")
-    public Customer(int id, String username, String password, String email, Date firstAccess, UserStatus userStatus, long credit) {
-        super(id, username, password, email, firstAccess);
+    public Customer(int id, String username, String password, String email, Date firstAccess, Date lastUpdate, UserStatus userStatus, long credit) {
+        super(id, username, password, email, firstAccess, lastUpdate);
         this.userStatus = userStatus;
         this.credit = credit;
     }
