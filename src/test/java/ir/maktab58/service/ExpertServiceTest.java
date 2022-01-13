@@ -134,4 +134,19 @@ public class ExpertServiceTest {
         List<Expert> listOfExpertsBySubService = expertService.getListOfExpertsBySubService(subServiceDescription);
         Assertions.assertNotNull(listOfExpertsBySubService);
     }
+
+    static Stream<Arguments> generateExpertAndOccupiedSubService() {
+        return Stream.of(
+                Arguments.of("repairment", "AmirA", "AmirAimiri11"),
+                Arguments.of("changing oil", "AmirA", "AmirAimiri11")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateExpertAndOccupiedSubService")
+    @Order(7)
+    public void removeExpertsBySubService(String subServiceDescription, String username, String password) {
+        Expert expert = expertService.expertLogin(username, password);
+        expertService.removeASubServiceFromExpertsServiceList(expert, subServiceDescription);
+    }
 }
