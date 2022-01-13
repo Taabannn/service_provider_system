@@ -2,6 +2,7 @@ package ir.maktab58.service;
 
 import ir.maktab58.config.SpringConfig;
 import ir.maktab58.data.models.users.Expert;
+import ir.maktab58.exceptions.ServiceSysException;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -78,6 +79,25 @@ public class ExpertServiceTest {
         Expert expert = expertService.expertLogin(username, password);
         for (String subServiceDescription : subServiceDes) {
             expertService.addNewSubServiceToExpertsSubServiceList(expert, subServiceDescription);
+        }
+    }
+
+    static Stream<Arguments> generateExistedExpertWithAddedSubServices() {
+        return Stream.of(
+                Arguments.of("Aminn", "1259Amin", List.of("repairment")),
+                Arguments.of("AmirA", "AmirAimiri11", List.of("repairment", "changing oil")),
+                Arguments.of("Mahnaz", "Mahnaz1366", List.of("demanding for a doctor"))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateExistedExpertWithAddedSubServices")
+    @Order(4)
+    public void addExistedSubServiceToExpertsSubServiceList(String username, String password, List<String> subServiceDes) {
+        expertService.expertLogin(username, password);
+        Expert expert = expertService.expertLogin(username, password);
+        for (String subServiceDescription : subServiceDes) {
+            Assertions.assertThrows(ServiceSysException.class, () -> expertService.addNewSubServiceToExpertsSubServiceList(expert, subServiceDescription), "SubService " + subServiceDescription + " has already added to your services list.");
         }
     }
 }
