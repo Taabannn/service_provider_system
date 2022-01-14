@@ -29,6 +29,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderServiceImpl orderService;
 
+    @Override
     public Order saveNewOrder(Customer customer, Address address, SubService subService, String details, long offeredPriceByCustomer, Date requestedDate) {
         customerService.addAddressToCustomerAddressList(customer, address);
         Order order = Order.builder()
@@ -40,5 +41,10 @@ public class OrderServiceImpl implements OrderService {
                 .withDetails(details)
                 .withOrderStatus(OrderStatus.WAITING_FOR_EXPERT_OFFER).build();
         return orderDao.save(order);
+    }
+
+    @Override
+    public List<Order> getOrdersBySubService(SubService subService) {
+        return orderDao.findOrdersBySubService(subService);
     }
 }

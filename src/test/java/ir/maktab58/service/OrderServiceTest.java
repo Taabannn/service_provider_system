@@ -45,7 +45,7 @@ public class OrderServiceTest {
 
     @ParameterizedTest
     @MethodSource("generateOrders")
-    public void saveAnNewAddressTestWithNotExistedAddress(String username, String postalCode, String subServiceDescription, String details, long offeredPriceByCustomer, Date requestedDate) {
+    public void saveNewOrderTest(String username, String postalCode, String subServiceDescription, String details, long offeredPriceByCustomer, Date requestedDate) {
         try {
             Address address = addressService.findAddressByPostalCode(postalCode).get();
             Customer customer = customerService.findVerifiedCustomerByUsername(username).get();

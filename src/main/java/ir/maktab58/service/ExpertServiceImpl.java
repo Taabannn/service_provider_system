@@ -107,4 +107,13 @@ public class ExpertServiceImpl implements ExpertService {
     public void updateExpertStatus(Expert expert, UserStatus newUserStatus) {
         expertDao.updateExpertStatus(expert.getUsername(), expert.getPassword(), newUserStatus);
     }
+
+    public void checkIfExpertHasSubService(SubService subService, Expert expert) {
+        List<ExpertSubService> expertSubServices = expertSubServiceDao.findExpertSubServiceBySubService(subService);
+        List<Expert> experts = expertSubServices.stream().map(ExpertSubService::getExpert).collect(Collectors.toList());
+        if (!experts.contains(expert))
+            throw ServiceSysException.builder()
+                    .withMessage("Expert has not been added in SubService.")
+                    .withErrorCode(400).build();
+    }
 }

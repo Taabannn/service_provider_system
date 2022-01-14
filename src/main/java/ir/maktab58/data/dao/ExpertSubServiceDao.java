@@ -29,4 +29,6 @@ public interface ExpertSubServiceDao extends CrudRepository<ExpertSubService, In
 
     @Modifying
     void deleteByExpertAndSubService(Expert expert, SubService subService);
+
+    List<ExpertSubService> findExpertSubServicesBySubService(SubService subService);
 }
