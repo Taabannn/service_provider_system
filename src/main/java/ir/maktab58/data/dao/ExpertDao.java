@@ -41,4 +41,6 @@ public interface ExpertDao extends PagingAndSortingRepository<Expert, Integer> {
     @Modifying
     @Query("update Expert e set e.userStatus=:newUserStatus where e.username=:username and e.password=:password")
     void updateExpertStatus(@Param("username") String username, @Param("password") String password, @Param("newUserStatus") UserStatus newUserStatus);
+
+    Optional<Expert> findExpertByUsernameAndUserStatus(String username, UserStatus userStatus);
 }

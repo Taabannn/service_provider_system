@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Taban Soleymani
@@ -19,4 +20,7 @@ import java.util.List;
 @Repository
 public interface OrderDao extends PagingAndSortingRepository<Order, Integer> {
     List<Order> findOrdersBySubService(SubService subService);
+
+    @Override
+    Optional<Order> findById(Integer integer);
 }

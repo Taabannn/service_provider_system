@@ -47,4 +47,8 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrdersBySubService(SubService subService) {
         return orderDao.findOrdersBySubService(subService);
     }
+
+    public Optional<Order> findOrderByOrderId(int orderId) {
+        return orderDao.findById(orderId);
+    }
 }

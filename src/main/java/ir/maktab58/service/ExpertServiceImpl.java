@@ -118,4 +118,8 @@ public class ExpertServiceImpl implements ExpertService {
                     .withMessage("Expert has not been added in SubService.")
                     .withErrorCode(400).build();
     }
+
+    public Optional<Expert> findVerifiedExpertByUsername(String username) {
+        return expertDao.findExpertByUsernameAndUserStatus(username, UserStatus.VERIFIED);
+    }
 }
