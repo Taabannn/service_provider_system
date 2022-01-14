@@ -1,6 +1,5 @@
 package ir.maktab58.data.models;
 
-import ir.maktab58.data.models.services.SubService;
 import ir.maktab58.data.models.users.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

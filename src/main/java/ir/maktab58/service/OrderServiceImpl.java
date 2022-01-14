@@ -1,7 +1,5 @@
 package ir.maktab58.service;
 
-import ir.maktab58.data.dao.AddressDao;
-import ir.maktab58.data.dao.CustomerDao;
 import ir.maktab58.data.dao.OrderDao;
 import ir.maktab58.data.models.Address;
 import ir.maktab58.data.models.Order;
@@ -50,5 +48,9 @@ public class OrderServiceImpl implements OrderService {
 
     public Optional<Order> findOrderByOrderId(int orderId) {
         return orderDao.findById(orderId);
+    }
+
+    public void updateOrderStatusToWaitingForCustomerChoice(Order order) {
+        orderDao.updateOrderStatus(OrderStatus.WAITING_FOR_CHOOSING_EXPERT, order.getId());
     }
 }

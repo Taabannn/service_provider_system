@@ -48,13 +48,13 @@ public class OfferServiceTest {
     @ParameterizedTest
     @MethodSource("generateOffers")
     public void saveNewOfferTest(String username, int orderId, long offeredPrice, int numOfEstimatedHours, Date timeOfBeginning) {
-        //try {
+        try {
             Expert expert = expertService.findVerifiedExpertByUsername(username).get();
             Order order = orderService.findOrderByOrderId(orderId).get();
             Offer offer = offerService.saveNewOffer(order, expert, offeredPrice, numOfEstimatedHours, timeOfBeginning);
             Assertions.assertNotNull(offer);
-        /*} catch (Exception e) {
+        } catch (Exception e) {
             Assertions.fail();
-        }*/
+        }
     }
 }

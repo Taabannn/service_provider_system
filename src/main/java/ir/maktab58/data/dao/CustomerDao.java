@@ -1,6 +1,5 @@
 package ir.maktab58.data.dao;
 
-import ir.maktab58.data.models.Address;
 import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.users.Customer;
 import org.springframework.data.jpa.repository.Modifying;

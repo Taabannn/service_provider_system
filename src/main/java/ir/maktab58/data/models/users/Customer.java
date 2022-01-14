@@ -1,14 +1,11 @@
 package ir.maktab58.data.models.users;
 
-import ir.maktab58.data.models.Address;
 import ir.maktab58.data.models.CustomerAddress;
 import ir.maktab58.data.models.enums.UserStatus;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /**

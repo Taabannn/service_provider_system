@@ -22,6 +22,9 @@ public class OfferServiceImpl implements OfferService {
     @Autowired
     ExpertServiceImpl expertService;
 
+    @Autowired
+    OrderServiceImpl orderService;
+
     @Override
     public Offer saveNewOffer(Order order, Expert expert, long offeredPrice, int numOfEstimatedHours, Date timeOfBeginning) {
         Optional<Offer> offerByExpertAndOrder = offerDao.findOfferByExpertAndOrder(expert, order);
@@ -44,6 +47,8 @@ public class OfferServiceImpl implements OfferService {
                 .withNumOfEstimatedHours(numOfEstimatedHours)
                 .withOrder(order)
                 .withTimeOfBeginning(timeOfBeginning).build();
+
+        orderService.updateOrderStatusToWaitingForCustomerChoice(order);
 
         return offerDao.save(offer);
     }
