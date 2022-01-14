@@ -40,20 +40,21 @@ public class OfferServiceTest {
 
     static Stream<Arguments> generateOffers() {
         return Stream.of(
-                Arguments.of("AmirA", 1, 300000, 2, new Date(122, 2, 3))
+                Arguments.of("AmirA", 1, 300000, 2, new Date(122, 2, 3)),
+                Arguments.of("Aminn", 1, 500000, 2, new Date(122, 2, 3))
         );
     }
 
     @ParameterizedTest
     @MethodSource("generateOffers")
     public void saveNewOfferTest(String username, int orderId, long offeredPrice, int numOfEstimatedHours, Date timeOfBeginning) {
-        try {
+        //try {
             Expert expert = expertService.findVerifiedExpertByUsername(username).get();
             Order order = orderService.findOrderByOrderId(orderId).get();
             Offer offer = offerService.saveNewOffer(order, expert, offeredPrice, numOfEstimatedHours, timeOfBeginning);
             Assertions.assertNotNull(offer);
-        } catch (Exception e) {
+        /*} catch (Exception e) {
             Assertions.fail();
-        }
+        }*/
     }
 }
