@@ -18,7 +18,7 @@ import java.util.Set;
 @DiscriminatorValue(value = "customer")
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, of = {"userStatus"})
 @ToString(callSuper = true)
 public class Customer extends User {
     @Enumerated(EnumType.STRING)

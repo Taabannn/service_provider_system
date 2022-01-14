@@ -66,4 +66,8 @@ public class CustomerServiceImpl implements CustomerService {
             customerAddressDao.save(customerAddress);
         }
     }
+
+    public Optional<Customer> findVerifiedCustomerByUsername(String username) {
+        return customerDao.findCustomerByUsernameAndUserStatus(username, UserStatus.VERIFIED);
+    }
 }

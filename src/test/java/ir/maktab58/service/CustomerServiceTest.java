@@ -84,14 +84,14 @@ public class CustomerServiceTest {
     static Stream<Arguments> generateExistedUserAndExistedAddress() {
         return Stream.of(
                 Arguments.of("Taabannn", "Taban1122", "1919191919"),
-                Arguments.of("Taabannn", "Taban1122", "1234554321")
+                Arguments.of("Taabannn", "Taban1122", "01234554321")
         );
     }
 
     @ParameterizedTest
     @MethodSource("generateExistedUserAndExistedAddress")
     @Order(4)
-    public void addNewAddressForExistedCustomer(String username, String password, String postalCode) {
+    public void addNewAddressForExistedCustomerTest(String username, String password, String postalCode) {
         Customer customer = customerService.customerLogin(username, password);
         Optional<Address> addressByPostalCode = addressService.findAddressByPostalCode(postalCode);
         customerService.addAddressToCustomerAddressList(customer, addressByPostalCode.get());

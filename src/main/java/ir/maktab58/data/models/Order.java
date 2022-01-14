@@ -1,5 +1,7 @@
 package ir.maktab58.data.models;
 
+import ir.maktab58.data.models.enums.OrderStatus;
+import ir.maktab58.data.models.services.SubService;
 import ir.maktab58.data.models.users.Customer;
 import ir.maktab58.data.models.users.Expert;
 import lombok.*;
@@ -31,13 +33,15 @@ public class Order {
     @ManyToOne
     @JoinColumn
     private Expert expert;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private SubService subService;
     @Column(nullable = false)
     private String details;
     @CreationTimestamp
     @Column(nullable = false)
     private Date createdDate;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
     private Date completedDate;
     @OneToMany(mappedBy = "order")
     private List<Offer> offers = new ArrayList<>();
@@ -48,4 +52,6 @@ public class Order {
     @Temporal(TemporalType.DATE)
     private Date requestedDate;
     private long OfferedPriceByCustomer;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 }

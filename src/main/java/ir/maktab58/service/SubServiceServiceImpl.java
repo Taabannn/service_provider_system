@@ -57,4 +57,8 @@ public class SubServiceServiceImpl implements SubServiceService {
                     .withErrorCode(400).build();
         }
     }
+
+    public Optional<SubService> findSubServiceByDescription(String description) {
+        return subServiceDao.findBySubServiceDescription(description);
+    }
 }

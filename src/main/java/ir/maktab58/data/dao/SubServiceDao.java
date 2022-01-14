@@ -18,4 +18,6 @@ public interface SubServiceDao extends PagingAndSortingRepository<SubService, In
     Optional<SubService> findBySubServiceDescriptionAndBasePriceAndMainService(String subServiceDescription, long BasePrice, MainService mainService);
 
     Optional<SubService> findBySubServiceDescription(String subServiceDescription);
+
+    Optional<SubService> findSubServiceBySubServiceDescription(String subServiceDescription);
 }
