@@ -1,83 +1,34 @@
 package ir.maktab58.data.dao;
 
-import ir.maktab58.data.dto.ExpertDTO;
-import ir.maktab58.data.models.services.SubService;
+import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.users.Expert;
-import ir.maktab58.data.utils.SessionUtil;
-import ir.maktab58.exceptions.ServiceSysException;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Projections;
-import org.hibernate.query.Query;
-import org.hibernate.transform.Transformers;
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.NoResultException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Taban Soleymani
  */
-@Component
-public class ExpertDao extends BaseDaoImpl<Expert> {
-    public Expert findExpertByUserAndPass(String username, String password) {
-        Expert expert;
-        try {
-            Session session = SessionUtil.getSession();
-            Transaction transaction = session.beginTransaction();
-            Query<Expert> query = session.createQuery("from Expert e where e.username=:username and e.password=:password", Expert.class)
-                    .setParameter("username", username)
-                    .setParameter("password", password);
-            expert = query.getSingleResult();
-            transaction.commit();
-            session.close();
-        } catch (NoResultException e) {
-            throw ServiceSysException.builder()
-                    .withMessage("No expert with entered username and password was found.")
-                    .withErrorCode(400).build();
-        }
-        return expert;
-    }
+@Transactional
+@Repository
+public interface ExpertDao extends PagingAndSortingRepository<Expert, Integer> {
+    Optional<Expert> findExpertByUsernameAndPassword(String username, String password);
 
-    public List<ExpertDTO> getListOfExperts() {
-        Session session = SessionUtil.getSession();
-        Transaction transaction = session.beginTransaction();
+    @Modifying
+    @Query("update Expert e set e.password=:newPassword where e.username=:username and e.password=:password")
+    void updateExpertPassword(@Param("username") String username, @Param("password") String password, @Param("newPassword") String newPassword);
 
-        Criteria criteria = session.createCriteria(Expert.class, "e");
+    List<Expert> getAllByUserStatus(UserStatus userStatus);
 
-        criteria.setProjection(Projections.projectionList()
-                .add(Projections.property("e.username").as("username"))
-                .add(Projections.property("e.userStatus").as("userStatus"))
-                .add(Projections.property("e.firstAccess").as("firstAccess"))
-                .add(Projections.property("e.email").as("email"))
-                .add(Projections.property("e.score").as("score"))
-        );
+    @Modifying
+    @Query("update Expert e set e.userStatus=:newUserStatus where e.username=:username and e.password=:password")
+    void updateExpertStatus(@Param("username") String username, @Param("password") String password, @Param("newUserStatus") UserStatus newUserStatus);
 
-        criteria.setResultTransformer(Transformers.aliasToBean(ExpertDTO.class));
-        List<ExpertDTO> list = criteria.list();
-
-        transaction.commit();
-        session.close();
-        return list;
-    }
-
-    public void addSubServiceToExpert(String username, String password, SubService subService) {
-        Expert expert;
-        try {
-            Session session = SessionUtil.getSession();
-            Transaction transaction = session.beginTransaction();
-            Query<Expert> query = session.createQuery("from Expert e where e.username=:username and e.password=:password", Expert.class)
-                    .setParameter("username", username)
-                    .setParameter("password", password);
-            expert = query.getSingleResult();
-            expert.getSubServices().add(subService);
-            transaction.commit();
-            session.close();
-        } catch (NoResultException e) {
-            throw ServiceSysException.builder()
-                    .withMessage("No expert with entered username and password was found.")
-                    .withErrorCode(400).build();
-        }
-    }
+    Optional<Expert> findExpertByUsernameAndUserStatus(String username, UserStatus userStatus);
 }

@@ -3,10 +3,7 @@ package ir.maktab58.data.models;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -26,4 +23,6 @@ public class Comment {
     private double score;
     @CreationTimestamp
     private Date createdDate;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Order order;
 }

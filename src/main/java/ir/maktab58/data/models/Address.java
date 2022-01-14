@@ -2,10 +2,8 @@ package ir.maktab58.data.models;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * @author Taban Soleymani
@@ -24,4 +22,8 @@ public class Address {
     private String street;
     private String city;
     private String county;
+    @Column(unique = true)
+    private String postalCode;
+    @OneToMany(mappedBy = "address")
+    private Set<CustomerAddress> customerAddressSet;
 }

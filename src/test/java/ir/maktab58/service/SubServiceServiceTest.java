@@ -1,12 +1,13 @@
 package ir.maktab58.service;
 
 import ir.maktab58.config.SpringConfig;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import ir.maktab58.data.models.services.SubService;
+import ir.maktab58.exceptions.ServiceSysException;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.stream.Stream;
@@ -14,18 +15,14 @@ import java.util.stream.Stream;
 /**
  * @author Taban Soleymani
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SubServiceServiceTest {
-    private SubServiceService subServiceService;
+    ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+    private final SubServiceServiceImpl subServiceService = context.getBean(SubServiceServiceImpl.class);
 
     @BeforeAll
     public static void init() {
         System.out.println("In subServiceServiceTest init...");
-    }
-
-    @BeforeEach
-    public void beforeEach() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        subServiceService = context.getBean(SubServiceService.class);
     }
 
     @AfterAll
@@ -33,15 +30,36 @@ public class SubServiceServiceTest {
         System.out.println("In subServiceServiceTest after...");
     }
 
-    static Stream<Arguments> generateExpert() {
+    static Stream<Arguments> generateSubService() {
         return Stream.of(
-                Arguments.of("Aminn", "12Amin", "aminAmini@example.com", "decoration", "repairment", 250000)
+                Arguments.of("Home Appliances", "repairment", 123000),
+                Arguments.of("Vehicles", "changing oil", 50000),
+                Arguments.of("Health", "demanding for a doctor", 50000),
+                Arguments.of("Food", "order a complete meal", 117000)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("generateExpert")
-    public void addASubServiceToExpertTest_whenAddASubServiceToExpertCalls_withExistedExpert(String username, String password, String email, String description, String field, long basePrice) {
-        subServiceService.addASubServiceToExpert(username, password, description, field, basePrice);
+    @MethodSource("generateSubService")
+    @Order(1)
+    public void saveASubServiceTest(String field, String subDescription, long basePrice) {
+        SubService subService = subServiceService.saveASubService(field, subDescription, basePrice);
+        Assertions.assertNotNull(subService);
+    }
+
+    static Stream<Arguments> generateExistedSubService() {
+        return Stream.of(
+                Arguments.of("Home Appliances", "repairment", 123000),
+                Arguments.of("Vehicles", "changing oil", 50000),
+                Arguments.of("Health", "demanding for a doctor", 50000),
+                Arguments.of("Food", "order a complete meal", 117000)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateExistedSubService")
+    @Order(2)
+    public void saveASubServiceTestWithExistedSubService(String field, String subDescription, long basePrice) {
+        Assertions.assertThrows(ServiceSysException.class, () -> subServiceService.saveASubService(field, subDescription, basePrice));
     }
 }

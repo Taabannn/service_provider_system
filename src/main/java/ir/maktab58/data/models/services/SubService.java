@@ -1,11 +1,10 @@
 package ir.maktab58.data.models.services;
 
-import ir.maktab58.data.models.users.Expert;
+import ir.maktab58.data.models.ExpertSubService;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Taban Soleymani
@@ -15,18 +14,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(setterPrefix = "with")
-@EqualsAndHashCode
+@EqualsAndHashCode(of = {"subServiceDescription", "basePrice"})
 @ToString
 public class SubService {
     @Id
     @GeneratedValue
-    private int id;
+    private int subServiceId;
     @Column(unique = true, nullable = false)
     private String subServiceDescription;
     @Column(nullable = false)
     private long basePrice;
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private MainService mainService;
-    @ManyToMany(mappedBy = "subServices")
-    private List<Expert> expertList = new ArrayList<>();
+    @OneToMany(mappedBy = "subService")
+    Set<ExpertSubService> expertSubServices;
 }
