@@ -1,4 +1,32 @@
-package ir.maktab58.data.models;/**
+package ir.maktab58.data.models;
+
+import ir.maktab58.data.models.services.SubService;
+import ir.maktab58.data.models.users.Customer;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+/**
  * @author Taban Soleymani
- */public class CustomerAddress {
+ */
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(setterPrefix = "with")
+public class CustomerAddress {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    Address address;
 }

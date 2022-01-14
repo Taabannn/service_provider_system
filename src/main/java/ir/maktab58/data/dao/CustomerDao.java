@@ -1,5 +1,6 @@
 package ir.maktab58.data.dao;
 
+import ir.maktab58.data.models.Address;
 import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.users.Customer;
 import org.springframework.data.jpa.repository.Modifying;
@@ -30,4 +31,5 @@ public interface CustomerDao extends PagingAndSortingRepository<Customer, Intege
     @Modifying
     @Query("update Customer c set c.userStatus=:newUserStatus where c.username=:username and c.password=:password")
     void updateCustomerStatus(@Param("username") String username, @Param("password") String password, @Param("newUserStatus") UserStatus newUserStatus);
+
 }

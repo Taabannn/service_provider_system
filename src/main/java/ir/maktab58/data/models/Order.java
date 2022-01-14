@@ -29,7 +29,7 @@ public class Order {
     @JoinColumn(nullable = false)
     private Customer customer;
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn
     private Expert expert;
     @Column(nullable = false)
     private String details;
@@ -43,4 +43,9 @@ public class Order {
     private List<Offer> offers = new ArrayList<>();
     @OneToMany(mappedBy = "order")
     private List<Comment> comments;
+    @ManyToOne
+    private Address address;
+    @Temporal(TemporalType.DATE)
+    private Date requestedDate;
+    private long OfferedPriceByCustomer;
 }
