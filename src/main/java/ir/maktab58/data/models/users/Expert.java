@@ -15,7 +15,7 @@ import java.util.*;
 @DiscriminatorValue(value = "expert")
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, of = {"image"})
 @ToString(callSuper = true)
 public class Expert extends User {
     @Enumerated(EnumType.STRING)

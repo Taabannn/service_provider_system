@@ -2,6 +2,7 @@ package ir.maktab58.service;
 
 import ir.maktab58.config.SpringConfig;
 import ir.maktab58.data.models.enums.UserStatus;
+import ir.maktab58.data.models.services.SubService;
 import ir.maktab58.data.models.users.Expert;
 import ir.maktab58.exceptions.ServiceSysException;
 import org.junit.jupiter.api.*;
@@ -12,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -21,6 +23,7 @@ import java.util.stream.Stream;
 public class ExpertServiceTest {
     ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     private final ExpertServiceImpl expertService = context.getBean(ExpertServiceImpl.class);
+    private final SubServiceServiceImpl subServiceService = context.getBean(SubServiceServiceImpl.class);
 
     @BeforeAll
     public static void init() {
@@ -67,7 +70,7 @@ public class ExpertServiceTest {
     static Stream<Arguments> generateExistedExpertWithSubService() {
         return Stream.of(
                 Arguments.of("Aminn", "1259Amin", List.of("repairment")),
-                Arguments.of("AmirA", "AmirAimiri11", List.of("repairment", "changing oil")),
+                Arguments.of("AmirA", "AmirAimiri11", List.of("order a complete meal")),
                 Arguments.of("Mahnaz", "Mahnaz1366", List.of("demanding for a doctor"))
         );
     }
@@ -86,7 +89,7 @@ public class ExpertServiceTest {
     static Stream<Arguments> generateExistedExpertWithAddedSubServices() {
         return Stream.of(
                 Arguments.of("Aminn", "1259Amin", List.of("repairment")),
-                Arguments.of("AmirA", "AmirAimiri11", List.of("repairment", "changing oil")),
+                Arguments.of("AmirA", "AmirAimiri11", List.of("demanding for a doctor")),
                 Arguments.of("Mahnaz", "Mahnaz1366", List.of("demanding for a doctor"))
         );
     }
@@ -137,13 +140,26 @@ public class ExpertServiceTest {
     static Stream<Arguments> generateExpertAndOccupiedSubService() {
         return Stream.of(
                 Arguments.of("repairment", "AmirA", "AmirAimiri11"),
-                Arguments.of("changing oil", "AmirA", "AmirAimiri11")
+                Arguments.of("demanding for a doctor", "AmirA", "AmirAimiri11")
         );
     }
 
     @ParameterizedTest
     @MethodSource("generateExpertAndOccupiedSubService")
     @Order(7)
+    public void checkExpertHasSubServiceTest(String subServiceDescription, String username, String password) {
+        Expert expert = expertService.expertLogin(username, password);
+        try {
+            SubService subService = subServiceService.findSubServiceByDescription(subServiceDescription).get();
+            expertService.checkIfExpertHasSubService(subService, expert);
+        } catch (NullPointerException e) {
+            Assertions.fail();
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateExpertAndOccupiedSubService")
+    @Order(8)
     public void removeExpertsBySubService(String subServiceDescription, String username, String password) {
         Expert expert = expertService.expertLogin(username, password);
         expertService.removeASubServiceFromExpertsServiceList(expert, subServiceDescription);

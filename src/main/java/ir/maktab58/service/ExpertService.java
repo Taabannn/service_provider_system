@@ -1,6 +1,7 @@
 package ir.maktab58.service;
 
 import ir.maktab58.data.models.enums.UserStatus;
+import ir.maktab58.data.models.services.SubService;
 import ir.maktab58.data.models.users.Expert;
 
 import java.util.List;
@@ -24,4 +25,6 @@ public interface ExpertService {
     List<Expert> getListOfExpertsBySubService(String subServiceDescription);
 
     void updateExpertStatus(Expert expert, UserStatus newUserStatus);
+
+    void checkIfExpertHasSubService(SubService subService, Expert expert);
 }
