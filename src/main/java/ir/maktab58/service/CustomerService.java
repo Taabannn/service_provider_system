@@ -1,5 +1,6 @@
 package ir.maktab58.service;
 
+import ir.maktab58.data.models.Address;
 import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.users.Customer;
 
@@ -18,4 +19,6 @@ public interface CustomerService {
     List<Customer> getAllCustomersByUserStatus(UserStatus userStatus);
 
     void updateCustomerStatus(Customer customer, UserStatus newUserStatus);
+
+    void addAddressToCustomerAddressList(Customer customer, Address address);
 }

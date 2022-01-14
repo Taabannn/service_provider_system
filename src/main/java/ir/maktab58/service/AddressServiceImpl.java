@@ -31,4 +31,8 @@ public class AddressServiceImpl implements AddressService {
                 .withPostalCode(postalCode).build();
         return addressDao.save(address);
     }
+
+    Optional<Address> findAddressByPostalCode(String postalCode) {
+        return addressDao.findAddressByPostalCode(postalCode);
+    }
 }

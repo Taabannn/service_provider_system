@@ -1,6 +1,7 @@
 package ir.maktab58.service;
 
 import ir.maktab58.config.SpringConfig;
+import ir.maktab58.data.models.Address;
 import ir.maktab58.data.models.enums.UserStatus;
 import ir.maktab58.data.models.users.Customer;
 import org.junit.jupiter.api.*;
@@ -11,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -20,6 +22,7 @@ import java.util.stream.Stream;
 public class CustomerServiceTest {
     ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     private final CustomerServiceImpl customerService = context.getBean(CustomerServiceImpl.class);
+    private final AddressServiceImpl addressService = context.getBean(AddressServiceImpl.class);
 
     @BeforeAll
     public static void init() {
@@ -76,5 +79,21 @@ public class CustomerServiceTest {
     public void getAllCustomersByUserStatus(UserStatus userStatus) {
         List<Customer> allCustomersByUserStatus = customerService.getAllCustomersByUserStatus(userStatus);
         Assertions.assertNotNull(allCustomersByUserStatus);
+    }
+
+    static Stream<Arguments> generateExistedUserAndExistedAddress() {
+        return Stream.of(
+                Arguments.of("Taabannn", "Taban1122", "1919191919"),
+                Arguments.of("Taabannn", "Taban1122", "1234554321")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateExistedUserAndExistedAddress")
+    @Order(4)
+    public void addNewAddressForExistedCustomer(String username, String password, String postalCode) {
+        Customer customer = customerService.customerLogin(username, password);
+        Optional<Address> addressByPostalCode = addressService.findAddressByPostalCode(postalCode);
+        customerService.addAddressToCustomerAddressList(customer, addressByPostalCode.get());
     }
 }

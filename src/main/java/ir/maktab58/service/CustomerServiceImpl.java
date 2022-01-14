@@ -55,6 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
         customerDao.updateCustomerStatus(customer.getUsername(), customer.getPassword(), newUserStatus);
     }
 
+    @Override
     public void addAddressToCustomerAddressList(Customer customer, Address address) {
         List<CustomerAddress> customerAddresses = customerAddressDao.findCustomerAddressByAddress(address);
         List<Customer> customers = customerAddresses.stream().map(CustomerAddress::getCustomer).collect(Collectors.toList());
