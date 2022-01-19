@@ -1,7 +1,7 @@
 package ir.maktab58.data.dao;
 
-import ir.maktab58.data.models.Address;
-import ir.maktab58.data.models.CustomerAddress;
+import ir.maktab58.data.entities.Address;
+import ir.maktab58.data.entities.CustomerAddress;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

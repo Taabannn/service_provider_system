@@ -1,7 +1,7 @@
 package ir.maktab58.data.dao;
 
-import ir.maktab58.data.models.enums.UserStatus;
-import ir.maktab58.data.models.users.Expert;
+import ir.maktab58.data.enums.UserStatus;
+import ir.maktab58.data.entities.users.Expert;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;

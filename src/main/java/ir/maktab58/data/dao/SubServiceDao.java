@@ -1,7 +1,7 @@
 package ir.maktab58.data.dao;
 
-import ir.maktab58.data.models.services.MainService;
-import ir.maktab58.data.models.services.SubService;
+import ir.maktab58.data.entities.services.MainService;
+import ir.maktab58.data.entities.services.SubService;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 @Transactional
 @Repository
-public interface SubServiceDao extends PagingAndSortingRepository<SubService, Integer> {
+public interface SubServiceDao extends PagingAndSortingRepository<SubService, Integer> {//JPAREpo
 
     Optional<SubService> findBySubServiceDescriptionAndBasePriceAndMainService(String subServiceDescription, long BasePrice, MainService mainService);
 

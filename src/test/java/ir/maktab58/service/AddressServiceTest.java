@@ -1,8 +1,9 @@
 package ir.maktab58.service;
 
 import ir.maktab58.config.SpringConfig;
-import ir.maktab58.data.models.Address;
+import ir.maktab58.data.entities.Address;
 import ir.maktab58.exceptions.ServiceSysException;
+import ir.maktab58.service.impl.AddressServiceImpl;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;

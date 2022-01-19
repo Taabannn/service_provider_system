@@ -1,6 +1,6 @@
 package ir.maktab58.data.dto;
 
-import ir.maktab58.data.models.enums.UserStatus;
+import ir.maktab58.data.enums.UserStatus;
 
 import java.util.Date;
 

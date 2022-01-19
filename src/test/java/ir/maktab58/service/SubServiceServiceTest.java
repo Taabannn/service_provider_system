@@ -1,8 +1,9 @@
 package ir.maktab58.service;
 
 import ir.maktab58.config.SpringConfig;
-import ir.maktab58.data.models.services.SubService;
+import ir.maktab58.data.entities.services.SubService;
 import ir.maktab58.exceptions.ServiceSysException;
+import ir.maktab58.service.impl.SubServiceServiceImpl;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
