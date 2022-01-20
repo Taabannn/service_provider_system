@@ -24,7 +24,8 @@ public class Transaction {
     @ManyToOne(cascade = CascadeType.MERGE)
     private Order order;
     @CreationTimestamp
-    private Date date;
+    private Date creationDate;
+    @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private TransactionStatus transactionStatus;
 }

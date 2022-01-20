@@ -5,9 +5,7 @@ import ir.maktab58.data.dto.WalletDto;
 import ir.maktab58.data.enums.UserStatus;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Taban Soleymani
@@ -19,10 +17,10 @@ import java.util.List;
 public class CustomerDto extends UserDto {
     private UserStatus userStatus;
     private WalletDto wallet;
-    private List<AddressDto> addressDtoList = new ArrayList<>();
+    private Set<AddressDto> addressDtoList = new HashSet<>();
 
     @Builder(setterPrefix = "with")
-    public CustomerDto(String firstName, String lastName, String username, String password, String email, Date firstAccess, Date lastUpdate, UserStatus userStatus, WalletDto wallet, List<AddressDto> addressDtoList) {
+    public CustomerDto(String firstName, String lastName, String username, String password, String email, Date firstAccess, Date lastUpdate, UserStatus userStatus, WalletDto wallet, Set<AddressDto> addressDtoList) {
         super(firstName, lastName, username, password, email, firstAccess, lastUpdate);
         this.userStatus = userStatus;
         this.wallet = wallet;

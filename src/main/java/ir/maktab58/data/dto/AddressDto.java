@@ -1,14 +1,15 @@
 package ir.maktab58.data.dto;
 
-import ir.maktab58.data.entities.CustomerAddress;
-
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import java.util.Set;
+import lombok.*;
 
 /**
  * @author Taban Soleymani
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Builder(setterPrefix = "with")
 public class AddressDto {
     private String alley;
     private String street;
