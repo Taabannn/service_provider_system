@@ -3,6 +3,5 @@ package ir.maktab58.data.dto;
 /**
  * @author Taban Soleymani
  */
-public class UserDto {
-
+public class WalletDto {
 }
