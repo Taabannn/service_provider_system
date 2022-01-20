@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
                         .withUsername(username)
                         .withPassword(password)
                         .withEmail(email)
-                        .withCredit(0)
+                        //.withCredit(0)
                         .withUserStatus(UserStatus.NEW)
                         .withFirstAccess(new Date()).build();
                 return customerService.saveNewCustomer(customer);

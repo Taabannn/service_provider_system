@@ -2,7 +2,9 @@ package ir.maktab58.data.dto;
 
 import ir.maktab58.data.enums.UserStatus;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Taban Soleymani
@@ -10,7 +12,10 @@ import java.util.Date;
 public class ExpertDTO {
     String username;
     String email;
-    double score;
+    Double score;
     UserStatus userStatus;
     Date firstAccess;
+    Date lastUpdate;
+    List<SubServiceDto> subServiceDtoList = new ArrayList<>();
+    byte[] image;
 }
