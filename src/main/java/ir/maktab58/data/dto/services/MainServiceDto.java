@@ -1,9 +1,6 @@
 package ir.maktab58.data.dto.services;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @author Taban Soleymani
@@ -12,6 +9,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder(setterPrefix = "with")
 public class MainServiceDto {
     private String field;
 }
