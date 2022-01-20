@@ -20,11 +20,15 @@ import java.util.*;
 public class Expert extends User {
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
+
     private Double score;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Wallet wallet;
+
     @OneToMany(mappedBy = "expert")
     Set<ExpertSubService> expertSubServices;
+
     @Lob
     @Column(columnDefinition = "BLOB", length = 307200)
     private byte[] image;

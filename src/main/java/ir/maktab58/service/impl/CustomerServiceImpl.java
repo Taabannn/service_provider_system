@@ -1,7 +1,7 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.dao.CustomerAddressDao;
-import ir.maktab58.data.dao.CustomerDao;
+import ir.maktab58.data.repository.CustomerAddressDao;
+import ir.maktab58.data.repository.CustomerDao;
 import ir.maktab58.data.entities.Address;
 import ir.maktab58.data.entities.CustomerAddress;
 import ir.maktab58.data.enums.UserStatus;

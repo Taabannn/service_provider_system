@@ -1,6 +1,6 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.dao.MainServiceDao;
+import ir.maktab58.data.repository.MainServiceDao;
 import ir.maktab58.data.entities.services.MainService;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.interfaces.MainServiceService;

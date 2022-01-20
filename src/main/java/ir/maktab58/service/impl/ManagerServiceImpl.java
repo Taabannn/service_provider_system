@@ -1,6 +1,6 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.dao.ManagerDao;
+import ir.maktab58.data.repository.ManagerDao;
 import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.users.Customer;
 import ir.maktab58.data.entities.users.Expert;

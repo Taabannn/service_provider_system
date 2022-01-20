@@ -1,8 +1,8 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.dao.ExpertDao;
-import ir.maktab58.data.dao.ExpertSubServiceDao;
-import ir.maktab58.data.dao.SubServiceDao;
+import ir.maktab58.data.repository.ExpertDao;
+import ir.maktab58.data.repository.ExpertSubServiceDao;
+import ir.maktab58.data.repository.SubServiceDao;
 import ir.maktab58.data.entities.ExpertSubService;
 import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.services.SubService;

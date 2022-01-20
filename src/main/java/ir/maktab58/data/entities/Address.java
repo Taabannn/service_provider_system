@@ -18,12 +18,18 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String alley;
+
     private String street;
+
     private String city;
+
     private String county;
+
     @Column(unique = true)
     private String postalCode;
+
     @OneToMany(mappedBy = "address")
     private Set<CustomerAddress> customerAddressSet;
 }

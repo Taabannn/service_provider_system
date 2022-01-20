@@ -21,8 +21,10 @@ import java.util.Set;
 public class Customer extends User {
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Wallet wallet;
+
     @OneToMany(mappedBy = "customer")
     private Set<CustomerAddress> customerAddressSet;
 

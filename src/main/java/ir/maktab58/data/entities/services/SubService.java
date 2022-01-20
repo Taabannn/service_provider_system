@@ -20,12 +20,16 @@ public class SubService {
     @Id
     @GeneratedValue
     private int subServiceId;
+
     @Column(unique = true, nullable = false)
     private String subServiceDescription;
+
     @Column(nullable = false)
     private long basePrice;
+
     @ManyToOne(cascade = CascadeType.MERGE)
     private MainService mainService;
+
     @OneToMany(mappedBy = "subService")
     Set<ExpertSubService> expertSubServices;
 }

@@ -21,10 +21,13 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @ManyToOne(cascade = CascadeType.MERGE)
     private Order order;
+
     @CreationTimestamp
     private Date creationDate;
+
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private TransactionStatus transactionStatus;

@@ -1,6 +1,6 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.dao.AddressDao;
+import ir.maktab58.data.repository.AddressDao;
 import ir.maktab58.data.entities.Address;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.interfaces.AddressService;

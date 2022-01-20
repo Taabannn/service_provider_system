@@ -19,10 +19,14 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String detail;
+
     private double score;
+
     @CreationTimestamp
     private Date createdDate;
+
     @ManyToOne(cascade = CascadeType.ALL)
     private Order order;
 }

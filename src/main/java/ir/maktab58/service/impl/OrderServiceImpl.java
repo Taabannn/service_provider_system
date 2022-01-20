@@ -1,6 +1,6 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.dao.OrderDao;
+import ir.maktab58.data.repository.OrderDao;
 import ir.maktab58.data.entities.Address;
 import ir.maktab58.data.entities.Order;
 import ir.maktab58.data.enums.OrderStatus;

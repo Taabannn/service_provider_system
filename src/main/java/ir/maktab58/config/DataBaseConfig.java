@@ -18,7 +18,7 @@ import java.util.Properties;
 /**
  * @author Taban Soleymani
  */
-@EnableJpaRepositories(basePackages = "ir.maktab58.data.dao")
+@EnableJpaRepositories(basePackages = "ir.maktab58.data.repository")
 @PropertySource("classpath:database.properties")
 @org.springframework.context.annotation.Configuration
 @EnableTransactionManagement

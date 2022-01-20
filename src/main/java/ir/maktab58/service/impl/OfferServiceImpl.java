@@ -1,6 +1,6 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.dao.OfferDao;
+import ir.maktab58.data.repository.OfferDao;
 import ir.maktab58.data.entities.Offer;
 import ir.maktab58.data.entities.Order;
 import ir.maktab58.data.entities.users.Expert;
