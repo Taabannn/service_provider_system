@@ -13,16 +13,16 @@
     <title>Home Page</title>
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" href="/customerLogin">Customer Login</a>
+            <a class="nav-link active" href="customerLogin">Customer Login</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/expertLogin">Expert Login</a>
+            <a class="nav-link" href="expertLogin">Expert Login</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/managerLogin">Manager Login</a>
+            <a class="nav-link" href="managerLogin">Manager Login</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/signUp">Sign up</a>
+            <a class="nav-link" href="signUp">Sign up</a>
         </li>
     </ul>
 </head>
