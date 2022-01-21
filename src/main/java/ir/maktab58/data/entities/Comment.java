@@ -31,7 +31,7 @@ public class Comment {
     private Date createdDate;
 
     @JoinColumn(nullable = false)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Order order;
 
     @Column(unique = true, nullable = false)

@@ -23,7 +23,7 @@ public class Transaction {
 
     @JoinColumn(nullable = false)
     @ManyToOne(cascade = CascadeType.MERGE)
-    private Order order;
+    private Wallet wallet;
 
     @Column(nullable = false)
     @CreationTimestamp
