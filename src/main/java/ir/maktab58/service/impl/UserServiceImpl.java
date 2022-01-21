@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
                         .withUsername(username)
                         .withPassword(password)
                         .withEmail(email)
-                        .withImage(image)
+                        //.withImage(image)
                         .withUserStatus(UserStatus.NEW)
                         .withFirstAccess(new Date()).build();
                 return expertService.saveNewExpert(expert);

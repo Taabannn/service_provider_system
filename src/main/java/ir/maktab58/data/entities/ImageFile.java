@@ -26,7 +26,8 @@ public class ImageFile {
     private ImageType type = ImageType.PROFILE;
 
     @Lob
-    private byte[] data;
+    @Column(columnDefinition = "BLOB", length = 307200, nullable = false)
+    private byte[] image;
 
     @ManyToOne
     private Expert expert;

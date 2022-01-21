@@ -28,16 +28,11 @@ public class Expert extends User {
     @OneToMany(mappedBy = "expert")
     Set<ExpertSubService> expertSubServices;
 
-    @Lob
-    @Column(columnDefinition = "BLOB", length = 307200, nullable = false)
-    private byte[] image;
-
     @Builder(setterPrefix = "with")
-    public Expert(int userId, String firstName, String lastName, String username, String password, String email, Date firstAccess, Date lastUpdate, UserStatus userStatus, Double score, Set<ExpertSubService> expertSubServices, byte[] image) {
+    public Expert(int userId, String firstName, String lastName, String username, String password, String email, Date firstAccess, Date lastUpdate, UserStatus userStatus, Double score, Set<ExpertSubService> expertSubServices) {
         super(userId, firstName, lastName, username, password, email, firstAccess, lastUpdate);
         this.userStatus = userStatus;
         this.score = score;
         this.expertSubServices = expertSubServices;
-        this.image = image;
     }
 }
