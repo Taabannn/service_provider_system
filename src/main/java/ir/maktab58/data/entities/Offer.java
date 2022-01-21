@@ -46,4 +46,7 @@ public class Offer {
 
     @Enumerated(EnumType.STRING)
     private OfferStatus offerStatus;
+
+    @Column(nullable = false, unique = true)
+    private long trackingCode;
 }
