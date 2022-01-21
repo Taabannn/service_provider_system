@@ -36,6 +36,6 @@ public abstract class UserDto {
     private String email;
 
     private Date firstAccess;
-    
+
     private Date lastUpdate;
 }
