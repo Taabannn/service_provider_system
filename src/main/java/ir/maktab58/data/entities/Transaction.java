@@ -22,13 +22,18 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @JoinColumn(nullable = false)
     @ManyToOne(cascade = CascadeType.MERGE)
     private Order order;
 
+    @Column(nullable = false)
     @CreationTimestamp
     private Date creationDate;
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private TransactionStatus transactionStatus;
+
+    @Column(nullable = false, unique = true)
+    private long trackingCode;
 }
