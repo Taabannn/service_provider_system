@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -15,8 +17,15 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 public class CommentDto {
+    @NotBlank(message = "comment detail should not be empty")
     private String detail;
+
     private double score;
+
     private Date createdDate;
+
+    @NotNull(message = "order can not be null")
     private OrderDto order;
+
+    private long trackingCode;
 }
