@@ -23,9 +23,9 @@ public class CustomerAddress {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    Customer customer;
+    private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "address_id")
-    Address address;
+    private Address address;
 }
