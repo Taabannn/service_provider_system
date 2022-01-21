@@ -13,6 +13,6 @@ import javax.validation.constraints.NotBlank;
 @ToString
 @Builder(setterPrefix = "with")
 public class MainServiceDto {
-    @NotBlank(message = "should not be empty")
+    @NotBlank(message = "field of MainService should not be empty")
     private String field;
 }

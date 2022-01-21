@@ -16,14 +16,13 @@ import java.util.Set;
 @ToString
 @Builder(setterPrefix = "with")
 public class SubServiceDto {
-    @NotBlank(message = "should not be empty")
+    @NotBlank(message = "subServiceDescription should not be empty")
     private String subServiceDescription;
 
     private long basePrice;
 
-    @NotNull(message = "not null")
+    @NotNull(message = "mainService could not be null")
     private MainServiceDto mainService;
 
-    @NotNull(message = "not null")
     Set<ExpertSubServiceDto> expertSubServiceDtoSet;
 }
