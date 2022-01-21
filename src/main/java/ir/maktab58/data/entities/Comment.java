@@ -13,20 +13,24 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = "trackingCode")
 @Builder(setterPrefix = "with")
-@ToString
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false)
     private String detail;
 
+    @Column(nullable = false)
     private double score;
 
+    @Column(nullable = false)
     @CreationTimestamp
     private Date createdDate;
 
+    @JoinColumn(nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)
     private Order order;
 

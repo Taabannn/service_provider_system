@@ -12,22 +12,26 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = "postalCode")
 @Builder(setterPrefix = "with")
-@ToString
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false)
     private String alley;
 
+    @Column(nullable = false)
     private String street;
 
+    @Column(nullable = false)
     private String city;
 
+    @Column(nullable = false)
     private String county;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String postalCode;
 
     @OneToMany(mappedBy = "address")
