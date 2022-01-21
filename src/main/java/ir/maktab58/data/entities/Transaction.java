@@ -14,8 +14,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@ToString
+@EqualsAndHashCode(of = "trackingCode")
 @Builder(setterPrefix = "with")
 public class Transaction {
     @Id

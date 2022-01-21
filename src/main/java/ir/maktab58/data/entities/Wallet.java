@@ -17,7 +17,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@ToString
 @Builder(setterPrefix = "with")
 public class Wallet {
     @Id
