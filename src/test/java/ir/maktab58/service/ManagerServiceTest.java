@@ -1,28 +1,14 @@
 package ir.maktab58.service;
 
-import ir.maktab58.config.SpringConfig;
-import ir.maktab58.data.enums.UserStatus;
-import ir.maktab58.data.entities.users.Customer;
-import ir.maktab58.data.entities.users.Expert;
-import ir.maktab58.data.entities.users.Manager;
-import ir.maktab58.service.impl.CustomerServiceImpl;
-import ir.maktab58.service.impl.ExpertServiceImpl;
-import ir.maktab58.service.impl.ManagerServiceImpl;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.stream.Stream;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
 
 /**
  * @author Taban Soleymani
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ManagerServiceTest {
-    ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+    /*ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     private final ManagerServiceImpl managerService = context.getBean(ManagerServiceImpl.class);
     private final ExpertServiceImpl expertService = context.getBean(ExpertServiceImpl.class);
     private final CustomerServiceImpl customerService = context.getBean(CustomerServiceImpl.class);
@@ -86,5 +72,5 @@ public class ManagerServiceTest {
         managerService.updateUserStatus(manager, customer, userStatus);
         customer = customerService.customerLogin(username, password);
         Assertions.assertEquals(userStatus, customer.getUserStatus());
-    }
+    }*/
 }

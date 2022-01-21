@@ -1,28 +1,14 @@
 package ir.maktab58.service;
 
-import ir.maktab58.config.SpringConfig;
-import ir.maktab58.data.entities.users.User;
-import ir.maktab58.exceptions.ServiceSysException;
-import ir.maktab58.service.impl.UserServiceImpl;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.stream.Stream;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
 
 /**
  * @author Taban Soleymani
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserServiceTest {
-    ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+   /* ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     private final UserServiceImpl userService = context.getBean(UserServiceImpl.class);
 
     @BeforeAll
@@ -141,6 +127,6 @@ public class UserServiceTest {
         Assertions.assertThrows(ServiceSysException.class, () -> userService.login(username, password),
                 "Invalid username or pass.\n" +
                         "Please try again!");
-    }
+    }*/
 }
 

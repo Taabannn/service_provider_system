@@ -4,6 +4,7 @@ import ir.maktab58.data.repository.AddressDao;
 import ir.maktab58.data.entities.Address;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.interfaces.AddressService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,10 @@ import java.util.Optional;
  * @author Taban Soleymani
  */
 @Service
+@RequiredArgsConstructor
 public class AddressServiceImpl implements AddressService {
-    @Autowired
-    AddressDao addressDao;
+
+    private final AddressDao addressDao;
 
     @Override
     public Address saveAnAddress(String alley, String street, String city, String county, String postalCode) {

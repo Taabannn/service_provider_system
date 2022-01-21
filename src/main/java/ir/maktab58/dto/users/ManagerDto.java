@@ -8,7 +8,6 @@ import java.util.Date;
  * @author Taban Soleymani
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class ManagerDto extends UserDto {

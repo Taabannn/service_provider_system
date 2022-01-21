@@ -1,31 +1,10 @@
 package ir.maktab58.service;
 
-import ir.maktab58.config.SpringConfig;
-import ir.maktab58.data.entities.Address;
-import ir.maktab58.data.entities.Order;
-import ir.maktab58.data.entities.services.SubService;
-import ir.maktab58.data.entities.users.Customer;
-import ir.maktab58.service.impl.AddressServiceImpl;
-import ir.maktab58.service.impl.CustomerServiceImpl;
-import ir.maktab58.service.impl.OrderServiceImpl;
-import ir.maktab58.service.impl.SubServiceServiceImpl;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.Date;
-import java.util.stream.Stream;
-
 /**
  * @author Taban Soleymani
  */
 public class OrderServiceTest {
-    ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+   /* ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     OrderServiceImpl orderService = context.getBean(OrderServiceImpl.class);
     AddressServiceImpl addressService = context.getBean(AddressServiceImpl.class);
     CustomerServiceImpl customerService = context.getBean(CustomerServiceImpl.class);
@@ -59,5 +38,5 @@ public class OrderServiceTest {
         } catch (Exception e) {
             Assertions.fail();
         }
-    }
+    }*/
 }

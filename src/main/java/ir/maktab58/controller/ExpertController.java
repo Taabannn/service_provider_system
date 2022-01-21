@@ -8,11 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Taban Soleymani
  */
 @Controller
-public class UserController {
-    @RequestMapping("/signUp")
+public class ExpertController {
+    @RequestMapping("/expertLogin")
     public ModelAndView getLogoutView() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("signUp");
+        modelAndView.setViewName("expertLogin");
         return modelAndView;
     }
 }

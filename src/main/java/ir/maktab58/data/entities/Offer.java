@@ -1,6 +1,7 @@
 package ir.maktab58.data.entities;
 
 import ir.maktab58.data.entities.users.Expert;
+import ir.maktab58.data.enums.OfferStatus;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -42,4 +43,7 @@ public class Offer {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
     private Order order;
+
+    @Enumerated(EnumType.STRING)
+    private OfferStatus offerStatus;
 }

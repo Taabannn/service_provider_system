@@ -1,32 +1,18 @@
 package ir.maktab58.service;
 
-import ir.maktab58.config.SpringConfig;
-import ir.maktab58.data.entities.Address;
-import ir.maktab58.data.enums.UserStatus;
-import ir.maktab58.data.entities.users.Customer;
-import ir.maktab58.service.impl.AddressServiceImpl;
-import ir.maktab58.service.impl.CustomerServiceImpl;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
 
 /**
  * @author Taban Soleymani
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CustomerServiceTest {
-    ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+    /*ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     private final CustomerServiceImpl customerService = context.getBean(CustomerServiceImpl.class);
     private final AddressServiceImpl addressService = context.getBean(AddressServiceImpl.class);
-
-    @BeforeAll
+*/
+    /*@BeforeAll
     public static void init() {
         System.out.println("In CustomerServiceTest init...");
     }
@@ -97,5 +83,5 @@ public class CustomerServiceTest {
         Customer customer = customerService.customerLogin(username, password);
         Optional<Address> addressByPostalCode = addressService.findAddressByPostalCode(postalCode);
         customerService.addAddressToCustomerAddressList(customer, addressByPostalCode.get());
-    }
+    }*/
 }

@@ -1,6 +1,5 @@
 package ir.maktab58.service;
 
-import ir.maktab58.config.SpringConfig;
 import ir.maktab58.data.entities.Address;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.impl.AddressServiceImpl;
@@ -19,7 +18,7 @@ import java.util.stream.Stream;
  * @author Taban Soleymani
  */
 public class AddressServiceTest {
-    ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+    /*//ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     AddressServiceImpl addressService = context.getBean(AddressServiceImpl.class);
 
     @BeforeAll
@@ -59,5 +58,5 @@ public class AddressServiceTest {
     @MethodSource("generateExistedAddress")
     public void saveAnNewAddressTestWithExistedAddress(String county, String city, String street, String alley, String postalCode) {
         Assertions.assertThrows(ServiceSysException.class, () -> addressService.saveAnAddress(alley, street, city, county, postalCode), "The entered Address has already saved in address table.");
-    }
+    }*/
 }
