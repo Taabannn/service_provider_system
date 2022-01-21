@@ -11,6 +11,7 @@ import java.util.Optional;
 /**
  * @author Taban Soleymani
  */
+@Transactional
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Integer> {
     Optional<Address> findAddressByPostalCode(String postalCode);

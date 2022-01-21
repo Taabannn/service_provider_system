@@ -29,6 +29,6 @@ public class ImageFile {
     @Column(columnDefinition = "BLOB", length = 307200, nullable = false)
     private byte[] image;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Expert expert;
 }
