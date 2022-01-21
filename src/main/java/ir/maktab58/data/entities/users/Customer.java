@@ -17,7 +17,6 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true, of = {"userStatus"})
-@ToString(callSuper = true)
 public class Customer extends User {
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;

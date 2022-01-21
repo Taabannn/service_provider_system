@@ -16,7 +16,6 @@ import java.util.*;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true, of = {"image"})
-@ToString(callSuper = true)
 public class Expert extends User {
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
@@ -30,7 +29,7 @@ public class Expert extends User {
     Set<ExpertSubService> expertSubServices;
 
     @Lob
-    @Column(columnDefinition = "BLOB", length = 307200)
+    @Column(columnDefinition = "BLOB", length = 307200, nullable = false)
     private byte[] image;
 
     @Builder(setterPrefix = "with")

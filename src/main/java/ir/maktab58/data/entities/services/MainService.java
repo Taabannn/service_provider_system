@@ -13,7 +13,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder(setterPrefix = "with")
 @EqualsAndHashCode(of = "field")
-@ToString
 public class MainService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

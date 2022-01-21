@@ -17,7 +17,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"username, password"})
-@ToString
 public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +37,7 @@ public abstract class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
     @CreationTimestamp
     private Date firstAccess;
 

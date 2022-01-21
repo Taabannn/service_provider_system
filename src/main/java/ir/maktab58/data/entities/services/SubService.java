@@ -14,8 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(setterPrefix = "with")
-@EqualsAndHashCode(of = {"subServiceDescription", "basePrice"})
-@ToString
+@EqualsAndHashCode(of = {"mainService", "subServiceDescription", "basePrice"})
 public class SubService {
     @Id
     @GeneratedValue
