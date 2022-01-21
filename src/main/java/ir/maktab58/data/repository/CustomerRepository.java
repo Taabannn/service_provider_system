@@ -2,6 +2,7 @@ package ir.maktab58.data.repository;
 
 import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.users.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -17,7 +18,7 @@ import java.util.Optional;
  */
 @Transactional
 @Repository
-public interface CustomerDao extends PagingAndSortingRepository<Customer, Integer> {
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     Optional<Customer> findCustomerByUsernameAndPassword(String username, String password);
 

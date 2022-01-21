@@ -1,6 +1,6 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.repository.OfferDao;
+import ir.maktab58.data.repository.OfferRepository;
 import ir.maktab58.data.entities.Offer;
 import ir.maktab58.data.entities.Order;
 import ir.maktab58.data.entities.users.Expert;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 public class OfferServiceImpl implements OfferService {
     @Autowired
-    OfferDao offerDao;
+    OfferRepository offerDao;
 
     @Autowired
     ExpertServiceImpl expertService;

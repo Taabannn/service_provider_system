@@ -2,6 +2,7 @@ package ir.maktab58.data.repository;
 
 import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.users.Expert;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -17,7 +18,7 @@ import java.util.Optional;
  */
 @Transactional
 @Repository
-public interface ExpertDao extends PagingAndSortingRepository<Expert, Integer> {
+public interface ExpertRepository extends JpaRepository<Expert, Integer> {
     Optional<Expert> findExpertByUsernameAndPassword(String username, String password);
 
     @Modifying

@@ -3,6 +3,7 @@ package ir.maktab58.data.repository;
 import ir.maktab58.data.entities.Order;
 import ir.maktab58.data.enums.OrderStatus;
 import ir.maktab58.data.entities.services.SubService;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -18,7 +19,7 @@ import java.util.Optional;
  */
 @Transactional
 @Repository
-public interface OrderDao extends PagingAndSortingRepository<Order, Integer> {
+public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findOrdersBySubService(SubService subService);
 
     @Override

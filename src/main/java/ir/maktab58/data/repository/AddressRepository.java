@@ -1,18 +1,17 @@
 package ir.maktab58.data.repository;
 
 import ir.maktab58.data.entities.Address;
-import ir.maktab58.data.entities.CustomerAddress;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Taban Soleymani
  */
-@Transactional
 @Repository
-public interface CustomerAddressDao extends PagingAndSortingRepository<CustomerAddress, Integer> {
-    List<CustomerAddress> findCustomerAddressByAddress(Address address);
+public interface AddressRepository extends JpaRepository<Address, Integer> {
+    Optional<Address> findAddressByPostalCode(String postalCode);
 }

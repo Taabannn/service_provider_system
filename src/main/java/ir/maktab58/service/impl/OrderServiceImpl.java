@@ -1,6 +1,6 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.repository.OrderDao;
+import ir.maktab58.data.repository.OrderRepository;
 import ir.maktab58.data.entities.Address;
 import ir.maktab58.data.entities.Order;
 import ir.maktab58.data.enums.OrderStatus;
@@ -20,7 +20,7 @@ import java.util.Optional;
 @Service
 public class OrderServiceImpl implements OrderService {
     @Autowired
-    OrderDao orderDao;
+    OrderRepository orderDao;
 
     @Autowired
     CustomerServiceImpl customerService;

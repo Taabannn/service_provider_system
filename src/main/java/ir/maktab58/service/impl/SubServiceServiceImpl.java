@@ -1,6 +1,6 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.repository.SubServiceDao;
+import ir.maktab58.data.repository.SubServiceRepository;
 import ir.maktab58.data.entities.services.MainService;
 import ir.maktab58.data.entities.services.SubService;
 import ir.maktab58.exceptions.ServiceSysException;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class SubServiceServiceImpl implements SubServiceService {
     @Autowired
-    private SubServiceDao subServiceDao;
+    private SubServiceRepository subServiceDao;
 
     @Autowired
     private MainServiceServiceImpl mainServiceService;

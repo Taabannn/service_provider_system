@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = {"image", "expert"})
 @Builder(setterPrefix = "with")
 public class ImageFile {
     @Id

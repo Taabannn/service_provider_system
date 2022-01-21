@@ -1,6 +1,6 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.repository.ManagerDao;
+import ir.maktab58.data.repository.ManagerRepository;
 import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.users.Customer;
 import ir.maktab58.data.entities.users.Expert;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 public class ManagerServiceImpl implements ManagerService {
     @Autowired
-    ManagerDao managerDao;
+    ManagerRepository managerDao;
 
     @Autowired
     ExpertServiceImpl expertService;

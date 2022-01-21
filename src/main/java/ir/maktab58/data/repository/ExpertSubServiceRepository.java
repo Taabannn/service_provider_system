@@ -3,6 +3,7 @@ package ir.maktab58.data.repository;
 import ir.maktab58.data.entities.ExpertSubService;
 import ir.maktab58.data.entities.services.SubService;
 import ir.maktab58.data.entities.users.Expert;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -17,7 +18,7 @@ import java.util.Optional;
  */
 @Transactional
 @Repository
-public interface ExpertSubServiceDao extends CrudRepository<ExpertSubService, Integer> {
+public interface ExpertSubServiceRepository extends JpaRepository<ExpertSubService, Integer> {
 
     Optional<ExpertSubService> findExpertSubServiceByExpertAndSubService(Expert expert, SubService subService);
 

@@ -1,11 +1,10 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.repository.AddressDao;
+import ir.maktab58.data.repository.AddressRepository;
 import ir.maktab58.data.entities.Address;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.interfaces.AddressService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,7 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AddressServiceImpl implements AddressService {
 
-    private final AddressDao addressDao;
+    private final AddressRepository addressDao;
 
     @Override
     public Address saveAnAddress(String alley, String street, String city, String county, String postalCode) {

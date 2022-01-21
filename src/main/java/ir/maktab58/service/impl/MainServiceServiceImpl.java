@@ -1,6 +1,6 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.repository.MainServiceDao;
+import ir.maktab58.data.repository.MainServiceRepository;
 import ir.maktab58.data.entities.services.MainService;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.interfaces.MainServiceService;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class MainServiceServiceImpl implements MainServiceService {
     @Autowired
-    private MainServiceDao mainServiceDao;
+    private MainServiceRepository mainServiceDao;
 
     @Override
     public MainService saveNewMainService(String field) {

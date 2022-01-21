@@ -1,7 +1,7 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.repository.CustomerAddressDao;
-import ir.maktab58.data.repository.CustomerDao;
+import ir.maktab58.data.repository.CustomerAddressRepository;
+import ir.maktab58.data.repository.CustomerRepository;
 import ir.maktab58.data.entities.Address;
 import ir.maktab58.data.entities.CustomerAddress;
 import ir.maktab58.data.enums.UserStatus;
@@ -21,10 +21,10 @@ import java.util.stream.Collectors;
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
-    CustomerDao customerDao;
+    CustomerRepository customerDao;
 
     @Autowired
-    CustomerAddressDao customerAddressDao;
+    CustomerAddressRepository customerAddressDao;
 
     @Override
     public Customer customerLogin(String username, String password) {

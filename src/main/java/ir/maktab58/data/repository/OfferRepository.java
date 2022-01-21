@@ -3,6 +3,7 @@ package ir.maktab58.data.repository;
 import ir.maktab58.data.entities.Offer;
 import ir.maktab58.data.entities.Order;
 import ir.maktab58.data.entities.users.Expert;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,6 @@ import java.util.Optional;
  */
 @Transactional
 @Repository
-public interface OfferDao extends PagingAndSortingRepository<Offer, Integer> {
+public interface OfferRepository extends JpaRepository<Offer, Integer> {
     Optional<Offer> findOfferByExpertAndOrder(Expert expert, Order order);
 }

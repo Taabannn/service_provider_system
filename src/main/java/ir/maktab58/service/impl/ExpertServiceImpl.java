@@ -1,8 +1,8 @@
 package ir.maktab58.service.impl;
 
-import ir.maktab58.data.repository.ExpertDao;
-import ir.maktab58.data.repository.ExpertSubServiceDao;
-import ir.maktab58.data.repository.SubServiceDao;
+import ir.maktab58.data.repository.ExpertRepository;
+import ir.maktab58.data.repository.ExpertSubServiceRepository;
+import ir.maktab58.data.repository.SubServiceRepository;
 import ir.maktab58.data.entities.ExpertSubService;
 import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.services.SubService;
@@ -23,13 +23,13 @@ import java.util.stream.Collectors;
 @Service
 public class ExpertServiceImpl implements ExpertService {
     @Autowired
-    private ExpertDao expertDao;
+    private ExpertRepository expertDao;
 
     @Autowired
-    private SubServiceDao subServiceDao;
+    private SubServiceRepository subServiceDao;
 
     @Autowired
-    private ExpertSubServiceDao expertSubServiceDao;
+    private ExpertSubServiceRepository expertSubServiceDao;
 
     @Override
     public Expert expertLogin(String username, String password) {
