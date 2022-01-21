@@ -16,7 +16,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(setterPrefix = "with")
-@ToString
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

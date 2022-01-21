@@ -29,4 +29,7 @@ public class Comment {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Order order;
+
+    @Column(unique = true, nullable = false)
+    private long trackingCode;
 }
