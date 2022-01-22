@@ -29,10 +29,11 @@ public class Expert extends User {
     Set<ExpertSubService> expertSubServices;
 
     @Builder(setterPrefix = "with")
-    public Expert(int userId, String firstName, String lastName, String username, String password, String email, Date firstAccess, Date lastUpdate, UserStatus userStatus, Double score, Set<ExpertSubService> expertSubServices) {
-        super(userId, firstName, lastName, username, password, email, firstAccess, lastUpdate);
+    public Expert(int id, String firstName, String lastName, String username, String password, String email, Date firstAccess, Date lastUpdate, UserStatus userStatus, Double score, Wallet wallet, Set<ExpertSubService> expertSubServices) {
+        super(id, firstName, lastName, username, password, email, firstAccess, lastUpdate);
         this.userStatus = userStatus;
         this.score = score;
+        this.wallet = wallet;
         this.expertSubServices = expertSubServices;
     }
 }
