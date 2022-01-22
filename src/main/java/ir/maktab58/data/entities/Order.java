@@ -20,7 +20,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = {"trackingCode"})
 @Builder(setterPrefix = "with")
 public class Order {
     @Id
@@ -53,7 +53,7 @@ public class Order {
     private List<Offer> offers = new ArrayList<>();
 
     @OneToMany(mappedBy = "order")
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     @ManyToOne
     private Address address;
