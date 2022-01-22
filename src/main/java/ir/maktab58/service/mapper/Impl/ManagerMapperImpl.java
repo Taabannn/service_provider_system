@@ -12,11 +12,27 @@ import org.springframework.stereotype.Component;
 public class ManagerMapperImpl implements ManagerMapper {
     @Override
     public Manager toManager(ManagerDto managerDto) {
-        return null;
+        return Manager.builder()
+                .withFirstName(managerDto.getFirstName())
+                .withLastName(managerDto.getLastName())
+                .withUsername(managerDto.getUsername())
+                .withPassword(managerDto.getPassword())
+                .withEmail(managerDto.getEmail())
+                .withFirstAccess(managerDto.getFirstAccess())
+                .withLastUpdate(managerDto.getLastUpdate())
+                .build();
     }
 
     @Override
     public ManagerDto toManagerDto(Manager manager) {
-        return null;
+        return ManagerDto.builder()
+                .withFirstName(manager.getFirstName())
+                .withLastName(manager.getLastName())
+                .withUsername(manager.getUsername())
+                .withPassword(manager.getPassword())
+                .withEmail(manager.getEmail())
+                .withFirstAccess(manager.getFirstAccess())
+                .withLastUpdate(manager.getLastUpdate())
+                .build();
     }
 }
