@@ -1,9 +1,6 @@
 package ir.maktab58.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -16,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder(setterPrefix = "with")
 public class CommentDto {
     @NotBlank(message = "comment detail should not be empty")
     private String detail;
