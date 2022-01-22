@@ -14,5 +14,6 @@ import java.util.Date;
 @Builder(setterPrefix = "with")
 public class WalletDto {
     private long wallet;
+
     private Date lastUpdate;
 }

@@ -15,7 +15,7 @@ public enum ImageType {
     DOCUMENT("document"),
     OTHER("other");
 
-    public ImageType getVal(String type) {
+    public static ImageType getVal(String type) {
         String toLowerCase = type.toLowerCase();
         switch (toLowerCase) {
             case "profile": return PROFILE;
