@@ -12,6 +12,6 @@ public class ImageFileDto {
     private ImageType type;
 
     private byte[] image;
-    
+
     private ExpertDto expert;
 }
