@@ -12,11 +12,15 @@ import org.springframework.stereotype.Component;
 public class WalletMapperImpl implements WalletMapper {
     @Override
     public Wallet toWallet(WalletDto walletDto) {
-        return null;
+        return Wallet.builder()
+                .withWallet(walletDto.getWallet())
+                .withLastUpdate(walletDto.getLastUpdate()).build();
     }
 
     @Override
     public WalletDto toWalletDto(Wallet wallet) {
-        return null;
+        return WalletDto.builder()
+                .withWallet(wallet.getWallet())
+                .withLastUpdate(wallet.getLastUpdate()).build();
     }
 }
