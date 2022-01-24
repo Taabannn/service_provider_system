@@ -14,8 +14,8 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" href="<c:url value="/static/css/style.css"/>">
-
-    <title>Login Page</title>
+    
+    <title>Manager Login Page</title>
 </head>
 <body>
 
@@ -42,15 +42,30 @@
         </div>
 
         <br>
-        <form>
+
+        <form:form cssClass="p-3 m-3" cssStyle="" modelAttribute="manager" action="managerLogin" method="post">
+            <p class="text-danger">${error}</p>
+
+            <input type="text" id="login" class="fadeIn second" name="username" placeholder="username">
+            <%--<form:input path="username" name="username" placeholder="username" class="fadeIn second"/>--%>
+
+            <form:errors path="username" cssClass="text-danger"/>
+
+            <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+            <%--<form:input path="password" name="password" placeholder="password" cssClass="fadeIn third"/>--%>
+
+            <form:errors path="password" cssClass="text-danger"/>
+
+            <input type="submit" class="fadeIn fourth" value="Login">
+            <%--<form:button name="login" cssClass="btn btn-primary">Login</form:button>--%>
+
+        </form:form>
+
+        <%--<form action="\login" method="post" modelAttribute="manager">
             <input type="text" id="login" class="fadeIn second" name="username" placeholder="username">
             <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
             <input type="submit" class="fadeIn fourth" value="Log In">
-        </form>
-
-        <%--<div id="formFooter">
-            <a class="underlineHover" href="signup.html">Register</a>
-        </div>--%>
+        </form>--%>
 
     </div>
 </div>

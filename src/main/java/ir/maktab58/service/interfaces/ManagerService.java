@@ -4,12 +4,13 @@ import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.users.Customer;
 import ir.maktab58.data.entities.users.Expert;
 import ir.maktab58.data.entities.users.Manager;
+import ir.maktab58.dto.users.ManagerDto;
 
 /**
  * @author Taban Soleymani
  */
 public interface ManagerService {
-    Manager managerLogin(String username, String password);
+    void managerLogin(ManagerDto managerDto);
 
     void updateUserStatus(Manager manager, Expert expert, UserStatus newUserStatus);
 

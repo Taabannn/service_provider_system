@@ -5,6 +5,7 @@ import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.users.Customer;
 import ir.maktab58.data.entities.users.Expert;
 import ir.maktab58.data.entities.users.Manager;
+import ir.maktab58.dto.users.ManagerDto;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.interfaces.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,12 @@ public class ManagerServiceImpl implements ManagerService {
     CustomerServiceImpl customerService;
 
     @Override
-    public Manager managerLogin(String username, String password) {
-        Optional<Manager> foundedManager = managerDao.findManagerByUsernameAndPassword(username, password);
+    public void managerLogin(ManagerDto managerDto) {
+        Optional<Manager> foundedManager = managerDao.findManagerByUsernameAndPassword(managerDto.getUsername(), managerDto.getPassword());
         if (foundedManager.isEmpty())
             throw ServiceSysException.builder()
                     .withMessage("Invalid username or pass.\n" +
                             "Please try again!").withErrorCode(400).build();
-        return foundedManager.get();
     }
 
     @Override
