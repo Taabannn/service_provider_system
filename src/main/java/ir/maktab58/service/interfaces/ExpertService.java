@@ -3,6 +3,7 @@ package ir.maktab58.service.interfaces;
 import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.services.SubService;
 import ir.maktab58.data.entities.users.Expert;
+import ir.maktab58.dto.users.ExpertDto;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @author Taban Soleymani
  */
 public interface ExpertService {
-    Expert expertLogin(String username, String password);
+    void expertLogin(ExpertDto expertDto);
 
     void changeExpertPassword(Expert expert, String newPassword);
 

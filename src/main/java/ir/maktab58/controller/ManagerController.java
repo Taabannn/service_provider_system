@@ -49,7 +49,7 @@ public class ManagerController {
     }
 
     @PostMapping("/managerLogin")
-    public String loginCustomer(@ModelAttribute("manager") @Validated(OnLogin.class) ManagerDto managerDto,
+    public String loginManager(@ModelAttribute("manager") @Validated(OnLogin.class) ManagerDto managerDto,
                                 Model model) {
         managerService.managerLogin(managerDto);
         //model.addAttribute("pcDto", new ProductCategoryDto());

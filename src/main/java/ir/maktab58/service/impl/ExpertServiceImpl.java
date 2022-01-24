@@ -7,6 +7,7 @@ import ir.maktab58.data.entities.ExpertSubService;
 import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.services.SubService;
 import ir.maktab58.data.entities.users.Expert;
+import ir.maktab58.dto.users.ExpertDto;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.interfaces.ExpertService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +33,12 @@ public class ExpertServiceImpl implements ExpertService {
     private ExpertSubServiceRepository expertSubServiceDao;
 
     @Override
-    public Expert expertLogin(String username, String password) {
-        Optional<Expert> foundedExpert = expertDao.findExpertByUsernameAndPassword(username, password);
+    public void expertLogin(ExpertDto expertDto) {
+        Optional<Expert> foundedExpert = expertDao.findExpertByUsernameAndPassword(expertDto.getUsername(), expertDto.getPassword());
         if (foundedExpert.isEmpty())
             throw  ServiceSysException.builder()
                     .withMessage("Invalid username or pass.\n" +
                             "Please try again!").withErrorCode(400).build();
-        return foundedExpert.get();
     }
 
     @Override
