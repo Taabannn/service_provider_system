@@ -33,12 +33,13 @@ public class ExpertServiceImpl implements ExpertService {
     private ExpertSubServiceRepository expertSubServiceDao;
 
     @Override
-    public void expertLogin(ExpertDto expertDto) {
+    public Expert expertLogin(ExpertDto expertDto) {
         Optional<Expert> foundedExpert = expertDao.findExpertByUsernameAndPassword(expertDto.getUsername(), expertDto.getPassword());
         if (foundedExpert.isEmpty())
             throw  ServiceSysException.builder()
                     .withMessage("Invalid username or pass.\n" +
                             "Please try again!").withErrorCode(400).build();
+        return foundedExpert.get();
     }
 
     @Override

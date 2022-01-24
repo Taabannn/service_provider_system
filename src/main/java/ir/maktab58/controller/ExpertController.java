@@ -1,10 +1,12 @@
 package ir.maktab58.controller;
 
 import ir.maktab58.config.LastViewInterceptor;
+import ir.maktab58.data.entities.users.Expert;
 import ir.maktab58.dto.users.ExpertDto;
 import ir.maktab58.dto.users.ManagerDto;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.impl.ExpertServiceImpl;
+import ir.maktab58.service.mapper.interfaces.ExpertMapper;
 import ir.maktab58.service.validation.OnLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,9 @@ public class ExpertController {
     @Autowired
     private ExpertServiceImpl expertService;
 
+    @Autowired
+    private ExpertMapper expertMapper;
+
     @GetMapping("/expertLogin")
     public ModelAndView getExpertLoginView() {
         return new ModelAndView("expertLogin","expert", new ExpertDto());
@@ -45,10 +50,11 @@ public class ExpertController {
         return new ModelAndView("expertLogin", model);
     }
 
-    @PostMapping("/managerLogin")
+    @PostMapping("/expertLogin")
     public String loginExpert(@ModelAttribute("expert") @Validated(OnLogin.class) ExpertDto expertDto,
                                 Model model) {
-        expertService.expertLogin(expertDto);
+        Expert expert = expertService.expertLogin(expertDto);
+        ExpertDto toExpertDto = expertMapper.toExpertDto(expert);
         //model.addAttribute("pcDto", new ProductCategoryDto());
         return "productList";
     }

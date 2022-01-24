@@ -11,7 +11,7 @@ import java.util.List;
  * @author Taban Soleymani
  */
 public interface ExpertService {
-    void expertLogin(ExpertDto expertDto);
+    Expert expertLogin(ExpertDto expertDto);
 
     void changeExpertPassword(Expert expert, String newPassword);
 
