@@ -14,8 +14,8 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" href="<c:url value="/static/css/style.css"/>">
-    <style><%@include file="/static/css/style.css"%></style>
-    <title>Login Page</title>
+
+    <title>Manager Login Page</title>
 </head>
 <body>
 

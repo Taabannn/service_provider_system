@@ -6,6 +6,7 @@ import ir.maktab58.data.entities.Address;
 import ir.maktab58.data.entities.CustomerAddress;
 import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.users.Customer;
+import ir.maktab58.dto.users.CustomerDto;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.interfaces.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerAddressRepository customerAddressDao;
 
     @Override
-    public Customer customerLogin(String username, String password) {
-        Optional<Customer> foundedCustomer = customerDao.findCustomerByUsernameAndPassword(username, password);
+    public Customer customerLogin(CustomerDto customerDto) {
+        Optional<Customer> foundedCustomer = customerDao.findCustomerByUsernameAndPassword(customerDto.getUsername(), customerDto.getPassword());
         if (foundedCustomer.isEmpty())
             throw ServiceSysException.builder()
                     .withMessage("Invalid username or pass.\n" +

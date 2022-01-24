@@ -26,7 +26,7 @@
             <br>
             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                  x="0px" y="0px"
-                 width="414.594px" height="414.594px" viewBox="0 0 414.594 414.594"
+                 width="170px" height="170px" viewBox="0 0 414.594 414.594"
                  style="enable-background:new 0 0 414.594 414.594;"
                  xml:space="preserve">
             <g>
