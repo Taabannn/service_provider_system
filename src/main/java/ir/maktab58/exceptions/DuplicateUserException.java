@@ -1,8 +1,5 @@
 package ir.maktab58.exceptions;
 
-import lombok.Builder;
-import lombok.experimental.SuperBuilder;
-
 /**
  * @author Taban Soleymani
  */

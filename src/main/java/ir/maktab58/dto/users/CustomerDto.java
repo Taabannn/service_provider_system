@@ -1,9 +1,8 @@
 package ir.maktab58.dto.users;
 
-import ir.maktab58.dto.AddressDto;
+import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.dto.CustomerAddressDto;
 import ir.maktab58.dto.WalletDto;
-import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.service.validation.OnLogin;
 import ir.maktab58.service.validation.OnRegister;
 import lombok.*;
@@ -11,7 +10,9 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Taban Soleymani

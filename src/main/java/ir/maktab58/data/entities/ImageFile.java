@@ -1,9 +1,7 @@
 package ir.maktab58.data.entities;
 
-import ir.maktab58.data.entities.users.Expert;
 import ir.maktab58.data.enums.ImageType;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
