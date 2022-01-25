@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,11 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     @Query("update Customer c set c.password=:newPassword where c.username=:username and c.password=:password")
     void updateCustomerPassword(@Param("username") String username, @Param("password") String password, @Param("newPassword") String newPassword);
 
+    @Modifying
+    @Query("update Customer c set c.lastUpdate=:lastUpdate where c.username=:username and c.password=:password")
+    void updateCustomerLastUpdate(@Param("username") String username, @Param("password") String password, @Param("lastUpdate") Date lastUpdate);
+
+
     List<Customer> getAllByUserStatus(UserStatus userStatus);
 // TODO Optional<List<Customer>>
     @Modifying
@@ -33,4 +39,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     void updateCustomerStatus(@Param("username") String username, @Param("password") String password, @Param("newUserStatus") UserStatus newUserStatus);
 
     Optional<Customer> findCustomerByUsernameAndUserStatus(String username, UserStatus userStatus);
+
+    Optional<Customer> findCustomerByUsername(String username);
+
+    Optional<Customer> findCustomerByEmail(String email);
 }

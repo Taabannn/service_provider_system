@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -49,8 +50,13 @@ public class ManagerController {
     }
 
     @PostMapping("/managerLogin")
-    public String loginManager(@ModelAttribute("manager") @Validated(OnLogin.class) ManagerDto managerDto,
+    public String loginManager(@ModelAttribute("manager") @Validated(OnLogin.class) ManagerDto managerDto, BindingResult bindingResult,
                                 Model model) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getFieldErrors().forEach(error -> model.addAttribute(error.getField(), error.getDefaultMessage()));
+            return "customerLogin";
+        }
+
         managerService.managerLogin(managerDto);
         //model.addAttribute("pcDto", new ProductCategoryDto());
         return "productList";

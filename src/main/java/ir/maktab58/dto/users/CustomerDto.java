@@ -23,7 +23,7 @@ import java.util.*;
 public class CustomerDto extends UserDto {
     private UserStatus userStatus;
 
-    private WalletDto wallet;
+    private WalletDto wallet = WalletDto.builder().build();
 
     private Set<CustomerAddressDto> customerAddressDtoSet = new HashSet<>();
 

@@ -13,7 +13,7 @@ import java.util.List;
 public interface CustomerService {
     Customer customerLogin(CustomerDto customerDto);
 
-    void changeCustomerPassword(Customer customer, String newPassword);
+    void changeCustomerPassword(CustomerDto customerDto, String newPassword);
 
     Customer saveNewCustomer(Customer customer);
 

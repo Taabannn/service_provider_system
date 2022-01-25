@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -51,8 +52,12 @@ public class ExpertController {
     }
 
     @PostMapping("/expertLogin")
-    public String loginExpert(@ModelAttribute("expert") @Validated(OnLogin.class) ExpertDto expertDto,
+    public String loginExpert(@ModelAttribute("expert") @Validated(OnLogin.class) ExpertDto expertDto, BindingResult bindingResult,
                                 Model model) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getFieldErrors().forEach(error -> model.addAttribute(error.getField(), error.getDefaultMessage()));
+            return "expertLogin";
+        }
         Expert expert = expertService.expertLogin(expertDto);
         ExpertDto toExpertDto = expertMapper.toExpertDto(expert);
         //model.addAttribute("pcDto", new ProductCategoryDto());

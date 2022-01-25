@@ -12,7 +12,7 @@ public class UserController {
     @RequestMapping("/signUp")
     public ModelAndView getLogoutView() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("signUp");
+        modelAndView.setViewName("customerSignUp");
         return modelAndView;
     }
 }
