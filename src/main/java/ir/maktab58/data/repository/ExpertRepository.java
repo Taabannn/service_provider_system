@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,4 +37,8 @@ public interface ExpertRepository extends JpaRepository<Expert, Integer> {
     Optional<Expert> findExpertByUsername(String username);
 
     Optional<Expert> findExpertByEmail(String email);
+
+    @Modifying
+    @Query("update Expert e set e.lastUpdate=:lastUpdate where e.username=:username and e.password=:password")
+    void updateExpertLastUpdate(String username, String newPassword, Date date);
 }

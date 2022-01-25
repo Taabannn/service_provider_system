@@ -56,6 +56,7 @@ public class ExpertServiceImpl implements ExpertService {
     @Override
     public void changeExpertPassword(ExpertDto expertDto, String newPassword) {
         expertRepository.updateExpertPassword(expertDto.getUsername(), expertDto.getPassword(), newPassword);
+        expertRepository.updateExpertLastUpdate(expertDto.getUsername(), newPassword, new Date());
     }
 
     @Override
