@@ -33,7 +33,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
 
     List<Customer> getAllByUserStatus(UserStatus userStatus);
-// TODO Optional<List<Customer>>
+
     @Modifying
     @Query("update Customer c set c.userStatus=:newUserStatus where c.username=:username and c.password=:password")
     void updateCustomerStatus(@Param("username") String username, @Param("password") String password, @Param("newUserStatus") UserStatus newUserStatus);
@@ -43,4 +43,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     Optional<Customer> findCustomerByUsername(String username);
 
     Optional<Customer> findCustomerByEmail(String email);
+
+    @Modifying
+    @Query("update Wallet w set w.wallet=:wallet where w.id=:id")
+    void updateCustomerWallet(@Param("id") int id, @Param("wallet") long wallet);
 }

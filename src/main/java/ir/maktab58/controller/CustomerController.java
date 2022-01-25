@@ -3,6 +3,7 @@ package ir.maktab58.controller;
 import ir.maktab58.config.LastViewInterceptor;
 import ir.maktab58.data.entities.users.Customer;
 import ir.maktab58.data.enums.UserStatus;
+import ir.maktab58.dto.TransactionDto;
 import ir.maktab58.dto.users.CustomerDto;
 import ir.maktab58.dto.users.ExpertDto;
 import ir.maktab58.exceptions.DuplicateUserException;
@@ -122,6 +123,7 @@ public class CustomerController {
         model.addAttribute("customer", toCustomerDto);
         model.addAttribute("message", customer.getFirstName()+ "!" +
                 "<br>Your password has been updated successfully.");
+        session.setAttribute("customer", toCustomerDto);
         return "customerDashboard";
     }
 
@@ -133,9 +135,30 @@ public class CustomerController {
         return new ModelAndView("customerLogin", model);
     }*/
 
+    @GetMapping("/depositWallet")
+    public ModelAndView getDepositWalletView(HttpSession httpSession) {
+        CustomerDto customer = (CustomerDto) httpSession.getAttribute("customer");
+        return new ModelAndView("depositWallet", "customer", customer);
+    }
+
+    @PostMapping("/depositWallet")
+    public String depositWallet(@RequestParam(value = "depositAmount") String amount,
+                                   Model model, HttpSession session) {
+        CustomerDto customer = (CustomerDto) session.getAttribute("customer");
+        long depositAmount = Long.parseLong(amount);
+        TransactionDto transactionDto = customerService.depositCustomerBalance(customer, depositAmount);
+        Customer modifiedCustomer = customerService.customerLogin(customer);
+        CustomerDto toCustomerDto = customerMapper.toCustomerDto(modifiedCustomer);
+        model.addAttribute("customer", toCustomerDto);
+        model.addAttribute("message", customer.getFirstName()+ "!" +
+                "<br>Your balance is " + toCustomerDto.getWallet().getWallet() + " now."
+                + "<br> Successful Transaction with tracking code : " + transactionDto.getTrackingCode());
+        session.setAttribute("customer", toCustomerDto);
+        return "customerDashboard";
+    }
+
     @GetMapping("/logout")
     public ModelAndView getCustomerLogoutView() {
         return new ModelAndView("logout");
     }
-
 }

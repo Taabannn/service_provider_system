@@ -1,22 +1,30 @@
 package ir.maktab58.service.impl;
 
+import ir.maktab58.data.entities.Transaction;
+import ir.maktab58.data.entities.Wallet;
+import ir.maktab58.data.enums.TransactionStatus;
+import ir.maktab58.data.enums.TransactionType;
 import ir.maktab58.data.repository.CustomerAddressRepository;
 import ir.maktab58.data.repository.CustomerRepository;
 import ir.maktab58.data.entities.Address;
 import ir.maktab58.data.entities.CustomerAddress;
 import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.users.Customer;
+import ir.maktab58.dto.TransactionDto;
+import ir.maktab58.dto.WalletDto;
 import ir.maktab58.dto.users.CustomerDto;
 import ir.maktab58.exceptions.DuplicateUserException;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.interfaces.CustomerService;
 import ir.maktab58.service.mapper.Impl.CustomerMapperImpl;
+import ir.maktab58.service.mapper.Impl.TransactionMapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -32,6 +40,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     CustomerMapperImpl customerMapper;
+
+    @Autowired
+    TransactionMapperImpl transactionMapper;
+
+    @Autowired
+    TransactionServiceImpl transactionService;
 
     @Override
     public Customer customerLogin(CustomerDto customerDto) {
@@ -94,5 +108,31 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setFirstAccess(new Date());
         customer.setUserStatus(UserStatus.NEW);
         return customerRepository.save(customer);
+    }
+
+    public TransactionDto depositCustomerBalance(CustomerDto customer, long amount) {
+        Optional<Customer> customerByUsername = customerRepository.findCustomerByUsername(customer.getUsername());
+        if (customerByUsername.isPresent()) {
+            Customer foundedCustomer = customerByUsername.get();
+            Wallet wallet = foundedCustomer.getWallet();
+            wallet.setWallet(wallet.getWallet() + amount);
+            customerRepository.updateCustomerWallet(wallet.getId(), wallet.getWallet());
+            customerRepository.updateCustomerLastUpdate(foundedCustomer.getUsername(), foundedCustomer.getPassword(), new Date());
+            return saveDepositTransaction(amount, wallet);
+        }
+        return null;
+    }
+
+    public TransactionDto saveDepositTransaction(long cost, Wallet wallet) {
+        Random random = new Random();
+        long trackingCode = random.nextLong();
+        Transaction transaction = Transaction.builder()
+                .withCost(cost)
+                .withWallet(wallet)
+                .withCreationDate(new Date())
+                .withTransactionStatus(TransactionStatus.SUCCESSFUL)
+                .withTransactionType(TransactionType.DEPOSIT)
+                .withTrackingCode(Math.abs(trackingCode)).build();
+        return transactionMapper.toTransactionDto(transactionService.saveNewTransaction(transaction));
     }
 }
