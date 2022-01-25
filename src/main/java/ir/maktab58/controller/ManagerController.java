@@ -5,7 +5,6 @@ import ir.maktab58.data.entities.users.Manager;
 import ir.maktab58.dto.users.ManagerDto;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.impl.ManagerServiceImpl;
-import ir.maktab58.service.interfaces.ManagerService;
 import ir.maktab58.service.mapper.interfaces.ManagerMapper;
 import ir.maktab58.service.validation.OnLogin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +34,7 @@ public class ManagerController {
 
     @GetMapping("/managerLogin")
     public ModelAndView getManagerLoginView() {
-        return new ModelAndView("managerLogin","manager", new ManagerDto());
+        return new ModelAndView("manager/managerLogin","manager", new ManagerDto());
     }
 
     @ExceptionHandler(value = BindException.class)
@@ -51,7 +48,7 @@ public class ManagerController {
         Map<String, Object> model = new HashMap<>();
         model.put("manager", new ManagerDto());
         model.put("error", ex.getMessage());
-        return new ModelAndView("managerLogin", model);
+        return new ModelAndView("manager/managerLogin", model);
     }
 
     @PostMapping("/managerLogin")
@@ -59,7 +56,7 @@ public class ManagerController {
                                 Model model, HttpSession httpSession) {
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldErrors().forEach(error -> model.addAttribute(error.getField(), error.getDefaultMessage()));
-            return "customerLogin";
+            return "customer/customerLogin";
         }
 
         Manager manager = managerService.managerLogin(managerDto);
@@ -69,7 +66,7 @@ public class ManagerController {
         model.addAttribute("message", "Welcome " + toManagerDto.getFirstName() + " " + toManagerDto.getLastName() +
                 "!<br>We are happy to see you again!");
         httpSession.setAttribute("manager", toManagerDto);
-        return "managerDashboard";
+        return "manager/managerDashboard";
     }
 
     @GetMapping("/managerLogout")

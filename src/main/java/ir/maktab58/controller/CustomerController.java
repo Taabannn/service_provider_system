@@ -2,10 +2,8 @@ package ir.maktab58.controller;
 
 import ir.maktab58.config.LastViewInterceptor;
 import ir.maktab58.data.entities.users.Customer;
-import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.dto.TransactionDto;
 import ir.maktab58.dto.users.CustomerDto;
-import ir.maktab58.dto.users.ExpertDto;
 import ir.maktab58.exceptions.DuplicateUserException;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.impl.CustomerServiceImpl;
@@ -23,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +37,7 @@ public class CustomerController {
 
     @GetMapping("/customerLogin")
     public ModelAndView getCustomerLoginView() {
-        return new ModelAndView("customerLogin","customer", new CustomerDto());
+        return new ModelAndView("customer/customerLogin","customer", new CustomerDto());
     }
 
     @ExceptionHandler(value = BindException.class)
@@ -54,7 +51,7 @@ public class CustomerController {
         Map<String, Object> model = new HashMap<>();
         model.put("customer", new CustomerDto());
         model.put("error", ex.getMessage());
-        return new ModelAndView("customerLogin", model);
+        return new ModelAndView("customer/customerLogin", model);
     }
 
     @PostMapping("/customerLogin")
@@ -62,7 +59,7 @@ public class CustomerController {
                                 Model model, HttpSession httpSession) {
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldErrors().forEach(error -> model.addAttribute(error.getField(), error.getDefaultMessage()));
-            return "customerLogin";
+            return "customer/customerLogin";
         }
 
         Customer customer = customerService.customerLogin(customerDto);
@@ -71,12 +68,12 @@ public class CustomerController {
         model.addAttribute("message", "Welcome " + toCustomerDto.getFirstName() + " " + toCustomerDto.getLastName() +
                 "!<br>We are happy to see you again!");
         httpSession.setAttribute("customer", toCustomerDto);
-        return "customerDashboard";
+        return "customer/customerDashboard";
     }
 
     @GetMapping("/customerSignUp")
     public ModelAndView getCustomerSignUpView() {
-        return new ModelAndView("customerSignUp","customer", new CustomerDto());
+        return new ModelAndView("customer/customerSignUp","customer", new CustomerDto());
     }
 
     @PostMapping("/customerSignUp")
@@ -84,7 +81,7 @@ public class CustomerController {
                                  Model model, HttpSession httpSession) {
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldErrors().forEach(error -> model.addAttribute(error.getField(), error.getDefaultMessage()));
-            return "customerSignUp";
+            return "customer/customerSignUp";
         }
 
         Customer customer = customerService.customerSignUp(customerDto);
@@ -93,7 +90,7 @@ public class CustomerController {
         model.addAttribute("message", "Welcome " + toCustomerDto.getFirstName() + " " + toCustomerDto.getLastName() +
                 "!<br>Your account has been created successfully!");
         httpSession.setAttribute("customer", toCustomerDto);
-        return "customerDashboard";
+        return "customer/customerDashboard";
     }
 
     @ExceptionHandler(value = DuplicateUserException.class)
@@ -101,13 +98,13 @@ public class CustomerController {
         Map<String, Object> model = new HashMap<>();
         model.put("customer", new CustomerDto());
         model.put("signupError", ex.getMessage() + "You are redirected to customerSignUp page.");
-        return new ModelAndView("customerSignUp", model);
+        return new ModelAndView("customer/customerSignUp", model);
     }
 
     @GetMapping("/customerPassEdition")
     public ModelAndView getCustomerPassEditionView(HttpSession httpSession) {
         CustomerDto customer = (CustomerDto) httpSession.getAttribute("customer");
-        return new ModelAndView("customerPassEdition", "customer", customer);
+        return new ModelAndView("customer/customerPassEdition", "customer", customer);
     }
 
     @PostMapping("/customerPassEdition")
@@ -124,7 +121,7 @@ public class CustomerController {
         model.addAttribute("message", customer.getFirstName()+ "!" +
                 "<br>Your password has been updated successfully.");
         session.setAttribute("customer", toCustomerDto);
-        return "customerDashboard";
+        return "customer/customerDashboard";
     }
 
     /*@ExceptionHandler(value = SQLException.class)
@@ -138,7 +135,7 @@ public class CustomerController {
     @GetMapping("/depositWallet")
     public ModelAndView getDepositWalletView(HttpSession httpSession) {
         CustomerDto customer = (CustomerDto) httpSession.getAttribute("customer");
-        return new ModelAndView("depositWallet", "customer", customer);
+        return new ModelAndView("customer/depositWallet", "customer", customer);
     }
 
     @PostMapping("/depositWallet")
@@ -154,7 +151,7 @@ public class CustomerController {
                 "<br>Your balance is " + toCustomerDto.getWallet().getWallet() + " now."
                 + "<br> Successful Transaction with tracking code : " + transactionDto.getTrackingCode());
         session.setAttribute("customer", toCustomerDto);
-        return "customerDashboard";
+        return "customer/customerDashboard";
     }
 
     @GetMapping("/logout")
