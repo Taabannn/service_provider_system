@@ -10,7 +10,7 @@ import ir.maktab58.dto.users.ManagerDto;
  * @author Taban Soleymani
  */
 public interface ManagerService {
-    void managerLogin(ManagerDto managerDto);
+    Manager managerLogin(ManagerDto managerDto);
 
     void updateUserStatus(Manager manager, Expert expert, UserStatus newUserStatus);
 

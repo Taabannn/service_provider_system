@@ -28,12 +28,13 @@ public class ManagerServiceImpl implements ManagerService {
     CustomerServiceImpl customerService;
 
     @Override
-    public void managerLogin(ManagerDto managerDto) {
+    public Manager managerLogin(ManagerDto managerDto) {
         Optional<Manager> foundedManager = managerDao.findManagerByUsernameAndPassword(managerDto.getUsername(), managerDto.getPassword());
         if (foundedManager.isEmpty())
             throw ServiceSysException.builder()
                     .withMessage("Invalid username or pass.\n" +
                             "Please try again!").withErrorCode(400).build();
+        return foundedManager.get();
     }
 
     @Override

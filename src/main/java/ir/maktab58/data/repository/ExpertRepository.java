@@ -32,4 +32,8 @@ public interface ExpertRepository extends JpaRepository<Expert, Integer> {
     void updateExpertStatus(@Param("username") String username, @Param("password") String password, @Param("newUserStatus") UserStatus newUserStatus);
 
     Optional<Expert> findExpertByUsernameAndUserStatus(String username, UserStatus userStatus);
+
+    Optional<Expert> findExpertByUsername(String username);
+
+    Optional<Expert> findExpertByEmail(String email);
 }

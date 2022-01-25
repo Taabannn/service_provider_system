@@ -158,7 +158,8 @@ public class CustomerController {
     }
 
     @GetMapping("/logout")
-    public ModelAndView getCustomerLogoutView() {
+    public ModelAndView getCustomerLogoutView(HttpSession httpSession) {
+        httpSession.removeAttribute("customer");
         return new ModelAndView("logout");
     }
 }

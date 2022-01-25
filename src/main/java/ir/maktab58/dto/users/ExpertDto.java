@@ -25,7 +25,7 @@ public class ExpertDto extends UserDto {
 
     private Double score;
 
-    private WalletDto walletDto;
+    private WalletDto walletDto = WalletDto.builder().build();
 
     private Set<ExpertSubServiceDto> expertSubServiceDtoSet = new HashSet<>();
 

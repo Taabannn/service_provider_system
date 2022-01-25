@@ -30,4 +30,6 @@ public interface ExpertSubServiceRepository extends JpaRepository<ExpertSubServi
     void deleteByExpertAndSubService(Expert expert, SubService subService);
 
     List<ExpertSubService> findExpertSubServicesBySubService(SubService subService);
+
+    List<ExpertSubService> findExpertSubServiceByExpert(Expert expert);
 }

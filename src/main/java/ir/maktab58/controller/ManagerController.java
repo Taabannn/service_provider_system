@@ -1,10 +1,12 @@
 package ir.maktab58.controller;
 
 import ir.maktab58.config.LastViewInterceptor;
+import ir.maktab58.data.entities.users.Manager;
 import ir.maktab58.dto.users.ManagerDto;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.impl.ManagerServiceImpl;
 import ir.maktab58.service.interfaces.ManagerService;
+import ir.maktab58.service.mapper.interfaces.ManagerMapper;
 import ir.maktab58.service.validation.OnLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,9 @@ public class ManagerController {
     @Autowired
     private ManagerServiceImpl managerService;
 
+    @Autowired
+    private ManagerMapper managerMapper;
+
     @GetMapping("/managerLogin")
     public ModelAndView getManagerLoginView() {
         return new ModelAndView("managerLogin","manager", new ManagerDto());
@@ -51,14 +56,25 @@ public class ManagerController {
 
     @PostMapping("/managerLogin")
     public String loginManager(@ModelAttribute("manager") @Validated(OnLogin.class) ManagerDto managerDto, BindingResult bindingResult,
-                                Model model) {
+                                Model model, HttpSession httpSession) {
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldErrors().forEach(error -> model.addAttribute(error.getField(), error.getDefaultMessage()));
             return "customerLogin";
         }
 
-        managerService.managerLogin(managerDto);
-        //model.addAttribute("pcDto", new ProductCategoryDto());
-        return "productList";
+        Manager manager = managerService.managerLogin(managerDto);
+        ManagerDto toManagerDto = managerMapper.toManagerDto(manager);
+
+        model.addAttribute("manager", toManagerDto);
+        model.addAttribute("message", "Welcome " + toManagerDto.getFirstName() + " " + toManagerDto.getLastName() +
+                "!<br>We are happy to see you again!");
+        httpSession.setAttribute("manager", toManagerDto);
+        return "managerDashboard";
+    }
+
+    @GetMapping("/managerLogout")
+    public ModelAndView getCustomerLogoutView(HttpSession httpSession) {
+        httpSession.removeAttribute("manager");
+        return new ModelAndView("logout");
     }
 }

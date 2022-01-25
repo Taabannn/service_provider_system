@@ -7,9 +7,14 @@ import ir.maktab58.data.entities.ExpertSubService;
 import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.services.SubService;
 import ir.maktab58.data.entities.users.Expert;
+import ir.maktab58.dto.services.SubServiceDto;
 import ir.maktab58.dto.users.ExpertDto;
+import ir.maktab58.exceptions.DuplicateUserException;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.interfaces.ExpertService;
+import ir.maktab58.service.mapper.Impl.SubServiceMapperImpl;
+import ir.maktab58.service.mapper.interfaces.ExpertMapper;
+import ir.maktab58.service.mapper.interfaces.SubServiceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,17 +29,23 @@ import java.util.stream.Collectors;
 @Service
 public class ExpertServiceImpl implements ExpertService {
     @Autowired
-    private ExpertRepository expertDao;
+    private ExpertRepository expertRepository;
 
     @Autowired
     private SubServiceRepository subServiceDao;
 
     @Autowired
-    private ExpertSubServiceRepository expertSubServiceDao;
+    private ExpertSubServiceRepository expertSubServiceRepository;
+
+    @Autowired
+    private ExpertMapper expertMapper;
+
+    @Autowired
+    private SubServiceMapperImpl subServiceMapper;
 
     @Override
     public Expert expertLogin(ExpertDto expertDto) {
-        Optional<Expert> foundedExpert = expertDao.findExpertByUsernameAndPassword(expertDto.getUsername(), expertDto.getPassword());
+        Optional<Expert> foundedExpert = expertRepository.findExpertByUsernameAndPassword(expertDto.getUsername(), expertDto.getPassword());
         if (foundedExpert.isEmpty())
             throw  ServiceSysException.builder()
                     .withMessage("Invalid username or pass.\n" +
@@ -44,12 +55,12 @@ public class ExpertServiceImpl implements ExpertService {
 
     @Override
     public void changeExpertPassword(Expert expert, String newPassword) {
-        expertDao.updateExpertPassword(expert.getUsername(), expert.getPassword(), newPassword);
+        expertRepository.updateExpertPassword(expert.getUsername(), expert.getPassword(), newPassword);
     }
 
     @Override
     public Expert saveNewExpert(Expert expert) {
-        return expertDao.save(expert);
+        return expertRepository.save(expert);
     }
 
     @Override
@@ -62,7 +73,7 @@ public class ExpertServiceImpl implements ExpertService {
                     .withErrorCode(400).build();
 
         SubService subService = foundedSubService.get();
-        Optional<ExpertSubService> expertSubService = expertSubServiceDao.findExpertSubServiceByExpertAndSubService(expert, subService);
+        Optional<ExpertSubService> expertSubService = expertSubServiceRepository.findExpertSubServiceByExpertAndSubService(expert, subService);
         if (expertSubService.isPresent()) {
             throw ServiceSysException.builder()
                     .withMessage("SubService " + subServiceDescription + " has already added to your services list.")
@@ -73,7 +84,7 @@ public class ExpertServiceImpl implements ExpertService {
                 .withSubService(subService)
                 .withExpert(expert)
                 .withCreationDate(new Date()).build();
-        expertSubServiceDao.save(newExpertSubService);
+        expertSubServiceRepository.save(newExpertSubService);
     }
 
     @Override
@@ -86,34 +97,34 @@ public class ExpertServiceImpl implements ExpertService {
                     .withErrorCode(400).build();
 
         SubService subService = foundedSubService.get();
-        List<ExpertSubService> expertSubs = expertSubServiceDao.findExpertSubServiceBySubService(subService);
+        List<ExpertSubService> expertSubs = expertSubServiceRepository.findExpertSubServiceBySubService(subService);
         if (expertSubs.size() == 0) {
             throw ServiceSysException.builder()
                     .withMessage("SubService " + subServiceDescription + " has not existed in your services list.")
                     .withErrorCode(400).build();
         }
-        expertSubServiceDao.deleteByExpertAndSubService(expert, subService);
+        expertSubServiceRepository.deleteByExpertAndSubService(expert, subService);
     }
 
     @Override
     public List<Expert> getAllExpertByExpertStatus(UserStatus userStatus) {
-        return expertDao.getAllByUserStatus(userStatus);
+        return expertRepository.getAllByUserStatus(userStatus);
     }
 
     @Override
     public List<Expert> getListOfExpertsBySubService(String subServiceDescription) {
-        List<ExpertSubService> expertSubByDescription = expertSubServiceDao.findExpertSubServiceBySubServiceDescription(subServiceDescription);
+        List<ExpertSubService> expertSubByDescription = expertSubServiceRepository.findExpertSubServiceBySubServiceDescription(subServiceDescription);
         return expertSubByDescription.stream().map(ExpertSubService::getExpert).collect(Collectors.toList());
     }
 
     @Override
     public void updateExpertStatus(Expert expert, UserStatus newUserStatus) {
-        expertDao.updateExpertStatus(expert.getUsername(), expert.getPassword(), newUserStatus);
+        expertRepository.updateExpertStatus(expert.getUsername(), expert.getPassword(), newUserStatus);
     }
 
     @Override
     public void checkIfExpertHasSubService(SubService subService, Expert expert) {
-        List<ExpertSubService> expertSubServices = expertSubServiceDao.findExpertSubServiceBySubService(subService);
+        List<ExpertSubService> expertSubServices = expertSubServiceRepository.findExpertSubServiceBySubService(subService);
         List<Expert> experts = expertSubServices.stream().map(ExpertSubService::getExpert).collect(Collectors.toList());
         if (!experts.contains(expert))
             throw ServiceSysException.builder()
@@ -122,6 +133,28 @@ public class ExpertServiceImpl implements ExpertService {
     }
 
     public Optional<Expert> findVerifiedExpertByUsername(String username) {
-        return expertDao.findExpertByUsernameAndUserStatus(username, UserStatus.VERIFIED);
+        return expertRepository.findExpertByUsernameAndUserStatus(username, UserStatus.VERIFIED);
+    }
+
+    public Expert expertSignUp(ExpertDto expertDto) {
+        Optional<Expert> expertByUsername = expertRepository.findExpertByUsername(expertDto.getUsername());
+        Optional<Expert> expertByEmail = expertRepository.findExpertByEmail(expertDto.getEmail());
+
+        if (expertByEmail.isPresent())
+            throw new DuplicateUserException("This email has been existed.", 400);
+
+        if (expertByUsername.isPresent())
+            throw new DuplicateUserException("This username has been existed.", 400);
+
+        Expert expert = expertMapper.toExpert(expertDto);
+        expert.setFirstAccess(new Date());
+        expert.setUserStatus(UserStatus.NEW);
+        return expertRepository.save(expert);
+    }
+
+    public List<SubServiceDto> getSubServiceListByExpert(Expert expert) {
+        List<ExpertSubService> serviceByExpert = expertSubServiceRepository.findExpertSubServiceByExpert(expert);
+        List<SubService> serviceList = serviceByExpert.stream().map(ExpertSubService::getSubService).collect(Collectors.toList());
+        return serviceList.stream().map(subServiceMapper::toSubServiceDto).collect(Collectors.toList());
     }
 }

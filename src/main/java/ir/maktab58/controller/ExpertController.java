@@ -1,13 +1,19 @@
 package ir.maktab58.controller;
 
 import ir.maktab58.config.LastViewInterceptor;
+import ir.maktab58.data.entities.users.Customer;
 import ir.maktab58.data.entities.users.Expert;
+import ir.maktab58.dto.services.SubServiceDto;
+import ir.maktab58.dto.users.CustomerDto;
 import ir.maktab58.dto.users.ExpertDto;
 import ir.maktab58.dto.users.ManagerDto;
+import ir.maktab58.exceptions.DuplicateUserException;
 import ir.maktab58.exceptions.ServiceSysException;
 import ir.maktab58.service.impl.ExpertServiceImpl;
+import ir.maktab58.service.mapper.Impl.ExpertSubServiceMapperImpl;
 import ir.maktab58.service.mapper.interfaces.ExpertMapper;
 import ir.maktab58.service.validation.OnLogin;
+import ir.maktab58.service.validation.OnRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +24,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,14 +61,58 @@ public class ExpertController {
 
     @PostMapping("/expertLogin")
     public String loginExpert(@ModelAttribute("expert") @Validated(OnLogin.class) ExpertDto expertDto, BindingResult bindingResult,
-                                Model model) {
+                                Model model, HttpSession httpSession) {
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldErrors().forEach(error -> model.addAttribute(error.getField(), error.getDefaultMessage()));
             return "expertLogin";
         }
         Expert expert = expertService.expertLogin(expertDto);
         ExpertDto toExpertDto = expertMapper.toExpertDto(expert);
-        //model.addAttribute("pcDto", new ProductCategoryDto());
-        return "productList";
+
+        model.addAttribute("expert", toExpertDto);
+        model.addAttribute("message", "Welcome " + toExpertDto.getFirstName() + " " + toExpertDto.getLastName() +
+                "!<br>Your account has been created successfully!");
+        List<SubServiceDto> serviceDtoList = expertService.getSubServiceListByExpert(expert);
+        model.addAttribute("services", serviceDtoList);
+        httpSession.setAttribute("expert", toExpertDto);
+        return "expertDashboard";
+    }
+
+    @GetMapping("/expertSignUp")
+    public ModelAndView getExpertSignUpView() {
+        return new ModelAndView("expertSignUp","expert", new ExpertDto());
+    }
+
+    @PostMapping("/expertSignUp")
+    public String signUpExpert(@ModelAttribute("expert") @Validated(OnRegister.class) ExpertDto expertDto, BindingResult bindingResult,
+                                 Model model, HttpSession httpSession) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getFieldErrors().forEach(error -> model.addAttribute(error.getField(), error.getDefaultMessage()));
+            return "expertSignUp";
+        }
+
+        Expert expert = expertService.expertSignUp(expertDto);
+        ExpertDto toExpertDto = expertMapper.toExpertDto(expert);
+        List<SubServiceDto> serviceDtoList = expertService.getSubServiceListByExpert(expert);
+        model.addAttribute("expert", toExpertDto);
+        model.addAttribute("message", "Welcome " + toExpertDto.getFirstName() + " " + toExpertDto.getLastName() +
+                "!<br>Your account has been created successfully!");
+        model.addAttribute("services", serviceDtoList);
+        httpSession.setAttribute("expert", toExpertDto);
+        return "expertDashboard";
+    }
+
+    @ExceptionHandler(value = DuplicateUserException.class)
+    public ModelAndView signUpExpertExceptionHandler(DuplicateUserException ex) {
+        Map<String, Object> model = new HashMap<>();
+        model.put("expert", new ExpertDto());
+        model.put("signupError", ex.getMessage() + "You are redirected to expertSignUp page.");
+        return new ModelAndView("expertSignUp", model);
+    }
+
+    @GetMapping("/expertLogout")
+    public ModelAndView getCustomerLogoutView(HttpSession httpSession) {
+        httpSession.removeAttribute("expert");
+        return new ModelAndView("logout");
     }
 }
