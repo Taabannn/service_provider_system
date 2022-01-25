@@ -110,6 +110,29 @@ public class ExpertController {
         return new ModelAndView("expertSignUp", model);
     }
 
+    @GetMapping("/expertPassEdition")
+    public ModelAndView getCustomerPassEditionView(HttpSession httpSession) {
+        ExpertDto expert = (ExpertDto) httpSession.getAttribute("expert");
+        return new ModelAndView("expertPassEdition", "expert", expert);
+    }
+
+    @PostMapping("/expertPassEdition")
+    public String editCustomerPass(@RequestParam(value = "password") String password,
+                                   @RequestParam(value = "newPassword") String newPass,
+                                   Model model, HttpSession session) {
+        ExpertDto expert = (ExpertDto) session.getAttribute("expert");
+        expert.setPassword(password);
+        expertService.changeExpertPassword(expert, newPass);
+        expert.setPassword(newPass);
+        Expert modifiedExpert = expertService.expertLogin(expert);
+        ExpertDto toExpertDto = expertMapper.toExpertDto(modifiedExpert);
+        model.addAttribute("expert", toExpertDto);
+        model.addAttribute("message", expert.getFirstName()+ "!" +
+                "<br>Your password has been updated successfully.");
+        session.setAttribute("expert", toExpertDto);
+        return "expertDashboard";
+    }
+
     @GetMapping("/expertLogout")
     public ModelAndView getCustomerLogoutView(HttpSession httpSession) {
         httpSession.removeAttribute("expert");

@@ -13,7 +13,7 @@ import java.util.List;
 public interface ExpertService {
     Expert expertLogin(ExpertDto expertDto);
 
-    void changeExpertPassword(Expert expert, String newPassword);
+    void changeExpertPassword(ExpertDto expertDto, String newPassword);
 
     Expert saveNewExpert(Expert expert);
 
