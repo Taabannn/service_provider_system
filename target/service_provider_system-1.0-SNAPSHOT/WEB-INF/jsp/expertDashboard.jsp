@@ -39,7 +39,7 @@
                 <a class="nav-link" href="expertPassEdition">Edit Password</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Add Profile Picture</a>
+                <a class="nav-link" href="addProfilePicture">Add Profile Picture</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Add Service</a>

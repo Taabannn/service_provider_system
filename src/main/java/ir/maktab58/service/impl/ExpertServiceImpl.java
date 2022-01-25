@@ -1,5 +1,7 @@
 package ir.maktab58.service.impl;
 
+import ir.maktab58.data.entities.ImageFile;
+import ir.maktab58.data.enums.ImageType;
 import ir.maktab58.data.repository.ExpertRepository;
 import ir.maktab58.data.repository.ExpertSubServiceRepository;
 import ir.maktab58.data.repository.SubServiceRepository;
@@ -17,7 +19,9 @@ import ir.maktab58.service.mapper.interfaces.ExpertMapper;
 import ir.maktab58.service.mapper.interfaces.SubServiceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -42,6 +46,9 @@ public class ExpertServiceImpl implements ExpertService {
 
     @Autowired
     private SubServiceMapperImpl subServiceMapper;
+
+    @Autowired
+    private ImageFileServiceImpl imageFileService;
 
     @Override
     public Expert expertLogin(ExpertDto expertDto) {
@@ -157,5 +164,15 @@ public class ExpertServiceImpl implements ExpertService {
         List<ExpertSubService> serviceByExpert = expertSubServiceRepository.findExpertSubServiceByExpert(expert);
         List<SubService> serviceList = serviceByExpert.stream().map(ExpertSubService::getSubService).collect(Collectors.toList());
         return serviceList.stream().map(subServiceMapper::toSubServiceDto).collect(Collectors.toList());
+    }
+
+    public void uploadProfileImage(MultipartFile imageFile, ExpertDto expert) {
+        Optional<Expert> expertByUsernameAndPassword = expertRepository.findExpertByUsernameAndPassword(expert.getUsername(), expert.getPassword());
+        if (expertByUsernameAndPassword.isPresent()) {
+            Expert foundedExpert = expertByUsernameAndPassword.get();
+            ImageFile image = imageFileService.saveNewImage(foundedExpert.getUsername()
+                    , ImageType.PROFILE, imageFile, expert);
+            expertRepository.updateExpertImageFile(foundedExpert.getId(), image);
+        }
     }
 }

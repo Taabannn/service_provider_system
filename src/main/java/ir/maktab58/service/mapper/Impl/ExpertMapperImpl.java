@@ -16,6 +16,9 @@ public class ExpertMapperImpl implements ExpertMapper {
     @Autowired
     private WalletMapper walletMapper;
 
+    @Autowired
+    private ImageFileMapperImpl imageFileMapper;
+
     @Override
     public Expert toExpert(ExpertDto expertDto) {
         return Expert.builder()
@@ -28,6 +31,7 @@ public class ExpertMapperImpl implements ExpertMapper {
                 .withLastUpdate(expertDto.getLastUpdate())
                 .withUserStatus(expertDto.getUserStatus())
                 .withWallet(walletMapper.toWallet(expertDto.getWalletDto()))
+                //.withImageFile(imageFileMapper.toImageFile(expertDto.getImageFileDto()))
                 .build();
     }
 
@@ -42,6 +46,8 @@ public class ExpertMapperImpl implements ExpertMapper {
                 .withFirstAccess(expert.getFirstAccess())
                 .withLastUpdate(expert.getLastUpdate())
                 .withUserStatus(expert.getUserStatus())
-                .withWalletDto(walletMapper.toWalletDto(expert.getWallet())).build();
+                .withWalletDto(walletMapper.toWalletDto(expert.getWallet()))
+                //.withImageFileDto(imageFileMapper.toImageFileDto(expert.getImageFile()))
+                .build();
     }
 }

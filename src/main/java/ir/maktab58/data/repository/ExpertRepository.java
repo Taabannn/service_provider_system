@@ -1,7 +1,9 @@
 package ir.maktab58.data.repository;
 
+import ir.maktab58.data.entities.ImageFile;
 import ir.maktab58.data.enums.UserStatus;
 import ir.maktab58.data.entities.users.Expert;
+import ir.maktab58.dto.users.ExpertDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -41,4 +43,8 @@ public interface ExpertRepository extends JpaRepository<Expert, Integer> {
     @Modifying
     @Query("update Expert e set e.lastUpdate=:lastUpdate where e.username=:username and e.password=:password")
     void updateExpertLastUpdate(String username, String newPassword, Date date);
+
+    @Modifying
+    @Query("update Expert e set e.imageFile=:image where e.id=:id")
+    void updateExpertImageFile(@Param("id") int id, @Param("image") ImageFile image);
 }

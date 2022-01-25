@@ -1,6 +1,7 @@
 package ir.maktab58.data.entities.users;
 
 import ir.maktab58.data.entities.ExpertSubService;
+import ir.maktab58.data.entities.ImageFile;
 import ir.maktab58.data.entities.Wallet;
 import ir.maktab58.data.enums.UserStatus;
 import lombok.*;
@@ -28,12 +29,16 @@ public class Expert extends User {
     @OneToMany(mappedBy = "expert")
     Set<ExpertSubService> expertSubServices;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private ImageFile imageFile;
+
     @Builder(setterPrefix = "with")
-    public Expert(int id, String firstName, String lastName, String username, String password, String email, Date firstAccess, Date lastUpdate, UserStatus userStatus, Double score, Wallet wallet, Set<ExpertSubService> expertSubServices) {
+    public Expert(int id, String firstName, String lastName, String username, String password, String email, Date firstAccess, Date lastUpdate, UserStatus userStatus, Double score, Wallet wallet, Set<ExpertSubService> expertSubServices, ImageFile imageFile) {
         super(id, firstName, lastName, username, password, email, firstAccess, lastUpdate);
         this.userStatus = userStatus;
         this.score = score;
         this.wallet = wallet;
         this.expertSubServices = expertSubServices;
+        this.imageFile = imageFile;
     }
 }

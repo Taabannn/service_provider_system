@@ -3,6 +3,7 @@ package ir.maktab58.data.entities;
 import ir.maktab58.data.entities.users.Expert;
 import ir.maktab58.data.enums.ImageType;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -27,8 +28,4 @@ public class ImageFile {
 
     @Lob
     @Column(columnDefinition = "BLOB", length = 307200, nullable = false)
-    private byte[] image;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private Expert expert;
-}
+    private byte[] image;}

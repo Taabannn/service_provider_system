@@ -11,14 +11,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ImageFileMapperImpl implements ImageFileMapper {
-    @Autowired
-    private ExpertMapperImpl expertMapper;
-
     @Override
     public ImageFile toImageFile(ImageFileDto imageFileDto) {
         return ImageFile.builder()
                 .withImage(imageFileDto.getImage())
-                .withExpert(expertMapper.toExpert(imageFileDto.getExpert()))
                 .withName(imageFileDto.getName())
                 .withType(imageFileDto.getType()).build();
     }
@@ -27,7 +23,6 @@ public class ImageFileMapperImpl implements ImageFileMapper {
     public ImageFileDto toImageFileDto(ImageFile imageFile) {
         return ImageFileDto.builder()
                 .withImage(imageFile.getImage())
-                .withExpert(expertMapper.toExpertDto(imageFile.getExpert()))
                 .withName(imageFile.getName())
                 .withType(imageFile.getType()).build();
     }
