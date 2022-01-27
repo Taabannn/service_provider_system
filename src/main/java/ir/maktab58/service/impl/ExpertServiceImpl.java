@@ -53,7 +53,7 @@ public class ExpertServiceImpl implements ExpertService {
     @Override
     public Expert expertLogin(ExpertDto expertDto) {
         Optional<Expert> foundedExpert = expertRepository.findExpertByUsernameAndPassword(expertDto.getUsername(), expertDto.getPassword());
-        if (foundedExpert.isEmpty())
+        if (!foundedExpert.isPresent())
             throw  ServiceSysException.builder()
                     .withMessage("Invalid username or pass.\n" +
                             "Please try again!").withErrorCode(400).build();
@@ -74,7 +74,7 @@ public class ExpertServiceImpl implements ExpertService {
     @Override
     public void addNewSubServiceToExpertsSubServiceList(Expert expert, String subServiceDescription) {
         Optional<SubService> foundedSubService = subServiceDao.findBySubServiceDescription(subServiceDescription);
-        if (foundedSubService.isEmpty())
+        if (!foundedSubService.isPresent())
             throw ServiceSysException.builder()
                     .withMessage("SubService " + subServiceDescription + " has not added yet.\n" +
                             "Please call admin.")
@@ -98,7 +98,7 @@ public class ExpertServiceImpl implements ExpertService {
     @Override
     public void removeASubServiceFromExpertsServiceList(Expert expert, String subServiceDescription) {
         Optional<SubService> foundedSubService = subServiceDao.findBySubServiceDescription(subServiceDescription);
-        if (foundedSubService.isEmpty())
+        if (!foundedSubService.isPresent())
             throw ServiceSysException.builder()
                     .withMessage("SubService " + subServiceDescription + " has not added yet.\n" +
                             "Please call admin.")

@@ -30,7 +30,7 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public Manager managerLogin(ManagerDto managerDto) {
         Optional<Manager> foundedManager = managerDao.findManagerByUsernameAndPassword(managerDto.getUsername(), managerDto.getPassword());
-        if (foundedManager.isEmpty())
+        if (!foundedManager.isPresent())
             throw ServiceSysException.builder()
                     .withMessage("Invalid username or pass.\n" +
                             "Please try again!").withErrorCode(400).build();

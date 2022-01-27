@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String username, String password) {
         Optional<User> foundedUser = userDao.findUserByUsernameAndPassword(username, password);
-        if (foundedUser.isEmpty())
+        if (!foundedUser.isPresent())
             throw  ServiceSysException.builder()
                     .withMessage("Invalid username or pass.\n" +
                             "Please try again!").withErrorCode(400).build();

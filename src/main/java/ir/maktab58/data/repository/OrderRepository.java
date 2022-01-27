@@ -22,7 +22,6 @@ import java.util.Optional;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findOrdersBySubService(SubService subService);
 
-    @Override
     Optional<Order> findById(Integer integer);
 
     @Modifying

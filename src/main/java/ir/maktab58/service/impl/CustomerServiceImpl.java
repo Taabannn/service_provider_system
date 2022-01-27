@@ -50,7 +50,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer customerLogin(CustomerDto customerDto) {
         Optional<Customer> foundedCustomer = customerRepository.findCustomerByUsernameAndPassword(customerDto.getUsername(), customerDto.getPassword());
-        if (foundedCustomer.isEmpty())
+        if (!foundedCustomer.isPresent())
             throw ServiceSysException.builder()
                     .withMessage("Invalid username or pass.\n" +
                             "Please try again!").withErrorCode(400).build();
