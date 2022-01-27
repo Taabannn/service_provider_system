@@ -2,6 +2,7 @@ package ir.maktab58.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -18,7 +19,8 @@ import java.util.Properties;
 /**
  * @author Taban Soleymani
  */
-@EnableJpaRepositories(basePackages = "ir.maktab58.data.dao")
+@EnableJpaRepositories(basePackages = "ir.maktab58.data.repository")
+@ComponentScan(basePackages = "ir.maktab58")
 @PropertySource("classpath:database.properties")
 @org.springframework.context.annotation.Configuration
 @EnableTransactionManagement
@@ -41,7 +43,7 @@ public class DataBaseConfig {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactoryBean.setPackagesToScan("ir.maktab58.data.models");
+        entityManagerFactoryBean.setPackagesToScan("ir.maktab58.data.entities");
         entityManagerFactoryBean.setJpaProperties(hibernateProperties());
         return entityManagerFactoryBean;
     }

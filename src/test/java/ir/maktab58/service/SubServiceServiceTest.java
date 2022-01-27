@@ -1,23 +1,14 @@
 package ir.maktab58.service;
 
-import ir.maktab58.config.SpringConfig;
-import ir.maktab58.data.models.services.SubService;
-import ir.maktab58.exceptions.ServiceSysException;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.stream.Stream;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
 
 /**
  * @author Taban Soleymani
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SubServiceServiceTest {
-    ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+   /* ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     private final SubServiceServiceImpl subServiceService = context.getBean(SubServiceServiceImpl.class);
 
     @BeforeAll
@@ -61,5 +52,5 @@ public class SubServiceServiceTest {
     @Order(2)
     public void saveASubServiceTestWithExistedSubService(String field, String subDescription, long basePrice) {
         Assertions.assertThrows(ServiceSysException.class, () -> subServiceService.saveASubService(field, subDescription, basePrice));
-    }
+    }*/
 }

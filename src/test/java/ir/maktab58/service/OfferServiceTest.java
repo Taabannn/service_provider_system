@@ -1,29 +1,10 @@
 package ir.maktab58.service;
 
-import ir.maktab58.config.SpringConfig;
-import ir.maktab58.data.models.Address;
-import ir.maktab58.data.models.Offer;
-import ir.maktab58.data.models.Order;
-import ir.maktab58.data.models.services.SubService;
-import ir.maktab58.data.models.users.Customer;
-import ir.maktab58.data.models.users.Expert;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.Date;
-import java.util.stream.Stream;
-
 /**
  * @author Taban Soleymani
  */
 public class OfferServiceTest {
-    ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+    /*ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     OfferServiceImpl offerService = context.getBean(OfferServiceImpl.class);
     OrderServiceImpl orderService = context.getBean(OrderServiceImpl.class);
     ExpertServiceImpl expertService = context.getBean(ExpertServiceImpl.class);
@@ -56,5 +37,5 @@ public class OfferServiceTest {
         } catch (Exception e) {
             Assertions.fail();
         }
-    }
+    }*/
 }
